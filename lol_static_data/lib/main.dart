@@ -1,6 +1,9 @@
+// ignore_for_file: use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
 
-import 'pages/champions_page.dart';
+import './pages/champions_page.dart';
+import './pages/champion_detail_page.dart';
 
 void main() {
   runApp(MyApp());
