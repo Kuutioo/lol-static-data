@@ -8,11 +8,13 @@ class ChampionAbilitiesItem extends StatelessWidget {
   final String title;
   final String abilityName;
   final String abilityDescription;
+  final String abilityIconUrl;
 
   const ChampionAbilitiesItem({
     this.title,
     this.abilityName,
     this.abilityDescription,
+    this.abilityIconUrl,
   });
 
   @override
@@ -27,14 +29,16 @@ class ChampionAbilitiesItem extends StatelessWidget {
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Image(
-              image: NetworkImage(
-                  'https://uning.es/wp-content/uploads/2016/08/ef3-placeholder-image.jpg'),
-              fit: BoxFit.cover,
-              height: 100,
-              width: 100,
+            Padding(
+              padding: const EdgeInsets.only(left: 5),
+              child: Image(
+                image: NetworkImage(abilityIconUrl),
+                fit: BoxFit.cover,
+                height: 100,
+                width: 100,
+              ),
             ),
-            ChampionDetailText(abilityDescription, 18),
+            Expanded(child: ChampionDetailText(abilityDescription, 18)),
           ],
         ),
         const SizedBox(
