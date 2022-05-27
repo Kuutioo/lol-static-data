@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 
 import '../widgets/champion_detail_text.dart';
+import '../widgets/champion_abilities.dart';
 
 class ChampionDetailPage extends StatelessWidget {
   @override
@@ -27,23 +28,21 @@ class ChampionDetailPage extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            ChampionDetailText('champ_name', 32),
-            ChampionDetailText('champ_description', 20),
+            const ChampionDetailText('champ_name', 32),
+            const ChampionDetailText('champ_description', 20),
             const SizedBox(
               height: 70,
             ),
-            ChampionDetailText('Abilities', 32),
-            Row(
-              children: [
-                Text('P'),
-                Image(
-                  image: NetworkImage(
-                      'https://uning.es/wp-content/uploads/2016/08/ef3-placeholder-image.jpg'),
-                  height: 50,
-                  width: 50,
-                ),
-              ],
-            )
+            const ChampionDetailText('Abilities', 32),
+            const SizedBox(
+              height: 15,
+            ),
+            ChampionAbilities(),
+            const SizedBox(
+              height: 70,
+            ),
+            const ChampionDetailText('Lore', 32),
+            const ChampionDetailText('champ_lore_text', 18),
           ],
         ),
       ),

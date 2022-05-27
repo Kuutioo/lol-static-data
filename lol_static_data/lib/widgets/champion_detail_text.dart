@@ -1,11 +1,12 @@
-import 'package:champions/champions.dart';
+// ignore_for_file: use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
 
 class ChampionDetailText extends StatelessWidget {
-  String text;
-  double fontSize;
+  final String text;
+  final double fontSize;
 
-  ChampionDetailText(this.text, this.fontSize);
+  const ChampionDetailText(this.text, this.fontSize);
 
   @override
   Widget build(BuildContext context) {
