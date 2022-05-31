@@ -38,7 +38,9 @@ class ChampionAbilitiesItem extends StatelessWidget {
                 width: 100,
               ),
             ),
-            Expanded(child: ChampionDetailText(abilityDescription, 18)),
+            Expanded(
+              child: ChampionDetailText(abilityDescription, 18),
+            ),
           ],
         ),
         const SizedBox(
