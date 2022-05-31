@@ -5,8 +5,9 @@ import 'package:flutter/material.dart';
 class ChampionDetailText extends StatelessWidget {
   final String text;
   final double fontSize;
+  final bool isBold;
 
-  const ChampionDetailText(this.text, this.fontSize);
+  const ChampionDetailText(this.text, this.fontSize, this.isBold);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,9 @@ class ChampionDetailText extends StatelessWidget {
       padding: const EdgeInsets.only(left: 5),
       child: Text(
         text,
-        style: TextStyle(fontSize: fontSize),
+        style: isBold
+            ? TextStyle(fontSize: fontSize, fontWeight: FontWeight.bold)
+            : TextStyle(fontSize: fontSize),
       ),
     );
   }

@@ -21,8 +21,8 @@ class ChampionAbilitiesItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ChampionDetailText(title, 20),
-        ChampionDetailText(abilityName, 24),
+        ChampionDetailText(title, 20, false),
+        ChampionDetailText(abilityName, 24, true),
         const SizedBox(
           height: 10,
         ),
@@ -31,15 +31,23 @@ class ChampionAbilitiesItem extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.only(left: 5),
-              child: Image(
-                image: NetworkImage(abilityIconUrl),
-                fit: BoxFit.cover,
-                height: 100,
-                width: 100,
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    width: 3,
+                    color: const Color(0xFF2c2f3e),
+                  ),
+                ),
+                child: Image(
+                  image: NetworkImage(abilityIconUrl),
+                  fit: BoxFit.cover,
+                  height: 100,
+                  width: 100,
+                ),
               ),
             ),
             Expanded(
-              child: ChampionDetailText(abilityDescription, 18),
+              child: ChampionDetailText(abilityDescription, 18, false),
             ),
           ],
         ),

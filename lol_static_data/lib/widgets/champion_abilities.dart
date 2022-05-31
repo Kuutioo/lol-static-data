@@ -10,7 +10,7 @@ import './champion_abilities_item.dart';
 class ChampionAbilities extends StatefulWidget {
   final champ.Champion champion;
 
-  ChampionAbilities(this.champion);
+  const ChampionAbilities(this.champion);
 
   @override
   State<ChampionAbilities> createState() => _ChampionAbilitiesState();
@@ -30,15 +30,12 @@ class _ChampionAbilitiesState extends State<ChampionAbilities> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    widget.champion.passive;
-  }
-
-  @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: Future.wait([_getSpells(), _getPassive()]),
+        future: Future.wait([
+          _getSpells(),
+          _getPassive(),
+        ]),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
