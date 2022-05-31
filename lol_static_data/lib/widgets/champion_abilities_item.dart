@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 
 import './champion_detail_text.dart';
+import './champion_detail_text_html.dart';
 
 class ChampionAbilitiesItem extends StatelessWidget {
   final String title;
@@ -47,7 +48,10 @@ class ChampionAbilitiesItem extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: ChampionDetailText(abilityDescription, 18, false),
+              child: ChampionDetailTextHtml(
+                abilityDescription,
+                18,
+              ),
             ),
           ],
         ),

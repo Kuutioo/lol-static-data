@@ -1,6 +1,7 @@
 // ignore_for_file: use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 
 class ChampionDetailText extends StatelessWidget {
   final String text;

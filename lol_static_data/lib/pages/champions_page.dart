@@ -52,12 +52,15 @@ class ChampionsPage extends StatelessWidget {
                   );
                 },
               ),
-              footer: Text(
-                _championList[index].name,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+              footer: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  _championList[index].name,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             );
