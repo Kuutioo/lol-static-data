@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:champions/champions.dart' as champ;
 
 import './champion_abilities_item.dart';
-import './champion_detail_text_html.dart';
 
 class ChampionAbilities extends StatefulWidget {
   final champ.Champion champion;

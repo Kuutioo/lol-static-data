@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:champions/champions.dart' as champ;
-import 'package:lol_static_data/main.dart';
 
 import './champion_detail_page.dart';
 
@@ -43,8 +42,10 @@ class _ChampionsPageState extends State<ChampionsPage> {
     });
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 197, 201, 209),
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
         title: cusSearchBar,
@@ -85,7 +86,6 @@ class _ChampionsPageState extends State<ChampionsPage> {
         ],
       ),
       body: Container(
-        color: const Color.fromARGB(255, 197, 201, 209),
         child: _foundChamps.isNotEmpty
             ? GridView.builder(
                 gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
@@ -124,9 +124,11 @@ class _ChampionsPageState extends State<ChampionsPage> {
                   );
                 }),
               )
-            : const Text(
-                'No results found',
-                style: TextStyle(fontSize: 24),
+            : Center(
+                child: const Text(
+                  'No results found',
+                  style: TextStyle(fontSize: 24),
+                ),
               ),
       ),
     );

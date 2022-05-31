@@ -5,6 +5,7 @@ import 'package:champions/champions.dart' as champ;
 
 import '../widgets/champion_detail_text.dart';
 import '../widgets/champion_abilities.dart';
+import '../widgets/champion_tips.dart';
 
 class ChampionDetailPage extends StatefulWidget {
   static const routeName = 'champion-detail-page';
@@ -35,18 +36,6 @@ class _ChampionDetailPageState extends State<ChampionDetailPage> {
       return result;
     }
 
-    champion.allyTips;
-
-    Future<List<String>> _allyTooltips() async {
-      Iterable<String> allytips = await champion.allyTips;
-      List<String> allyTipsList = allytips.toList();
-
-      for (var element in allytips) {
-        print(element);
-      }
-      print(champion.stats.armor);
-    }
-
     return Scaffold(
       appBar: AppBar(
         title: Text(champion.name),
@@ -59,7 +48,6 @@ class _ChampionDetailPageState extends State<ChampionDetailPage> {
               child: CircularProgressIndicator(),
             );
           }
-          _allyTooltips();
           String url = snapshot.data[0].full.url;
           String result = _modifyUrl(url);
 
@@ -78,22 +66,16 @@ class _ChampionDetailPageState extends State<ChampionDetailPage> {
                       fit: BoxFit.cover,
                     ),
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
+                  const SizedBox(height: 10),
                   ChampionDetailText(champion.name, 32, true),
                   ChampionDetailText(champion.title, 20, false),
-                  const SizedBox(
-                    height: 70,
-                  ),
+                  const SizedBox(height: 70),
                   const ChampionDetailText('Abilities', 32, true),
-                  const SizedBox(
-                    height: 15,
-                  ),
+                  const SizedBox(height: 15),
                   ChampionAbilities(champion),
-                  const SizedBox(
-                    height: 70,
-                  ),
+                  const SizedBox(height: 70),
+                  ChampionTips(champion),
+                  const SizedBox(height: 70),
                   const ChampionDetailText('Lore', 32, true),
                   ChampionDetailText(champion.blurb, 18, false),
                 ],

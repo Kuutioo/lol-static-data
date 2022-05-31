@@ -33,6 +33,8 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// Cheers to Stackoverflow for this https://stackoverflow.com/a/62433225
+// No idea what it does but it works :)
 MaterialColor buildMaterialColor(Color color) {
   List strengths = <double>[.05];
   Map<int, Color> swatch = {};
