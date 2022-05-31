@@ -10,12 +10,20 @@ class ChampionAbilitiesItem extends StatelessWidget {
   final String abilityName;
   final String abilityDescription;
   final String abilityIconUrl;
+  final String abilityRangeSpread;
+  final String abilityCostSpread;
+  final String abilityCooldownSpread;
+  final bool isPassive;
 
   const ChampionAbilitiesItem({
     this.title,
     this.abilityName,
     this.abilityDescription,
     this.abilityIconUrl,
+    this.abilityRangeSpread,
+    this.abilityCostSpread,
+    this.abilityCooldownSpread,
+    this.isPassive,
   });
 
   @override
@@ -24,6 +32,15 @@ class ChampionAbilitiesItem extends StatelessWidget {
       children: [
         ChampionDetailText(title, 20, false),
         ChampionDetailText(abilityName, 24, true),
+        !isPassive
+            ? ChampionDetailText('Range: $abilityRangeSpread', 18, false)
+            : const SizedBox.shrink(),
+        !isPassive
+            ? ChampionDetailText('Cost: $abilityCostSpread', 18, false)
+            : const SizedBox.shrink(),
+        !isPassive
+            ? ChampionDetailText('Cooldown: $abilityCooldownSpread', 18, false)
+            : const SizedBox.shrink(),
         const SizedBox(
           height: 10,
         ),

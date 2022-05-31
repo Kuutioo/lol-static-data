@@ -35,6 +35,18 @@ class _ChampionDetailPageState extends State<ChampionDetailPage> {
       return result;
     }
 
+    champion.allyTips;
+
+    Future<List<String>> _allyTooltips() async {
+      Iterable<String> allytips = await champion.allyTips;
+      List<String> allyTipsList = allytips.toList();
+
+      for (var element in allytips) {
+        print(element);
+      }
+      print(champion.stats.armor);
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text(champion.name),
@@ -47,8 +59,8 @@ class _ChampionDetailPageState extends State<ChampionDetailPage> {
               child: CircularProgressIndicator(),
             );
           }
+          _allyTooltips();
           String url = snapshot.data[0].full.url;
-          print(url);
           String result = _modifyUrl(url);
 
           return Container(
