@@ -6,51 +6,89 @@ import 'package:champions/champions.dart' as champ;
 import '../widgets/champion_detail_text.dart';
 import '../widgets/champion_abilities.dart';
 
-class ChampionDetailPage extends StatelessWidget {
+class ChampionDetailPage extends StatefulWidget {
   static const routeName = 'champion-detail-page';
 
+  @override
+  State<ChampionDetailPage> createState() => _ChampionDetailPageState();
+}
+
+class _ChampionDetailPageState extends State<ChampionDetailPage> {
   @override
   Widget build(BuildContext context) {
     final champion =
         ModalRoute.of(context).settings.arguments as champ.Champion;
 
+    Future<List<champ.ChampionSkin>> _getSkin() async {
+      Iterable<champ.ChampionSkin> champSkin = await champion.skins;
+      List<champ.ChampionSkin> skinList = champSkin.toList();
+
+      return skinList;
+    }
+
+    String _modifyUrl(String url) {
+      String result = url.replaceAll('12.10.1/', '');
+      var pos = result.lastIndexOf('.');
+      result = result.substring(0, pos);
+      result = result + '_0' + '.jpg';
+
+      return result;
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text(champion.name),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 200,
-              width: double.infinity,
-              child: Image(
-                image: NetworkImage(
-                  champion.icon.url,
-                ),
-                fit: BoxFit.cover,
+      body: FutureBuilder<List<champ.ChampionSkin>>(
+        future: _getSkin(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          String url = snapshot.data[0].full.url;
+          print(url);
+          String result = _modifyUrl(url);
+
+          return Container(
+            color: const Color.fromARGB(255, 197, 201, 209),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 200,
+                    width: double.infinity,
+                    child: Image(
+                      image: NetworkImage(
+                        result,
+                      ),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  ChampionDetailText(champion.name, 32, true),
+                  ChampionDetailText(champion.title, 20, false),
+                  const SizedBox(
+                    height: 70,
+                  ),
+                  const ChampionDetailText('Abilities', 32, true),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  ChampionAbilities(champion),
+                  const SizedBox(
+                    height: 70,
+                  ),
+                  const ChampionDetailText('Lore', 32, true),
+                  ChampionDetailText(champion.blurb, 18, false),
+                ],
               ),
             ),
-            const SizedBox(
-              height: 10,
-            ),
-            ChampionDetailText(champion.name, 32),
-            ChampionDetailText(champion.title, 20),
-            const SizedBox(
-              height: 70,
-            ),
-            const ChampionDetailText('Abilities', 32),
-            const SizedBox(
-              height: 15,
-            ),
-            ChampionAbilities(champion),
-            const SizedBox(
-              height: 70,
-            ),
-            const ChampionDetailText('Lore', 32),
-            ChampionDetailText(champion.blurb, 18),
-          ],
-        ),
+          );
+        },
       ),
     );
   }
