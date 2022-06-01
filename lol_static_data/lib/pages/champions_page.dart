@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:champions/champions.dart' as champ;
+import 'package:flutter/services.dart';
 
 import './champion_detail_page.dart';
 
@@ -19,6 +20,8 @@ class _ChampionsPageState extends State<ChampionsPage> {
   Widget cusSearchBar = Text('Champions');
 
   List<champ.Champion> _foundChamps = [];
+  List<champ.Champion> _filteredChamps = [];
+
   @override
   void initState() {
     _foundChamps = widget._championList;
@@ -27,19 +30,83 @@ class _ChampionsPageState extends State<ChampionsPage> {
 
   void _runFilter(String enteredKeyword) {
     List<champ.Champion> result = [];
-    if (enteredKeyword.isEmpty) {
+    if (enteredKeyword.isEmpty && _filteredChamps.isNotEmpty) {
+      print('NOOOOO BRASS MONKEY BROKE :(((((((((((((((((');
+      result = _filteredChamps;
+    } else if (enteredKeyword.isEmpty) {
+      print('YES BRASS MONKEY GO CHAMPION LIST XDDDDDDDDDDDDDDDDD');
       result = widget._championList;
     } else {
-      result = widget._championList
-          .where((champion) => champion.name
-              .toLowerCase()
-              .contains(enteredKeyword.toLowerCase()))
-          .toList();
+      if (_filteredChamps == null || _filteredChamps.isEmpty) {
+        result = widget._championList
+            .where((champion) => champion.name
+                .toLowerCase()
+                .contains(enteredKeyword.toLowerCase()))
+            .toList();
+      } else {
+        result = _filteredChamps
+            .where((champion) => champion.name
+                .toLowerCase()
+                .contains(enteredKeyword.toLowerCase()))
+            .toList();
+      }
     }
 
     setState(() {
       _foundChamps = result;
     });
+  }
+
+  void _filterChampRoles(champ.Role role) {
+    print('Picked role $role');
+    List<champ.Champion> result = [];
+    for (var element in _foundChamps) {
+      if (element.roles.contains(role)) {
+        result = _foundChamps
+            .where((champion) => champion.roles.contains(role))
+            .toList();
+      }
+      _filteredChamps = result;
+    }
+
+    setState(() {
+      _foundChamps = result;
+    });
+  }
+
+  void _showRoleSheet(BuildContext ctx) {
+    showModalBottomSheet(
+      context: ctx,
+      builder: (_) {
+        return Drawer(
+          child: Container(
+            color: const Color.fromARGB(255, 197, 201, 209),
+            child: ListView.builder(
+              itemCount: champ.Role.values.length,
+              itemBuilder: (context, index) {
+                return TextButton(
+                  child: Text(
+                    champ.Role.values[index].label,
+                    style: TextStyle(color: Colors.black, fontSize: 20),
+                  ),
+                  onPressed: () {
+                    _filteredChamps.forEach((element) {
+                      print(element.name);
+                    });
+
+                    setState(() {
+                      _filteredChamps = [];
+                      _filterChampRoles(champ.Role.values[index]);
+                    });
+                    Navigator.of(context).pop();
+                  },
+                );
+              },
+            ),
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -57,7 +124,9 @@ class _ChampionsPageState extends State<ChampionsPage> {
                 if (cusIcon.icon == Icons.search) {
                   cusIcon = Icon(Icons.cancel);
                   cusSearchBar = TextField(
-                    onChanged: (value) => _runFilter(value),
+                    onChanged: (value) {
+                      _runFilter(value);
+                    },
                     cursorColor: Colors.white,
                     textInputAction: TextInputAction.go,
                     decoration: InputDecoration(
@@ -80,8 +149,18 @@ class _ChampionsPageState extends State<ChampionsPage> {
             icon: cusIcon,
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () => _showRoleSheet(context),
             icon: Icon(Icons.filter_alt_rounded),
+          ),
+          IconButton(
+            onPressed: () {
+              setState(() {
+                _filteredChamps = [];
+                _foundChamps = widget._championList;
+              });
+            },
+            tooltip: 'FIX ALL BUGS :)',
+            icon: Icon(Icons.delete),
           ),
         ],
       ),
@@ -97,7 +176,7 @@ class _ChampionsPageState extends State<ChampionsPage> {
                 itemCount: _foundChamps.length,
                 itemBuilder: ((context, index) {
                   return GridTile(
-                    key: ValueKey(_foundChamps[index].name),
+                    //key: ValueKey(_foundChamps[index].name),
                     child: IconButton(
                       icon: Image.network(
                         _foundChamps[index].icon.url,
