@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:champions/champions.dart' as champ;
-import 'package:flutter/services.dart';
 
 import './champion_detail_page.dart';
 
@@ -90,10 +89,9 @@ class _ChampionsPageState extends State<ChampionsPage> {
                     style: TextStyle(color: Colors.black, fontSize: 20),
                   ),
                   onPressed: () {
-                    _filteredChamps.forEach((element) {
+                    for (var element in _filteredChamps) {
                       print(element.name);
-                    });
-
+                    }
                     setState(() {
                       _filteredChamps = [];
                       _filterChampRoles(champ.Role.values[index]);
