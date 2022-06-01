@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 
-import './champion_detail_text.dart';
-import './champion_detail_text_html.dart';
+import '../detail_text/champion_detail_text.dart';
+import '../detail_text/champion_detail_text_html.dart';
 
 class ChampionAbilitiesItem extends StatelessWidget {
   final String title;

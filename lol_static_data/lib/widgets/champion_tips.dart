@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:champions/champions.dart' as champ;
 
-import 'champion_detail_text.dart';
+import './detail_text/champion_detail_text.dart';
 
 class ChampionTips extends StatelessWidget {
   final champ.Champion champion;

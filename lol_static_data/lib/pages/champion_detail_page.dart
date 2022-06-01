@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:champions/champions.dart' as champ;
 
-import '../widgets/champion_detail_text.dart';
-import '../widgets/champion_abilities.dart';
+import '../widgets/detail_text/champion_detail_text.dart';
+import '../widgets/abilities/champion_abilities.dart';
 import '../widgets/champion_tips.dart';
 
 class ChampionDetailPage extends StatefulWidget {
