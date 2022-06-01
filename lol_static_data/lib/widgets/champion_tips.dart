@@ -33,8 +33,14 @@ class ChampionTips extends StatelessWidget {
           return const Center(
             child: CircularProgressIndicator(),
           );
+        } else if (snapshot.hasError) {
+          return null;
         }
-        return _championTips(snapshot);
+        if (snapshot.hasData) {
+          print('xd here');
+          return _championTips(snapshot);
+        }
+        return null;
       },
     );
   }
@@ -46,29 +52,29 @@ class ChampionTips extends StatelessWidget {
       children: [
         const ChampionDetailText('Tips', 32, true),
         ChampionDetailText('Tips playing with ${champion.name}', 24, true),
-        snapshot.data[0][0] != null
-            ? ChampionDetailText('- ${snapshot.data[0][0]}', 18, false)
+        !snapshot.data[0].isEmpty
+            ? ChampionDetailText('- ${snapshot.data[0]}', 18, false)
             : const SizedBox.shrink(),
         const SizedBox(height: 10),
-        snapshot.data[0][1] != null
-            ? ChampionDetailText('- ${snapshot.data[0][1]}', 18, false)
+        !snapshot.data[0].isEmpty
+            ? ChampionDetailText('- ${snapshot.data[0]}', 18, false)
             : const SizedBox.shrink(),
         const SizedBox(height: 10),
-        snapshot.data[0][2] != null
-            ? ChampionDetailText('- ${snapshot.data[0][2]}', 18, false)
+        !snapshot.data[0].isEmpty
+            ? ChampionDetailText('- ${snapshot.data[0]}', 18, false)
             : const SizedBox.shrink(),
         const SizedBox(height: 10),
         ChampionDetailText('Tips playing against ${champion.name}', 24, true),
-        snapshot.data[1][0] != null
-            ? ChampionDetailText('- ${snapshot.data[1][0]}', 18, false)
+        !snapshot.data[1].isEmpty
+            ? ChampionDetailText('- ${snapshot.data[1]}', 18, false)
             : const SizedBox.shrink(),
         const SizedBox(height: 10),
-        snapshot.data[1][1] != null
-            ? ChampionDetailText('- ${snapshot.data[1][1]}', 18, false)
+        !snapshot.data[1].isEmpty
+            ? ChampionDetailText('- ${snapshot.data[1]}', 18, false)
             : const SizedBox.shrink(),
         const SizedBox(height: 10),
-        snapshot.data[1][2] != null
-            ? ChampionDetailText('- ${snapshot.data[1][2]}', 18, false)
+        !snapshot.data[1].isEmpty
+            ? ChampionDetailText('- ${snapshot.data[1]}', 18, false)
             : const SizedBox.shrink(),
       ],
     );
