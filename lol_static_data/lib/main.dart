@@ -5,6 +5,7 @@ import 'package:champions/champions.dart';
 
 import './pages/champions_page.dart';
 import './pages/champion_detail_page.dart';
+import './pages/champion_smash_or_pass_page.dart';
 
 List<Champion> championList;
 void main() async {
