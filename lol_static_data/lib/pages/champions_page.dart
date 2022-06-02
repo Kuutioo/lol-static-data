@@ -21,22 +21,30 @@ class _ChampionsPageState extends State<ChampionsPage> {
   List<champ.Champion> _foundChamps = [];
   List<champ.Champion> _filteredChamps = [];
 
+  final Map<champ.Role, bool> _isSelectedMap = {
+    champ.Role.assassin: false,
+    champ.Role.fighter: false,
+    champ.Role.mage: false,
+    champ.Role.marksman: false,
+    champ.Role.support: false,
+    champ.Role.tank: false,
+  };
+
   @override
   void initState() {
-    _foundChamps = widget._championList;
     super.initState();
+
+    _foundChamps = widget._championList;
   }
 
   void _runFilter(String enteredKeyword) {
     List<champ.Champion> result = [];
-    if (enteredKeyword.isEmpty && _filteredChamps.isNotEmpty) {
-      print('NOOOOO BRASS MONKEY BROKE :(((((((((((((((((');
+    if (enteredKeyword.isEmpty && _isSelectedMap.containsValue(true)) {
       result = _filteredChamps;
     } else if (enteredKeyword.isEmpty) {
-      print('YES BRASS MONKEY GO CHAMPION LIST XDDDDDDDDDDDDDDDDD');
       result = widget._championList;
     } else {
-      if (_filteredChamps == null || _filteredChamps.isEmpty) {
+      if (_isSelectedMap.values.every((element) => false)) {
         result = widget._championList
             .where((champion) => champion.name
                 .toLowerCase()
@@ -50,27 +58,88 @@ class _ChampionsPageState extends State<ChampionsPage> {
             .toList();
       }
     }
-
     setState(() {
       _foundChamps = result;
     });
   }
 
-  void _filterChampRoles(champ.Role role) {
-    print('Picked role $role');
+  void _filterChampRoles(
+    champ.Role role,
+    bool isSelected,
+    int index,
+    Map<champ.Role, bool> filterChampSelectionMap,
+  ) {
     List<champ.Champion> result = [];
-    for (var element in _foundChamps) {
-      if (element.roles.contains(role)) {
-        result = _foundChamps
-            .where((champion) => champion.roles.contains(role))
-            .toList();
-      }
-      _filteredChamps = result;
-    }
 
+    int i = 0;
+
+    filterChampSelectionMap.forEach(
+      (key, value) {
+        if (value) {
+          result = _foundChamps
+              .where((champion) => champion.roles.contains(role))
+              .toList();
+        } else {
+          if (filterChampSelectionMap.containsValue(false)) {
+            i++;
+            if (i >= 6) {
+              result = widget._championList;
+            }
+          }
+        }
+
+        /* print('VALUE = FALSE');
+          if (filterChampSelectionMap.containsValue(false)) {
+            i++;
+            if (i >= 6) {
+              result = widget._championList;
+            }
+          }*/
+        /*for (var element in widget._championList) {
+            if (element.roles.contains((role))) {
+              result = widget._championList
+                  .where((champion) => champion.roles.contains(role))
+                  .toList();
+            }
+          }*/
+        //result.removeWhere((element) => !element.roles.contains(role));
+      },
+    );
+
+    /*print('Picked role $role');
+    if (isSelected) {
+      for (var element in _foundChamps) {
+        if (element.roles.contains(role)) {
+          result = _foundChamps
+              .where((champion) => champion.roles.contains(role))
+              .toList();
+        }
+        _filteredChamps = result;
+        _previousChamps = _foundChamps;
+      }
+    } else {
+      // _isSelectedList[index] = isSelected;
+      //_filterChampRoles(role, true, index);
+      /*_filteredChamps = _previousChamps;
+      _isSelectedList[index] = isSelected;
+      result = _filteredChamps;
+
+      if (_contains_only(_isSelectedList, false)) {
+        result = widget._championList;
+      }*/
+      print('RESULT = _PREVIOUSCHAMPS');
+    }*/
     setState(() {
       _foundChamps = result;
     });
+    _filteredChamps = _foundChamps;
+  }
+
+  bool _contains_only(var _list, bool e) {
+    bool isTrue = _list.every(
+      (element) => element == e,
+    );
+    return isTrue;
   }
 
   void _showRoleSheet(BuildContext ctx) {
@@ -83,22 +152,48 @@ class _ChampionsPageState extends State<ChampionsPage> {
             child: ListView.builder(
               itemCount: champ.Role.values.length,
               itemBuilder: (context, index) {
-                return TextButton(
-                  child: Text(
+                return SwitchListTile(
+                  title: Text(
                     champ.Role.values[index].label,
                     style: TextStyle(color: Colors.black, fontSize: 20),
                   ),
-                  onPressed: () {
-                    for (var element in _filteredChamps) {
-                      print(element.name);
-                    }
+                  value: _isSelectedMap[champ.Role.values[index]],
+                  onChanged: (newValue) {
                     setState(() {
-                      _filteredChamps = [];
-                      _filterChampRoles(champ.Role.values[index]);
+                      _isSelectedMap[champ.Role.values[index]] = newValue;
+                      if (!newValue) {}
                     });
-                    Navigator.of(context).pop();
+
+                    setState(() {
+                      //_filteredChamps = [];
+                      _filterChampRoles(
+                          champ.Role.values[index],
+                          _isSelectedMap[champ.Role.values[index]],
+                          index,
+                          _isSelectedMap);
+                    });
+
+                    Future.delayed(Duration(milliseconds: 250), () {
+                      Navigator.of(context).pop();
+                    });
                   },
                 );
+                // return TextButton(
+                // child: Text(
+                //   champ.Role.values[index].label,
+                //   style: TextStyle(color: Colors.black, fontSize: 20),
+                // ),
+                //   onPressed: () {
+                //     for (var element in _filteredChamps) {
+                //       print(element.name);
+                //     }
+                //     setState(() {
+                //       _filteredChamps = [];
+                //       _filterChampRoles(champ.Role.values[index]);
+                //     });
+                //     Navigator.of(context).pop();
+                //   },
+                // );
               },
             ),
           ),
@@ -154,6 +249,9 @@ class _ChampionsPageState extends State<ChampionsPage> {
             onPressed: () {
               setState(() {
                 _filteredChamps = [];
+                _isSelectedMap.forEach((key, value) {
+                  _isSelectedMap[key] = false;
+                });
                 _foundChamps = widget._championList;
               });
             },
