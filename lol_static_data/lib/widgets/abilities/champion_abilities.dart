@@ -48,7 +48,8 @@ class _ChampionAbilitiesState extends State<ChampionAbilities> {
               ChampionAbilitiesItem(
                 title: 'Passive',
                 abilityName: snapshot.data[1].name,
-                abilityDescription: snapshot.data[1].description,
+                abilityDescription:
+                    snapshot.data[1].description.replaceAll('<mainText>', ''),
                 abilityIconUrl: snapshot.data[1].icon.url,
                 isPassive: true,
               ),

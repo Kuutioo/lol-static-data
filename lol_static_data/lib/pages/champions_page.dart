@@ -44,7 +44,7 @@ class _ChampionsPageState extends State<ChampionsPage> {
     } else if (enteredKeyword.isEmpty) {
       result = widget._championList;
     } else {
-      if (_isSelectedMap.values.every((element) => false)) {
+      if (_isSelectedMap.values.every((element) => element == false)) {
         result = widget._championList
             .where((champion) => champion.name
                 .toLowerCase()
@@ -87,116 +87,51 @@ class _ChampionsPageState extends State<ChampionsPage> {
             }
           }
         }
-
-        /* print('VALUE = FALSE');
-          if (filterChampSelectionMap.containsValue(false)) {
-            i++;
-            if (i >= 6) {
-              result = widget._championList;
-            }
-          }*/
-        /*for (var element in widget._championList) {
-            if (element.roles.contains((role))) {
-              result = widget._championList
-                  .where((champion) => champion.roles.contains(role))
-                  .toList();
-            }
-          }*/
-        //result.removeWhere((element) => !element.roles.contains(role));
       },
     );
-
-    /*print('Picked role $role');
-    if (isSelected) {
-      for (var element in _foundChamps) {
-        if (element.roles.contains(role)) {
-          result = _foundChamps
-              .where((champion) => champion.roles.contains(role))
-              .toList();
-        }
-        _filteredChamps = result;
-        _previousChamps = _foundChamps;
-      }
-    } else {
-      // _isSelectedList[index] = isSelected;
-      //_filterChampRoles(role, true, index);
-      /*_filteredChamps = _previousChamps;
-      _isSelectedList[index] = isSelected;
-      result = _filteredChamps;
-
-      if (_contains_only(_isSelectedList, false)) {
-        result = widget._championList;
-      }*/
-      print('RESULT = _PREVIOUSCHAMPS');
-    }*/
     setState(() {
       _foundChamps = result;
     });
     _filteredChamps = _foundChamps;
   }
 
-  bool _contains_only(var _list, bool e) {
-    bool isTrue = _list.every(
-      (element) => element == e,
-    );
-    return isTrue;
-  }
-
-  void _showRoleSheet(BuildContext ctx) {
+  void _showRoleSheet(BuildContext context) {
     showModalBottomSheet(
-      context: ctx,
-      builder: (_) {
-        return Drawer(
-          child: Container(
-            color: const Color.fromARGB(255, 197, 201, 209),
-            child: ListView.builder(
-              itemCount: champ.Role.values.length,
-              itemBuilder: (context, index) {
-                return SwitchListTile(
-                  title: Text(
-                    champ.Role.values[index].label,
-                    style: TextStyle(color: Colors.black, fontSize: 20),
-                  ),
-                  value: _isSelectedMap[champ.Role.values[index]],
-                  onChanged: (newValue) {
-                    setState(() {
-                      _isSelectedMap[champ.Role.values[index]] = newValue;
-                      if (!newValue) {}
-                    });
-
-                    setState(() {
-                      //_filteredChamps = [];
-                      _filterChampRoles(
-                          champ.Role.values[index],
-                          _isSelectedMap[champ.Role.values[index]],
-                          index,
-                          _isSelectedMap);
-                    });
-
-                    Future.delayed(Duration(milliseconds: 250), () {
-                      Navigator.of(context).pop();
-                    });
+      context: context,
+      builder: (context) {
+        return StatefulBuilder(
+          builder: ((context, setState) {
+            return Drawer(
+              child: Container(
+                color: const Color.fromARGB(255, 197, 201, 209),
+                child: ListView.builder(
+                  itemCount: champ.Role.values.length,
+                  itemBuilder: (context, index) {
+                    return SwitchListTile(
+                      title: Text(
+                        champ.Role.values[index].label,
+                        style: TextStyle(color: Colors.black, fontSize: 20),
+                      ),
+                      value: _isSelectedMap[champ.Role.values[index]],
+                      onChanged: (newValue) {
+                        setState(() {
+                          _isSelectedMap[champ.Role.values[index]] = newValue;
+                          if (!newValue) {}
+                        });
+                        setState(() {
+                          _filterChampRoles(
+                              champ.Role.values[index],
+                              _isSelectedMap[champ.Role.values[index]],
+                              index,
+                              _isSelectedMap);
+                        });
+                      },
+                    );
                   },
-                );
-                // return TextButton(
-                // child: Text(
-                //   champ.Role.values[index].label,
-                //   style: TextStyle(color: Colors.black, fontSize: 20),
-                // ),
-                //   onPressed: () {
-                //     for (var element in _filteredChamps) {
-                //       print(element.name);
-                //     }
-                //     setState(() {
-                //       _filteredChamps = [];
-                //       _filterChampRoles(champ.Role.values[index]);
-                //     });
-                //     Navigator.of(context).pop();
-                //   },
-                // );
-              },
-            ),
-          ),
+                ),
+              ),
+            );
+          }),
         );
       },
     );
@@ -272,7 +207,6 @@ class _ChampionsPageState extends State<ChampionsPage> {
                 itemCount: _foundChamps.length,
                 itemBuilder: ((context, index) {
                   return GridTile(
-                    //key: ValueKey(_foundChamps[index].name),
                     child: IconButton(
                       icon: Image.network(
                         _foundChamps[index].icon.url,
