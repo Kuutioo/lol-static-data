@@ -19,11 +19,7 @@ class _ChampionSmashOrPassPageState extends State<ChampionSmashOrPassPage> {
         child: Container(
           height: 300,
           width: 200,
-          child: Stack(
-            children: [
-              ChampionTinderCard(color: Colors.deepPurple),
-            ],
-          ),
+          child: ChampionTinderCard(color: Colors.deepPurple),
         ),
       ),
     );

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swipable/flutter_swipable.dart';
 
+import '../pages/champion_smash_or_pass_result_page.dart';
+
 class ChampionTinderCard extends StatefulWidget {
   final color;
 
@@ -15,14 +17,19 @@ class _ChampionTinderCardState extends State<ChampionTinderCard> {
   Widget build(BuildContext context) {
     return Swipable(
       onSwipeRight: (finalPosition) {
-        print('here!');
-        setState(() {
-          ChampionTinderCard(color: Colors.black);
-        });
+        print('RIGHT');
+        _addCard();
       },
       child: Container(
         color: widget.color,
       ),
     );
+  }
+
+  void _addCard() {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => ChampionSmashOrPassResultPage()));
   }
 }
