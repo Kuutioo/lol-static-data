@@ -1,3 +1,5 @@
+// ignore_for_file: use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter_swipable/flutter_swipable.dart';
 import 'package:champions/champions.dart' as champ;
@@ -41,8 +43,20 @@ class _ChampionTinderCardState extends State<ChampionTinderCard> {
 
     var champDocs = championsCollection.doc('champion_${widget.champion.name}');
 
-    Future<void> _addChampion(int addToSmash, int addToPass) {
-      if (champDocs.get() == null) {
+    Future<bool> _getBool() async {
+      var value = await champDocs.get();
+      if (value.exists) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    Future<void> _addChampion(
+        int addToSmash, int addToPass, bool champDocsDataExists) async {
+      bool champDataExists = champDocsDataExists;
+      print(champDataExists);
+      if (champDocs.get() == null || !champDataExists) {
         return champDocs.set({
           'champion_name': widget.champion.name,
           'smash_count': addToSmash,
@@ -72,15 +86,15 @@ class _ChampionTinderCardState extends State<ChampionTinderCard> {
         String url = snapshot.data[0].full.url;
         String result = _modifyUrl(url);
         return Swipable(
-          onSwipeRight: (finalPosition) {
-            print('SMASH');
+          onSwipeRight: (finalPosition) async {
+            bool champDocsDataExists = await _getBool();
+            await _addChampion(1, 0, champDocsDataExists);
             _showResult();
-            _addChampion(1, 0);
           },
-          onSwipeLeft: (finalPosition) {
-            print('PASS');
+          onSwipeLeft: (finalPosition) async {
+            bool champDocsDataExists = await _getBool();
+            await _addChampion(0, 1, champDocsDataExists);
             _showResult();
-            _addChampion(0, 1);
           },
           child: Center(
             child: Stack(
