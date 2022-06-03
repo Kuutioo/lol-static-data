@@ -21,7 +21,7 @@ class HamburgerBar extends StatelessWidget {
               child: const Text(
                 'Static data',
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 16,
                   color: Colors.white,
                 ),
               ),
