@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:champions/champions.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/services.dart';
 
 import './pages/champions_page.dart';
 import './pages/champion_detail_page.dart';
@@ -10,6 +11,10 @@ import './pages/champion_smash_or_pass_page.dart';
 
 List<Champion> championList;
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+
   Champions champions = await Champions.forRegion(Region.na);
   championList = (await champions.all).values.toList();
 
@@ -31,9 +36,11 @@ class MyApp extends StatelessWidget {
           ),
           fontFamily: 'spiegel',
         ),
-        home: ChampionSmashOrPassPage(),
+        home: ChampionsPage(championList),
         routes: {
           ChampionDetailPage.routeName: (context) => ChampionDetailPage(),
+          ChampionSmashOrPassPage.routeName: (context) =>
+              ChampionSmashOrPassPage()
         });
   }
 }

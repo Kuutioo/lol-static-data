@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:champions/champions.dart' as champ;
+import 'package:lol_static_data/widgets/hamburger_bar.dart';
 
 import '../widgets/champion_tinder_card.dart';
 
@@ -10,6 +11,7 @@ class ChampionSmashOrPassPage extends StatefulWidget {
   @override
   State<ChampionSmashOrPassPage> createState() =>
       _ChampionSmashOrPassPageState();
+  static const routeName = 'champion-smash-or-pass-page';
 }
 
 class _ChampionSmashOrPassPageState extends State<ChampionSmashOrPassPage> {
@@ -40,6 +42,7 @@ class _ChampionSmashOrPassPageState extends State<ChampionSmashOrPassPage> {
           );
         }
         return Scaffold(
+          drawer: const HamburgerBar(),
           appBar: AppBar(
             backgroundColor: Theme.of(context).primaryColor,
             title: const Text('Smash Or Pass'),

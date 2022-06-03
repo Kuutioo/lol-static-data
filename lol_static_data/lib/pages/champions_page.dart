@@ -2,7 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:champions/champions.dart' as champ;
+import 'package:lol_static_data/pages/champion_smash_or_pass_page.dart';
 
+import '../widgets/hamburger_bar.dart';
 import './champion_detail_page.dart';
 
 class ChampionsPage extends StatefulWidget {
@@ -140,6 +142,7 @@ class _ChampionsPageState extends State<ChampionsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: HamburgerBar(),
       backgroundColor: const Color.fromARGB(255, 197, 201, 209),
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
