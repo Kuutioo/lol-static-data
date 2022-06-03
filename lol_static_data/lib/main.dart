@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
           ),
           fontFamily: 'spiegel',
         ),
-        home: ChampionsPage(championList),
+        home: ChampionSmashOrPassPage(),
         routes: {
           ChampionDetailPage.routeName: (context) => ChampionDetailPage(),
         });
