@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:champions/champions.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import './pages/champions_page.dart';
 import './pages/champion_detail_page.dart';
@@ -11,6 +12,9 @@ List<Champion> championList;
 void main() async {
   Champions champions = await Champions.forRegion(Region.na);
   championList = (await champions.all).values.toList();
+
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
 
   runApp(MyApp());
 }
@@ -27,7 +31,7 @@ class MyApp extends StatelessWidget {
           ),
           fontFamily: 'spiegel',
         ),
-        home: ChampionsPage(championList),
+        home: ChampionSmashOrPassPage(), //ChampionsPage(championList),
         routes: {
           ChampionDetailPage.routeName: (context) => ChampionDetailPage(),
         });
