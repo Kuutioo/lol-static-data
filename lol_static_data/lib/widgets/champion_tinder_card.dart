@@ -19,6 +19,8 @@ class ChampionTinderCard extends StatefulWidget {
   State<ChampionTinderCard> createState() => _ChampionTinderCardState();
 }
 
+String result;
+
 class _ChampionTinderCardState extends State<ChampionTinderCard> {
   Future<List<champ.ChampionSkin>> _getSkin() async {
     Iterable<champ.ChampionSkin> champSkin = await widget.champion.skins;
@@ -55,17 +57,18 @@ class _ChampionTinderCardState extends State<ChampionTinderCard> {
     Future<void> _addChampion(
         int addToSmash, int addToPass, bool champDocsDataExists) async {
       bool champDataExists = champDocsDataExists;
-      print(champDataExists);
       if (champDocs.get() == null || !champDataExists) {
         return champDocs.set({
           'champion_name': widget.champion.name,
           'smash_count': addToSmash,
-          'pass_count': addToPass
+          'pass_count': addToPass,
+          'total_count': addToSmash + addToPass
         });
       } else {
         return champDocs.update({
           'smash_count': FieldValue.increment(addToSmash),
-          'pass_count': FieldValue.increment(addToPass)
+          'pass_count': FieldValue.increment(addToPass),
+          'total_count': FieldValue.increment(addToSmash + addToPass),
         });
       }
     }
@@ -84,7 +87,7 @@ class _ChampionTinderCardState extends State<ChampionTinderCard> {
           );
         }
         String url = snapshot.data[0].full.url;
-        String result = _modifyUrl(url);
+        result = _modifyUrl(url);
         return Swipable(
           onSwipeRight: (finalPosition) async {
             bool champDocsDataExists = await _getBool();
@@ -94,6 +97,7 @@ class _ChampionTinderCardState extends State<ChampionTinderCard> {
           onSwipeLeft: (finalPosition) async {
             bool champDocsDataExists = await _getBool();
             await _addChampion(0, 1, champDocsDataExists);
+
             _showResult();
           },
           child: Center(
@@ -136,8 +140,11 @@ class _ChampionTinderCardState extends State<ChampionTinderCard> {
 
   void _showResult() {
     Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-            builder: (context) => ChampionSmashOrPassResultPage()));
+      context,
+      MaterialPageRoute(
+        builder: (context) =>
+            ChampionSmashOrPassResultPage(widget.champion, result),
+      ),
+    );
   }
 }
