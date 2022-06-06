@@ -2,13 +2,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:champions/champions.dart' as champ;
+import 'package:scroll_snap_list/scroll_snap_list.dart';
 
 import './detail_text/champion_detail_text.dart';
 
 class ChampionTips extends StatelessWidget {
   final champ.Champion champion;
 
-  const ChampionTips(this.champion);
+  ChampionTips(this.champion);
 
   Future<List<String>> _allyTooltips() async {
     Iterable<String> allytips = await champion.allyTips;
@@ -24,6 +25,8 @@ class ChampionTips extends StatelessWidget {
     return enemyTipsList;
   }
 
+  AsyncSnapshot<dynamic> dataSnapshot;
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -36,11 +39,51 @@ class ChampionTips extends StatelessWidget {
         } else if (snapshot.hasError) {
           return null;
         }
+        dataSnapshot = snapshot;
         if (snapshot.hasData) {
-          return _championTips(snapshot);
+          //return _championTips(snapshot);
+          return Container(
+            height: 150,
+            width: 350,
+            child: ScrollSnapList(
+              itemBuilder: _itemList,
+              itemSize: 350,
+              dynamicItemSize: true,
+              itemCount: dataSnapshot.data.length + 1,
+            ),
+          );
         }
         return null;
       },
+    );
+  }
+
+  Widget _itemList(BuildContext context, int index) {
+    return Container(
+      height: 150,
+      width: 350,
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.bottomLeft,
+          end: Alignment.topRight,
+          colors: [
+            Color.fromARGB(255, 156, 130, 74),
+            Color.fromARGB(255, 255, 224, 113),
+          ],
+        ),
+      ),
+      child: Card(
+        elevation: 5,
+        child: Center(
+          child: ChampionDetailText(
+            '${dataSnapshot.data[0][index]}',
+            18,
+            true,
+            Colors.black,
+            true,
+          ),
+        ),
+      ),
     );
   }
 
