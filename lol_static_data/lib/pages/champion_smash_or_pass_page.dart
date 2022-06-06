@@ -18,6 +18,13 @@ class _ChampionSmashOrPassPageState extends State<ChampionSmashOrPassPage> {
   List<champ.Champion> _championList;
   final _random = Random();
 
+  @override
+  void initState() {
+    super.initState();
+
+    HamburgerBar.page = DrawerPages.tinderPage;
+  }
+
   Future<void> _getChamps() async {
     champ.Champions champions =
         await champ.Champions.forRegion(champ.Region.na);
@@ -42,7 +49,7 @@ class _ChampionSmashOrPassPageState extends State<ChampionSmashOrPassPage> {
           );
         }
         return Scaffold(
-          drawer: const HamburgerBar(),
+          drawer: HamburgerBar(),
           appBar: AppBar(
             backgroundColor: Theme.of(context).primaryColor,
             title: const Text('Smash Or Pass'),

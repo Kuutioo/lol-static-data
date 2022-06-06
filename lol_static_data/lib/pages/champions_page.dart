@@ -39,6 +39,7 @@ class _ChampionsPageState extends State<ChampionsPage> {
   void initState() {
     super.initState();
 
+    HamburgerBar.page = DrawerPages.championsPage;
     _foundChamps = widget._championList;
   }
 
