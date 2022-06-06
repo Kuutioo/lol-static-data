@@ -12,22 +12,20 @@ class HamburgerBar extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          SizedBox(
-            height: 88,
-            child: DrawerHeader(
-              decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor,
-              ),
-              child: const Text(
-                'Static data',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.white,
-                ),
+          DrawerHeader(
+            decoration: BoxDecoration(
+              color: Theme.of(context).primaryColor,
+            ),
+            child: const Text(
+              'Static data',
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.white,
               ),
             ),
           ),
           ListTile(
+            leading: Icon(Icons.person),
             title: const Text(
               'Champions',
               style: TextStyle(
@@ -39,6 +37,7 @@ class HamburgerBar extends StatelessWidget {
             },
           ),
           ListTile(
+            leading: Icon(Icons.favorite_rounded),
             title: const Text(
               'Smash or Pass',
               style: TextStyle(

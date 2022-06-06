@@ -18,7 +18,10 @@ class ChampionsPage extends StatefulWidget {
 
 class _ChampionsPageState extends State<ChampionsPage> {
   Icon cusIcon = Icon(Icons.search);
-  Widget cusSearchBar = Text('Champions');
+  Widget cusSearchBar = Text(
+    'Champions',
+    style: TextStyle(color: Colors.black),
+  );
 
   List<champ.Champion> _foundChamps = [];
   List<champ.Champion> _filteredChamps = [];
@@ -142,12 +145,15 @@ class _ChampionsPageState extends State<ChampionsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 199, 203, 212),
       drawer: HamburgerBar(),
-      backgroundColor: const Color.fromARGB(255, 197, 201, 209),
       appBar: AppBar(
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Color.fromARGB(255, 199, 203, 212),
+        iconTheme: IconThemeData(
+          color: Colors.black,
+        ),
         title: cusSearchBar,
-        elevation: 10,
+        elevation: 0,
         actions: [
           IconButton(
             onPressed: () {
@@ -164,16 +170,18 @@ class _ChampionsPageState extends State<ChampionsPage> {
                         border: InputBorder.none,
                         hintText: 'Search a champion',
                         hintStyle: TextStyle(
-                          color: Colors.white60,
+                          color: Colors.black,
                         )),
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       fontSize: 16.0,
                     ),
                   );
                 } else {
                   cusIcon = Icon(Icons.search);
-                  cusSearchBar = Text('Champions');
+                  cusSearchBar = Text(
+                    'Champions',
+                  );
                 }
               });
             },
