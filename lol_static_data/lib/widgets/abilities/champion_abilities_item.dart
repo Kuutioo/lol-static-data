@@ -29,20 +29,12 @@ class ChampionAbilitiesItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        ChampionDetailText(title, 20, false),
-        ChampionDetailText(abilityName, 24, true),
-        !isPassive
-            ? ChampionDetailText('Range: $abilityRangeSpread', 18, false)
-            : const SizedBox.shrink(),
-        !isPassive
-            ? ChampionDetailText('Cost: $abilityCostSpread', 18, false)
-            : const SizedBox.shrink(),
-        !isPassive
-            ? ChampionDetailText('Cooldown: $abilityCooldownSpread', 18, false)
-            : const SizedBox.shrink(),
+        ChampionDetailText(title, 20, false, Colors.black, true),
+        ChampionDetailText(abilityName, 24, true, Colors.black, true),
         const SizedBox(
-          height: 10,
+          height: 6,
         ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,25 +45,58 @@ class ChampionAbilitiesItem extends StatelessWidget {
                 decoration: BoxDecoration(
                   border: Border.all(
                     width: 3,
-                    color: const Color(0xFF2c2f3e),
+                    color: const Color.fromARGB(255, 156, 130, 74),
                   ),
+                  borderRadius: BorderRadius.circular(15),
                 ),
-                child: Image(
-                  image: NetworkImage(abilityIconUrl),
-                  fit: BoxFit.cover,
-                  height: 100,
-                  width: 100,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image(
+                    image: NetworkImage(abilityIconUrl),
+                    fit: BoxFit.cover,
+                    height: 75,
+                    width: 75,
+                  ),
                 ),
               ),
             ),
-            Expanded(
-              child: ChampionDetailTextHtml(
-                abilityDescription,
-                18,
-              ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                isPassive
+                    ? Container(
+                        width: MediaQuery.of(context).size.width - 86,
+                        child: ChampionDetailTextHtml(
+                          abilityDescription,
+                          16,
+                        ),
+                      )
+                    : const SizedBox.shrink(),
+                const SizedBox(height: 9),
+                !isPassive
+                    ? ChampionDetailText('Range: $abilityRangeSpread', 16,
+                        false, Colors.black, true)
+                    : const SizedBox.shrink(),
+                const SizedBox(height: 2),
+                !isPassive
+                    ? ChampionDetailText('Cost: $abilityCostSpread', 16, false,
+                        Colors.black, true)
+                    : const SizedBox.shrink(),
+                const SizedBox(height: 2),
+                !isPassive
+                    ? ChampionDetailText('Cooldown: $abilityCooldownSpread', 16,
+                        false, Colors.black, true)
+                    : const SizedBox.shrink(),
+              ],
             ),
           ],
         ),
+        !isPassive
+            ? ChampionDetailTextHtml(
+                abilityDescription,
+                16,
+              )
+            : const SizedBox.shrink(),
         const SizedBox(
           height: 20,
         ),

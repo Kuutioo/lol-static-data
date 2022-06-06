@@ -56,28 +56,39 @@ class _ChampionDetailPageState extends State<ChampionDetailPage> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  SizedBox(
-                    height: 200,
-                    width: double.infinity,
-                    child: Image(
-                      image: NetworkImage(
-                        result,
+                  Padding(
+                    padding: const EdgeInsets.all(5),
+                    child: SizedBox(
+                      height: 200,
+                      width: double.infinity,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: Image(
+                          image: NetworkImage(
+                            result,
+                          ),
+                          fit: BoxFit.cover,
+                        ),
                       ),
-                      fit: BoxFit.cover,
                     ),
                   ),
                   const SizedBox(height: 10),
-                  ChampionDetailText(champion.name, 32, true),
-                  ChampionDetailText(champion.title, 20, false),
+                  ChampionDetailText(
+                      champion.name, 32, true, Colors.black, true),
+                  ChampionDetailText(
+                      champion.title, 20, false, Colors.black, true),
                   const SizedBox(height: 70),
-                  const ChampionDetailText('Abilities', 32, true),
+                  const ChampionDetailText(
+                      'Abilities', 32, true, Colors.black, true),
                   const SizedBox(height: 15),
                   ChampionAbilities(champion),
                   const SizedBox(height: 70),
                   ChampionTips(champion),
                   const SizedBox(height: 70),
-                  const ChampionDetailText('Lore', 32, true),
-                  ChampionDetailText(champion.blurb, 18, false),
+                  const ChampionDetailText(
+                      'Lore', 32, true, Colors.black, true),
+                  ChampionDetailText(
+                      champion.blurb, 18, false, Colors.black, true),
                 ],
               ),
             ),

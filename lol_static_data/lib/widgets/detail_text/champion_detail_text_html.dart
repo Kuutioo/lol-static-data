@@ -13,7 +13,7 @@ class ChampionDetailTextHtml extends StatelessWidget {
   Widget build(BuildContext context) {
     return Html(
       data: text,
-      shrinkWrap: true,
+      shrinkWrap: false,
       style: {
         'body': Style(
           fontSize: FontSize(fontSize),

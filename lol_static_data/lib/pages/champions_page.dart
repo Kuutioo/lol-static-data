@@ -181,6 +181,9 @@ class _ChampionsPageState extends State<ChampionsPage> {
                   cusIcon = Icon(Icons.search);
                   cusSearchBar = Text(
                     'Champions',
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
                   );
                 }
               });
@@ -219,9 +222,12 @@ class _ChampionsPageState extends State<ChampionsPage> {
                 itemBuilder: ((context, index) {
                   return GridTile(
                     child: IconButton(
-                      icon: Image.network(
-                        _foundChamps[index].icon.url,
-                        fit: BoxFit.cover,
+                      icon: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.network(
+                          _foundChamps[index].icon.url,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                       onPressed: () {
                         Navigator.of(context).pushNamed(

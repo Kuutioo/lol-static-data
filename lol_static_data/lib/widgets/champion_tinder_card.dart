@@ -4,16 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_swipable/flutter_swipable.dart';
 import 'package:champions/champions.dart' as champ;
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 import '../pages/champion_smash_or_pass_result_page.dart';
-import '../pages/champion_detail_page.dart';
 
 class ChampionTinderCard extends StatefulWidget {
-  final color;
   final champ.Champion champion;
 
-  ChampionTinderCard({@required this.color, this.champion});
+  ChampionTinderCard({this.champion});
 
   @override
   State<ChampionTinderCard> createState() => _ChampionTinderCardState();

@@ -48,7 +48,6 @@ class _ChampionSmashOrPassPageState extends State<ChampionSmashOrPassPage> {
             title: const Text('Smash Or Pass'),
           ),
           body: ChampionTinderCard(
-            color: Colors.deepPurple,
             champion: _randomChampion(_championList),
           ),
         );

@@ -49,31 +49,39 @@ class ChampionTips extends StatelessWidget {
   Column _championTips(AsyncSnapshot<dynamic> snapshot) {
     return Column(
       children: [
-        const ChampionDetailText('Tips', 32, true),
-        ChampionDetailText('Tips playing with ${champion.name}', 24, true),
+        const ChampionDetailText('Tips', 32, true, Colors.black, true),
+        ChampionDetailText(
+            'Tips playing with ${champion.name}', 24, true, Colors.black, true),
         snapshot.data[0].length > 0 && !snapshot.data[0][0].isEmpty
-            ? ChampionDetailText('- ${snapshot.data[0][0]}', 18, false)
+            ? ChampionDetailText(
+                '- ${snapshot.data[0][0]}', 18, false, Colors.black, true)
             : const SizedBox.shrink(),
         const SizedBox(height: 10),
         snapshot.data[0].length > 1 && !snapshot.data[0][1].isEmpty
-            ? ChampionDetailText('- ${snapshot.data[0][1]}', 18, false)
+            ? ChampionDetailText(
+                '- ${snapshot.data[0][1]}', 18, false, Colors.black, true)
             : const SizedBox.shrink(),
         const SizedBox(height: 10),
         snapshot.data[0].length > 2 && !snapshot.data[0][2].isEmpty
-            ? ChampionDetailText('- ${snapshot.data[0][2]}', 18, false)
+            ? ChampionDetailText(
+                '- ${snapshot.data[0][2]}', 18, false, Colors.black, true)
             : const SizedBox.shrink(),
         const SizedBox(height: 10),
-        ChampionDetailText('Tips playing against ${champion.name}', 24, true),
+        ChampionDetailText('Tips playing against ${champion.name}', 24, true,
+            Colors.black, true),
         snapshot.data[1].length > 0 && !snapshot.data[1][0].isEmpty
-            ? ChampionDetailText('- ${snapshot.data[1][0]}', 18, false)
+            ? ChampionDetailText(
+                '- ${snapshot.data[1][0]}', 18, false, Colors.black, true)
             : const SizedBox.shrink(),
         const SizedBox(height: 10),
         snapshot.data[1].length > 1 && !snapshot.data[1][1].isEmpty
-            ? ChampionDetailText('- ${snapshot.data[1][1]}', 18, false)
+            ? ChampionDetailText(
+                '- ${snapshot.data[1][1]}', 18, false, Colors.black, true)
             : const SizedBox.shrink(),
         const SizedBox(height: 10),
         snapshot.data[1].length > 2 && !snapshot.data[1][2].isEmpty
-            ? ChampionDetailText('- ${snapshot.data[1][2]}', 18, false)
+            ? ChampionDetailText(
+                '- ${snapshot.data[1][2]}', 18, false, Colors.black, true)
             : const SizedBox.shrink(),
       ],
     );
