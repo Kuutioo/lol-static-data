@@ -18,13 +18,6 @@ class _ChampionSmashOrPassPageState extends State<ChampionSmashOrPassPage> {
   List<champ.Champion> _championList;
   final _random = Random();
 
-  @override
-  void initState() {
-    super.initState();
-
-    HamburgerBar.page = DrawerPages.tinderPage;
-  }
-
   Future<void> _getChamps() async {
     champ.Champions champions =
         await champ.Champions.forRegion(champ.Region.na);
@@ -48,14 +41,75 @@ class _ChampionSmashOrPassPageState extends State<ChampionSmashOrPassPage> {
             ),
           );
         }
-        return Scaffold(
-          drawer: HamburgerBar(),
-          appBar: AppBar(
-            backgroundColor: Theme.of(context).primaryColor,
-            title: const Text('Smash Or Pass'),
+        return Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+              stops: const [
+                0.001,
+                0.05,
+                0.95,
+                0.999,
+              ],
+              colors: [
+                Colors.red.shade200,
+                Colors.white,
+                Colors.white,
+                Colors.green.shade200,
+              ],
+            ),
           ),
-          body: ChampionTinderCard(
-            champion: _randomChampion(_championList),
+          child: Scaffold(
+            backgroundColor: Colors.transparent,
+            drawer: HamburgerBar(),
+            appBar: AppBar(
+              iconTheme: const IconThemeData(
+                color: Colors.black,
+              ),
+              elevation: 0,
+              backgroundColor: Colors.transparent,
+              title: const Text(
+                'Smash Or Pass',
+                style: TextStyle(
+                  color: Colors.black,
+                ),
+              ),
+            ),
+            body: Column(
+              children: [
+                SizedBox(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: const [
+                      Padding(
+                        padding: EdgeInsets.only(left: 20),
+                        child: Text(
+                          'Pass',
+                          style: TextStyle(
+                            fontSize: 28,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(right: 20),
+                        child: Text(
+                          'Smash',
+                          style: TextStyle(
+                            fontSize: 28,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: ChampionTinderCard(
+                    champion: _randomChampion(_championList),
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       },

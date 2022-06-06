@@ -11,6 +11,7 @@ import './pages/champion_smash_or_pass_page.dart';
 
 List<Champion> championList;
 void main() async {
+  Paint.enableDithering = true;
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);

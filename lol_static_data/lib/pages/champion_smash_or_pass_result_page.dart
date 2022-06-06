@@ -125,6 +125,11 @@ class ChampionSmashOrPassResultPage extends StatelessWidget {
                     image: NetworkImage(championSplashUrl),
                     fit: BoxFit.cover,
                   ),
+                  border: Border.all(
+                    color: const Color(0xFF2c2f3e),
+                    width: 3,
+                  ),
+                  borderRadius: BorderRadius.circular(10),
                 ),
               ),
               Expanded(

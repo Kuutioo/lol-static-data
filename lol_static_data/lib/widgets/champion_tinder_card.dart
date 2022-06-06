@@ -76,7 +76,6 @@ class _ChampionTinderCardState extends State<ChampionTinderCard> {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Scaffold(
             body: Container(
-              color: Colors.white,
               child: const Center(
                 child: CircularProgressIndicator(),
               ),
@@ -102,22 +101,25 @@ class _ChampionTinderCardState extends State<ChampionTinderCard> {
               children: [
                 Container(
                   decoration: BoxDecoration(
-                    border: Border.all(
-                      width: 3,
-                      color: const Color(0xFF2c2f3e),
+                      border: Border.all(
+                        width: 3,
+                        color: const Color(0xFF2c2f3e),
+                      ),
+                      borderRadius: BorderRadius.circular(20)),
+                  height: 500,
+                  width: 350,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(15),
+                    child: Image(
+                      image: NetworkImage(result),
+                      fit: BoxFit.cover,
                     ),
-                  ),
-                  height: 400,
-                  width: 300,
-                  child: Image(
-                    image: NetworkImage(result),
-                    fit: BoxFit.cover,
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
-                    top: 5,
-                    left: 5,
+                    top: 8,
+                    left: 8,
                   ),
                   child: Text(
                     widget.champion.name,
