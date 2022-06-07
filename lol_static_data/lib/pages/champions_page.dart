@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:champions/champions.dart' as champ;
 import 'package:lol_static_data/pages/champion_smash_or_pass_page.dart';
+import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
 
 import '../widgets/hamburger_bar.dart';
 import './champion_detail_page.dart';
@@ -20,7 +21,7 @@ class _ChampionsPageState extends State<ChampionsPage> {
   Icon cusIcon = Icon(Icons.search);
   Widget cusSearchBar = Text(
     'Champions',
-    style: TextStyle(color: Colors.black),
+    style: TextStyle(color: Colors.white),
   );
 
   List<champ.Champion> _foundChamps = [];
@@ -146,12 +147,19 @@ class _ChampionsPageState extends State<ChampionsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 199, 203, 212),
+      //backgroundColor: Color.fromARGB(255, 199, 203, 212),
       drawer: HamburgerBar(),
-      appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 199, 203, 212),
+      appBar: NewGradientAppBar(
+        gradient: const LinearGradient(
+          begin: Alignment.bottomCenter,
+          end: Alignment.topCenter,
+          colors: [
+            Color.fromARGB(255, 47, 69, 76),
+            Color.fromARGB(255, 7, 32, 44),
+          ],
+        ),
         iconTheme: IconThemeData(
-          color: Colors.black,
+          color: Colors.white,
         ),
         title: cusSearchBar,
         elevation: 0,
@@ -166,16 +174,16 @@ class _ChampionsPageState extends State<ChampionsPage> {
                     onChanged: (value) {
                       _runFilter(value);
                     },
-                    cursorColor: Colors.black,
+                    cursorColor: Colors.white,
                     textInputAction: TextInputAction.go,
                     decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: 'Search a champion',
                         hintStyle: TextStyle(
-                          color: Colors.black,
+                          color: Colors.white,
                         )),
                     style: TextStyle(
-                      color: Colors.black,
+                      color: Colors.white,
                       fontSize: 16.0,
                     ),
                   );
@@ -184,7 +192,7 @@ class _ChampionsPageState extends State<ChampionsPage> {
                   cusSearchBar = Text(
                     'Champions',
                     style: TextStyle(
-                      color: Colors.black,
+                      color: Colors.white,
                     ),
                   );
                 }
@@ -212,6 +220,16 @@ class _ChampionsPageState extends State<ChampionsPage> {
         ],
       ),
       body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color.fromARGB(255, 47, 69, 76),
+              Color.fromARGB(255, 7, 32, 44),
+            ],
+          ),
+        ),
         child: _foundChamps.isNotEmpty
             ? GridView.builder(
                 gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
@@ -244,6 +262,7 @@ class _ChampionsPageState extends State<ChampionsPage> {
                         _foundChamps[index].name,
                         textAlign: TextAlign.center,
                         style: const TextStyle(
+                          color: Colors.white,
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
