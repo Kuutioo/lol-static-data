@@ -31,8 +31,16 @@ class ChampionAbilitiesItem extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        ChampionDetailText(title, 20, false, Colors.white, true),
-        ChampionDetailText(abilityName, 24, true, Colors.white, true),
+        ChampionDetailText(
+          title,
+          20,
+          false,
+        ),
+        ChampionDetailText(
+          abilityName,
+          24,
+          true,
+        ),
         const SizedBox(
           height: 6,
         ),
@@ -45,6 +53,7 @@ class ChampionAbilitiesItem extends StatelessWidget {
                 decoration: BoxDecoration(
                   border: Border.all(
                     width: 3,
+                    color: const Color.fromARGB(255, 171, 150, 76),
                   ),
                   gradient: const LinearGradient(
                     begin: Alignment.bottomRight,
@@ -81,22 +90,34 @@ class ChampionAbilitiesItem extends StatelessWidget {
                     : const SizedBox.shrink(),
                 const SizedBox(height: 9),
                 !isPassive
-                    ? ChampionDetailText('Range: $abilityRangeSpread', 16,
-                        false, Colors.white, true)
+                    ? ChampionDetailText(
+                        'Range: $abilityRangeSpread',
+                        16,
+                        false,
+                      )
                     : const SizedBox.shrink(),
                 const SizedBox(height: 2),
                 !isPassive
-                    ? ChampionDetailText('Cost: $abilityCostSpread', 16, false,
-                        Colors.white, true)
+                    ? ChampionDetailText(
+                        'Cost: $abilityCostSpread',
+                        16,
+                        false,
+                      )
                     : const SizedBox.shrink(),
                 const SizedBox(height: 2),
                 !isPassive
-                    ? ChampionDetailText('Cooldown: $abilityCooldownSpread', 16,
-                        false, Colors.white, true)
+                    ? ChampionDetailText(
+                        'Cooldown: $abilityCooldownSpread',
+                        16,
+                        false,
+                      )
                     : const SizedBox.shrink(),
               ],
             ),
           ],
+        ),
+        const SizedBox(
+          height: 10,
         ),
         !isPassive
             ? ChampionDetailTextHtml(

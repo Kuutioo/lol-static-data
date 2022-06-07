@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 
+import '../helpers/gradient_text.dart';
+
 class HamburgerBar extends StatefulWidget {
   static DrawerPages page;
 
@@ -13,20 +15,35 @@ class _HamburgerBarState extends State<HamburgerBar> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: const Color.fromARGB(255, 197, 201, 209),
+      backgroundColor: const Color.fromARGB(255, 170, 173, 180),
       child: ListView(
         padding: const EdgeInsets.all(0),
         children: [
-          DrawerHeader(
-            margin: const EdgeInsets.all(0),
+          const DrawerHeader(
+            margin: EdgeInsets.all(0),
             decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor,
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color.fromARGB(255, 47, 69, 76),
+                  Color.fromARGB(255, 7, 32, 44),
+                ],
+              ),
             ),
-            child: const Text(
-              'Static data',
+            child: GradientText(
+              'League Of Data',
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color.fromARGB(255, 171, 150, 76),
+                  Color.fromARGB(255, 247, 217, 110),
+                ],
+              ),
               style: TextStyle(
-                fontSize: 16,
-                color: Colors.white,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
@@ -38,9 +55,10 @@ class _HamburgerBarState extends State<HamburgerBar> {
               ),
               contentPadding: const EdgeInsets.symmetric(horizontal: 10),
               selected: HamburgerBar.page == DrawerPages.championsPage,
-              selectedTileColor: const Color.fromARGB(255, 145, 148, 151),
-              tileColor: const Color.fromARGB(255, 197, 201, 209),
+              selectedTileColor: const Color.fromARGB(255, 47, 69, 76),
+              tileColor: const Color.fromARGB(255, 170, 173, 180),
               leading: const Icon(Icons.person),
+              selectedColor: const Color.fromARGB(255, 206, 167, 29),
               title: const Text(
                 'Champions',
                 style: TextStyle(
@@ -63,9 +81,10 @@ class _HamburgerBarState extends State<HamburgerBar> {
               ),
               contentPadding: const EdgeInsets.symmetric(horizontal: 10),
               selected: HamburgerBar.page == DrawerPages.tinderPage,
-              selectedTileColor: const Color.fromARGB(255, 145, 148, 151),
-              tileColor: const Color.fromARGB(255, 197, 201, 209),
+              selectedTileColor: const Color.fromARGB(255, 47, 69, 76),
+              tileColor: const Color.fromARGB(255, 170, 173, 180),
               leading: const Icon(Icons.favorite_rounded),
+              selectedColor: const Color.fromARGB(255, 206, 167, 29),
               title: const Text(
                 'Smash or Pass',
                 style: TextStyle(

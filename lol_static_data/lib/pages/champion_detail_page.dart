@@ -58,8 +58,20 @@ class _ChampionDetailPageState extends State<ChampionDetailPage> {
           future: _getSkin(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(
-                child: CircularProgressIndicator(),
+              return Container(
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Color.fromARGB(255, 47, 69, 76),
+                      Color.fromARGB(255, 7, 32, 44),
+                    ],
+                  ),
+                ),
+                child: const Center(
+                  child: CircularProgressIndicator(),
+                ),
               );
             }
             String url = snapshot.data[0].full.url;
@@ -96,20 +108,32 @@ class _ChampionDetailPageState extends State<ChampionDetailPage> {
                       ),
                     ),
                     const SizedBox(height: 10),
-                    ChampionDetailText(champion.name, 32, true,
-                        const Color.fromARGB(255, 252, 221, 112), true),
-                    ChampionDetailText(champion.title, 20, false,
-                        const Color.fromARGB(255, 252, 221, 112), true),
+                    ChampionDetailText(
+                      champion.name,
+                      32,
+                      true,
+                    ),
+                    ChampionDetailText(
+                      champion.title,
+                      20,
+                      false,
+                    ),
                     const SizedBox(height: 70),
-                    const ChampionDetailText('Abilities', 32, true,
-                        Color.fromARGB(255, 252, 221, 112), true),
+                    const ChampionDetailText(
+                      'Abilities',
+                      32,
+                      true,
+                    ),
                     const SizedBox(height: 15),
                     ChampionAbilities(champion),
                     const SizedBox(height: 70),
                     ChampionTips(champion),
                     const SizedBox(height: 70),
-                    const ChampionDetailText('Lore', 32, true,
-                        Color.fromARGB(255, 252, 221, 112), true),
+                    const ChampionDetailText(
+                      'Lore',
+                      32,
+                      true,
+                    ),
                     ChampionDetailTextHtml(champion.blurb, 18),
                   ],
                 ),

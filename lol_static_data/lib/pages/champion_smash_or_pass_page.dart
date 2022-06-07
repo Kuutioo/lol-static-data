@@ -6,6 +6,7 @@ import 'package:champions/champions.dart' as champ;
 import 'package:lol_static_data/widgets/hamburger_bar.dart';
 
 import '../widgets/champion_tinder_card.dart';
+import '../widgets/detail_text/champion_detail_text.dart';
 
 class ChampionSmashOrPassPage extends StatefulWidget {
   @override
@@ -35,7 +36,16 @@ class _ChampionSmashOrPassPageState extends State<ChampionSmashOrPassPage> {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Container(
-            color: Colors.white,
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color.fromARGB(255, 47, 69, 76),
+                  Color.fromARGB(255, 7, 32, 44),
+                ],
+              ),
+            ),
             child: const Center(
               child: CircularProgressIndicator(),
             ),
@@ -54,8 +64,8 @@ class _ChampionSmashOrPassPageState extends State<ChampionSmashOrPassPage> {
               ],
               colors: [
                 Colors.red.shade200,
-                Colors.white,
-                Colors.white,
+                const Color.fromARGB(255, 47, 69, 76),
+                const Color.fromARGB(255, 7, 32, 44),
                 Colors.green.shade200,
               ],
             ),
@@ -65,14 +75,14 @@ class _ChampionSmashOrPassPageState extends State<ChampionSmashOrPassPage> {
             drawer: HamburgerBar(),
             appBar: AppBar(
               iconTheme: const IconThemeData(
-                color: Colors.black,
+                color: Colors.white,
               ),
               elevation: 0,
               backgroundColor: Colors.transparent,
               title: const Text(
                 'Smash Or Pass',
                 style: TextStyle(
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
               ),
             ),
@@ -83,23 +93,11 @@ class _ChampionSmashOrPassPageState extends State<ChampionSmashOrPassPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: const [
                       Padding(
-                        padding: EdgeInsets.only(left: 20),
-                        child: Text(
-                          'Pass',
-                          style: TextStyle(
-                            fontSize: 28,
-                          ),
-                        ),
-                      ),
+                          padding: EdgeInsets.only(left: 20),
+                          child: ChampionDetailText('Pass', 28, true)),
                       Padding(
-                        padding: EdgeInsets.only(right: 20),
-                        child: Text(
-                          'Smash',
-                          style: TextStyle(
-                            fontSize: 28,
-                          ),
-                        ),
-                      ),
+                          padding: EdgeInsets.only(right: 20),
+                          child: ChampionDetailText('Smash', 28, true)),
                     ],
                   ),
                 ),

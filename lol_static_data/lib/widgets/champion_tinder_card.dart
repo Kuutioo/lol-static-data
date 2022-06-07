@@ -74,9 +74,21 @@ class _ChampionTinderCardState extends State<ChampionTinderCard> {
       future: _getSkin(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Scaffold(
-            body: Center(
-              child: CircularProgressIndicator(),
+          return Scaffold(
+            body: Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Color.fromARGB(255, 47, 69, 76),
+                    Color.fromARGB(255, 7, 32, 44),
+                  ],
+                ),
+              ),
+              child: const Center(
+                child: CircularProgressIndicator(),
+              ),
             ),
           );
         }
@@ -123,9 +135,10 @@ class _ChampionTinderCardState extends State<ChampionTinderCard> {
                   child: Text(
                     widget.champion.name,
                     style: const TextStyle(
-                        color: Colors.white,
-                        backgroundColor: Colors.black54,
-                        fontSize: 28),
+                      color: Colors.white,
+                      backgroundColor: Colors.black54,
+                      fontSize: 28,
+                    ),
                   ),
                 ),
               ],

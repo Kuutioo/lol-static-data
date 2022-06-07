@@ -51,8 +51,6 @@ class ChampionTips extends StatelessWidget {
                       'Tips playing with ${champion.name}',
                       24,
                       true,
-                      Colors.white,
-                      true,
                     ),
                     const SizedBox(
                       height: 5,
@@ -73,8 +71,6 @@ class ChampionTips extends StatelessWidget {
                     ChampionDetailText(
                       'Tips playing against ${champion.name}',
                       24,
-                      true,
-                      Colors.white,
                       true,
                     ),
                     const SizedBox(

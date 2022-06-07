@@ -7,11 +7,8 @@ class ChampionDetailText extends StatelessWidget {
   final String text;
   final double fontSize;
   final bool isBold;
-  final bool hasColor;
-  final Color textColor;
 
-  const ChampionDetailText(
-      this.text, this.fontSize, this.isBold, this.textColor, this.hasColor);
+  const ChampionDetailText(this.text, this.fontSize, this.isBold);
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +25,9 @@ class ChampionDetailText extends StatelessWidget {
             ],
           ),
           style: TextStyle(
-              fontSize: fontSize,
-              fontWeight: isBold ? FontWeight.bold : null,
-              color: hasColor ? textColor : Colors.black)
+            fontSize: fontSize,
+            fontWeight: isBold ? FontWeight.bold : null,
+          )
           //TextStyle(fontSize: fontSize),
           ),
     );

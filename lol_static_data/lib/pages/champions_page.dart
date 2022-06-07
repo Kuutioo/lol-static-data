@@ -6,6 +6,8 @@ import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
 
 import '../widgets/hamburger_bar.dart';
 import './champion_detail_page.dart';
+import '../widgets/detail_text/champion_detail_text.dart';
+import '../helpers/gradient_text.dart';
 
 class ChampionsPage extends StatefulWidget {
   final List<champ.Champion> _championList;
@@ -109,15 +111,37 @@ class _ChampionsPageState extends State<ChampionsPage> {
           builder: ((context, setState) {
             return Drawer(
               child: Container(
-                color: const Color.fromARGB(255, 197, 201, 209),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: const [
+                      Color.fromARGB(255, 47, 69, 76),
+                      Color.fromARGB(255, 7, 32, 44),
+                    ],
+                  ),
+                ),
                 child: ListView.builder(
                   itemCount: champ.Role.values.length,
                   itemBuilder: (context, index) {
                     return SwitchListTile(
-                      title: Text(
+                      activeColor: const Color.fromARGB(255, 206, 167, 29),
+                      title: GradientText(
+                        champ.Role.values[index].label,
+                        gradient: const LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [
+                            Color.fromARGB(255, 171, 150, 76),
+                            Color.fromARGB(255, 247, 217, 110),
+                          ],
+                        ),
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      /*Text(
                         champ.Role.values[index].label,
                         style: TextStyle(color: Colors.black, fontSize: 20),
-                      ),
+                      ),*/
                       value: _isSelectedMap[champ.Role.values[index]],
                       onChanged: (newValue) {
                         setState(() {
@@ -257,7 +281,11 @@ class _ChampionsPageState extends State<ChampionsPage> {
                     ),
                     footer: FittedBox(
                       fit: BoxFit.scaleDown,
-                      child: Text(
+                      child: ChampionDetailText(
+                        _foundChamps[index].name,
+                        20,
+                        true,
+                      ), /*Text(
                         _foundChamps[index].name,
                         textAlign: TextAlign.center,
                         style: const TextStyle(
@@ -265,7 +293,7 @@ class _ChampionsPageState extends State<ChampionsPage> {
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
-                      ),
+                      ),*/
                     ),
                   );
                 }),
