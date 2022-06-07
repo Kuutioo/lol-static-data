@@ -74,17 +74,16 @@ class _ChampionTinderCardState extends State<ChampionTinderCard> {
       future: _getSkin(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Scaffold(
-            body: Container(
-              child: const Center(
-                child: CircularProgressIndicator(),
-              ),
+          return const Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(),
             ),
           );
         }
         String url = snapshot.data[0].full.url;
         result = _modifyUrl(url);
         return Swipable(
+          verticalSwipe: false,
           onSwipeRight: (finalPosition) async {
             bool champDocsDataExists = await _getBool();
             await _addChampion(1, 0, champDocsDataExists);
