@@ -71,7 +71,7 @@ class ChampionAbilitiesItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 isPassive
-                    ? Container(
+                    ? SizedBox(
                         width: MediaQuery.of(context).size.width - 86,
                         child: ChampionDetailTextHtml(
                           abilityDescription,

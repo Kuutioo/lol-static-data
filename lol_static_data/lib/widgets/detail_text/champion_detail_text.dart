@@ -3,8 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:lol_static_data/helpers/gradient_text.dart';
 
-import '';
-
 class ChampionDetailText extends StatelessWidget {
   final String text;
   final double fontSize;

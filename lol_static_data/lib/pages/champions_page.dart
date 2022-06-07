@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:champions/champions.dart' as champ;
-import 'package:lol_static_data/pages/champion_smash_or_pass_page.dart';
 import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
 
 import '../widgets/hamburger_bar.dart';

@@ -1,4 +1,4 @@
-// ignore_for_file: use_key_in_widget_constructors
+// ignore_for_file: use_key_in_widget_constructors, must_be_immutable, missing_required_param
 
 import 'package:flutter/material.dart';
 import 'package:champions/champions.dart' as champ;
@@ -57,7 +57,7 @@ class ChampionTips extends StatelessWidget {
                     const SizedBox(
                       height: 5,
                     ),
-                    Container(
+                    SizedBox(
                       height: 150,
                       width: 350,
                       child: ScrollSnapList(
@@ -80,7 +80,7 @@ class ChampionTips extends StatelessWidget {
                     const SizedBox(
                       height: 5,
                     ),
-                    Container(
+                    SizedBox(
                       height: 150,
                       width: 350,
                       child: ScrollSnapList(

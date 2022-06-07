@@ -10,7 +10,7 @@ import '../pages/champion_smash_or_pass_result_page.dart';
 class ChampionTinderCard extends StatefulWidget {
   final champ.Champion champion;
 
-  ChampionTinderCard({this.champion});
+  const ChampionTinderCard({this.champion});
 
   @override
   State<ChampionTinderCard> createState() => _ChampionTinderCardState();

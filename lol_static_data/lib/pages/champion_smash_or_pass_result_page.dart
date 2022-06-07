@@ -1,3 +1,5 @@
+// ignore_for_file: use_key_in_widget_constructors, must_be_immutable, avoid_print
+
 import 'package:champions/champions.dart' as champ;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -55,20 +57,18 @@ class ChampionSmashOrPassResultPage extends StatelessWidget {
                       child: Column(
                         children: [
                           const Text('Pass'),
-                          Container(
-                            child: Flexible(
-                              child: LinearPercentIndicator(
-                                //width: double.infinity,
-                                lineHeight: 22.0,
-                                percent: passCount / totalCount,
-                                backgroundColor: Theme.of(context).primaryColor,
-                                progressColor: Colors.cyan,
-                                animation: true,
-                                animationDuration: 1000,
-                                center: Text(
-                                  '${passCountPercentage.toStringAsFixed(0)} %',
-                                  style: const TextStyle(color: Colors.white),
-                                ),
+                          Flexible(
+                            child: LinearPercentIndicator(
+                              //width: double.infinity,
+                              lineHeight: 22.0,
+                              percent: passCount / totalCount,
+                              backgroundColor: Theme.of(context).primaryColor,
+                              progressColor: Colors.cyan,
+                              animation: true,
+                              animationDuration: 1000,
+                              center: Text(
+                                '${passCountPercentage.toStringAsFixed(0)} %',
+                                style: const TextStyle(color: Colors.white),
                               ),
                             ),
                           ),
@@ -89,20 +89,18 @@ class ChampionSmashOrPassResultPage extends StatelessWidget {
                       child: Column(
                         children: [
                           const Text('Smash'),
-                          Container(
-                            child: Flexible(
-                              child: LinearPercentIndicator(
-                                // width: double.infinity,
-                                lineHeight: 22.0,
-                                percent: smashCount / totalCount,
-                                backgroundColor: Theme.of(context).primaryColor,
-                                progressColor: Colors.cyan,
-                                animation: true,
-                                animationDuration: 1000,
-                                center: Text(
-                                  '${smashCountPercentage.toStringAsFixed(0)} %',
-                                  style: const TextStyle(color: Colors.white),
-                                ),
+                          Flexible(
+                            child: LinearPercentIndicator(
+                              // width: double.infinity,
+                              lineHeight: 22.0,
+                              percent: smashCount / totalCount,
+                              backgroundColor: Theme.of(context).primaryColor,
+                              progressColor: Colors.cyan,
+                              animation: true,
+                              animationDuration: 1000,
+                              center: Text(
+                                '${smashCountPercentage.toStringAsFixed(0)} %',
+                                style: const TextStyle(color: Colors.white),
                               ),
                             ),
                           ),
