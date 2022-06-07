@@ -31,8 +31,8 @@ class ChampionAbilitiesItem extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        ChampionDetailText(title, 20, false, Colors.black, true),
-        ChampionDetailText(abilityName, 24, true, Colors.black, true),
+        ChampionDetailText(title, 20, false, Colors.white, true),
+        ChampionDetailText(abilityName, 24, true, Colors.white, true),
         const SizedBox(
           height: 6,
         ),
@@ -45,12 +45,19 @@ class ChampionAbilitiesItem extends StatelessWidget {
                 decoration: BoxDecoration(
                   border: Border.all(
                     width: 3,
-                    color: const Color.fromARGB(255, 156, 130, 74),
+                  ),
+                  gradient: const LinearGradient(
+                    begin: Alignment.bottomRight,
+                    end: Alignment.topLeft,
+                    colors: [
+                      Color.fromARGB(255, 109, 85, 39),
+                      Color.fromARGB(255, 231, 195, 123),
+                    ],
                   ),
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(12),
                   child: Image(
                     image: NetworkImage(abilityIconUrl),
                     fit: BoxFit.cover,
@@ -75,17 +82,17 @@ class ChampionAbilitiesItem extends StatelessWidget {
                 const SizedBox(height: 9),
                 !isPassive
                     ? ChampionDetailText('Range: $abilityRangeSpread', 16,
-                        false, Colors.black, true)
+                        false, Colors.white, true)
                     : const SizedBox.shrink(),
                 const SizedBox(height: 2),
                 !isPassive
                     ? ChampionDetailText('Cost: $abilityCostSpread', 16, false,
-                        Colors.black, true)
+                        Colors.white, true)
                     : const SizedBox.shrink(),
                 const SizedBox(height: 2),
                 !isPassive
                     ? ChampionDetailText('Cooldown: $abilityCooldownSpread', 16,
-                        false, Colors.black, true)
+                        false, Colors.white, true)
                     : const SizedBox.shrink(),
               ],
             ),

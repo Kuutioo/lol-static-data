@@ -17,6 +17,7 @@ class ChampionDetailTextHtml extends StatelessWidget {
       style: {
         'body': Style(
           fontSize: FontSize(fontSize),
+          color: Colors.white,
           margin: const EdgeInsets.all(0),
           padding: const EdgeInsets.only(left: 5),
         ),

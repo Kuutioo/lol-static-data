@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:champions/champions.dart' as champ;
+import 'package:lol_static_data/widgets/detail_text/champion_detail_text_html.dart';
+import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
 
 import '../widgets/detail_text/champion_detail_text.dart';
 import '../widgets/abilities/champion_abilities.dart';
@@ -37,8 +39,17 @@ class _ChampionDetailPageState extends State<ChampionDetailPage> {
     }
 
     return Scaffold(
-      appBar: AppBar(
+      appBar: NewGradientAppBar(
+        elevation: 0,
         title: Text(champion.name),
+        gradient: const LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Color.fromARGB(255, 20, 158, 166),
+            Color.fromARGB(255, 7, 32, 44),
+          ],
+        ),
       ),
       body: FutureBuilder<List<champ.ChampionSkin>>(
         future: _getSkin(),
@@ -52,7 +63,16 @@ class _ChampionDetailPageState extends State<ChampionDetailPage> {
           String result = _modifyUrl(url);
 
           return Container(
-            color: const Color.fromARGB(255, 197, 201, 209),
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color.fromARGB(255, 47, 69, 76),
+                  Color.fromARGB(255, 7, 32, 44),
+                ],
+              ),
+            ),
             child: SingleChildScrollView(
               child: Column(
                 children: [
@@ -73,22 +93,21 @@ class _ChampionDetailPageState extends State<ChampionDetailPage> {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  ChampionDetailText(
-                      champion.name, 32, true, Colors.black, true),
-                  ChampionDetailText(
-                      champion.title, 20, false, Colors.black, true),
+                  ChampionDetailText(champion.name, 32, true,
+                      Color.fromARGB(255, 252, 221, 112), true),
+                  ChampionDetailText(champion.title, 20, false,
+                      Color.fromARGB(255, 252, 221, 112), true),
                   const SizedBox(height: 70),
-                  const ChampionDetailText(
-                      'Abilities', 32, true, Colors.black, true),
+                  const ChampionDetailText('Abilities', 32, true,
+                      Color.fromARGB(255, 252, 221, 112), true),
                   const SizedBox(height: 15),
                   ChampionAbilities(champion),
                   const SizedBox(height: 70),
                   ChampionTips(champion),
                   const SizedBox(height: 70),
-                  const ChampionDetailText(
-                      'Lore', 32, true, Colors.black, true),
-                  ChampionDetailText(
-                      champion.blurb, 18, false, Colors.black, true),
+                  const ChampionDetailText('Lore', 32, true,
+                      Color.fromARGB(255, 252, 221, 112), true),
+                  ChampionDetailTextHtml(champion.blurb, 18),
                 ],
               ),
             ),
