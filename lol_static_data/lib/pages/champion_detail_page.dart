@@ -39,80 +39,84 @@ class _ChampionDetailPageState extends State<ChampionDetailPage> {
     }
 
     return Scaffold(
-      appBar: NewGradientAppBar(
-        elevation: 0,
-        title: Text(champion.name),
-        gradient: const LinearGradient(
-          begin: Alignment.bottomCenter,
-          end: Alignment.topCenter,
-          colors: [
-            Color.fromARGB(255, 44, 92, 84),
-            Color.fromARGB(255, 36, 99, 159),
-          ],
-        ),
-      ),
-      body: FutureBuilder<List<champ.ChampionSkin>>(
-        future: _getSkin(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          String url = snapshot.data[0].full.url;
-          String result = _modifyUrl(url);
-
-          return Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Color.fromARGB(255, 47, 69, 76),
-                  Color.fromARGB(255, 7, 32, 44),
-                ],
-              ),
+      body: NestedScrollView(
+        headerSliverBuilder: (context, innerBoxIsScrolled) => [
+          SliverNewGradientAppBar(
+            elevation: 0,
+            title: Text(champion.name),
+            gradient: const LinearGradient(
+              begin: Alignment.bottomCenter,
+              end: Alignment.topCenter,
+              colors: [
+                Color.fromARGB(255, 47, 69, 76),
+                Color.fromARGB(255, 7, 32, 44),
+              ],
             ),
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(5),
-                    child: SizedBox(
-                      height: 200,
-                      width: double.infinity,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
-                        child: Image(
-                          image: NetworkImage(
-                            result,
+          ),
+        ],
+        body: FutureBuilder<List<champ.ChampionSkin>>(
+          future: _getSkin(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            String url = snapshot.data[0].full.url;
+            String result = _modifyUrl(url);
+
+            return Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Color.fromARGB(255, 47, 69, 76),
+                    Color.fromARGB(255, 7, 32, 44),
+                  ],
+                ),
+              ),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(5),
+                      child: SizedBox(
+                        height: 200,
+                        width: double.infinity,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(15),
+                          child: Image(
+                            image: NetworkImage(
+                              result,
+                            ),
+                            fit: BoxFit.cover,
                           ),
-                          fit: BoxFit.cover,
                         ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 10),
-                  ChampionDetailText(champion.name, 32, true,
-                      Color.fromARGB(255, 252, 221, 112), true),
-                  ChampionDetailText(champion.title, 20, false,
-                      Color.fromARGB(255, 252, 221, 112), true),
-                  const SizedBox(height: 70),
-                  const ChampionDetailText('Abilities', 32, true,
-                      Color.fromARGB(255, 252, 221, 112), true),
-                  const SizedBox(height: 15),
-                  ChampionAbilities(champion),
-                  const SizedBox(height: 70),
-                  ChampionTips(champion),
-                  const SizedBox(height: 70),
-                  const ChampionDetailText('Lore', 32, true,
-                      Color.fromARGB(255, 252, 221, 112), true),
-                  ChampionDetailTextHtml(champion.blurb, 18),
-                ],
+                    const SizedBox(height: 10),
+                    ChampionDetailText(champion.name, 32, true,
+                        Color.fromARGB(255, 252, 221, 112), true),
+                    ChampionDetailText(champion.title, 20, false,
+                        Color.fromARGB(255, 252, 221, 112), true),
+                    const SizedBox(height: 70),
+                    const ChampionDetailText('Abilities', 32, true,
+                        Color.fromARGB(255, 252, 221, 112), true),
+                    const SizedBox(height: 15),
+                    ChampionAbilities(champion),
+                    const SizedBox(height: 70),
+                    ChampionTips(champion),
+                    const SizedBox(height: 70),
+                    const ChampionDetailText('Lore', 32, true,
+                        Color.fromARGB(255, 252, 221, 112), true),
+                    ChampionDetailTextHtml(champion.blurb, 18),
+                  ],
+                ),
               ),
-            ),
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }
