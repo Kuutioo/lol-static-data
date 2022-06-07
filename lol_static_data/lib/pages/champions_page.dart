@@ -162,10 +162,11 @@ class _ChampionsPageState extends State<ChampionsPage> {
                 if (cusIcon.icon == Icons.search) {
                   cusIcon = Icon(Icons.cancel);
                   cusSearchBar = TextField(
+                    autofocus: true,
                     onChanged: (value) {
                       _runFilter(value);
                     },
-                    cursorColor: Colors.white,
+                    cursorColor: Colors.black,
                     textInputAction: TextInputAction.go,
                     decoration: InputDecoration(
                         border: InputBorder.none,
