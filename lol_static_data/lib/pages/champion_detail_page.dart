@@ -43,11 +43,11 @@ class _ChampionDetailPageState extends State<ChampionDetailPage> {
         elevation: 0,
         title: Text(champion.name),
         gradient: const LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
+          begin: Alignment.bottomCenter,
+          end: Alignment.topCenter,
           colors: [
-            Color.fromARGB(255, 20, 158, 166),
-            Color.fromARGB(255, 7, 32, 44),
+            Color.fromARGB(255, 44, 92, 84),
+            Color.fromARGB(255, 36, 99, 159),
           ],
         ),
       ),
