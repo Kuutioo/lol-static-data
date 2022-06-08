@@ -1,5 +1,6 @@
 // ignore_for_file: use_key_in_widget_constructors, must_be_immutable, missing_required_param
 
+import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:champions/champions.dart' as champ;
 import 'package:scroll_snap_list/scroll_snap_list.dart';
@@ -59,6 +60,10 @@ class ChampionTips extends StatelessWidget {
                       height: 150,
                       width: 350,
                       child: ScrollSnapList(
+                        updateOnScroll: true,
+                        onItemFocus: (int i) {
+                          print('i: $i');
+                        },
                         itemBuilder: _allytipsList,
                         itemSize: 350,
                         dynamicItemSize: true,
