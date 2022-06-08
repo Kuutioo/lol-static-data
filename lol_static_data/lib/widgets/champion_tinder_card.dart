@@ -6,6 +6,7 @@ import 'package:champions/champions.dart' as champ;
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../pages/champion_smash_or_pass_result_page.dart';
+import '../helpers/gradient_text.dart';
 
 class ChampionTinderCard extends StatefulWidget {
   final champ.Champion champion;
@@ -70,7 +71,7 @@ class _ChampionTinderCardState extends State<ChampionTinderCard> {
       }
     }
 
-    return FutureBuilder(
+    return FutureBuilder<List<champ.ChampionSkin>>(
       future: _getSkin(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -83,7 +84,7 @@ class _ChampionTinderCardState extends State<ChampionTinderCard> {
             ),
           );
         }
-        String url = snapshot.data[0].full.url;
+        String url = snapshot.data[0].compact.url;
         result = _modifyUrl(url);
         return Swipable(
           verticalSwipe: false,
@@ -105,10 +106,10 @@ class _ChampionTinderCardState extends State<ChampionTinderCard> {
                   decoration: BoxDecoration(
                       border: Border.all(
                         width: 3,
-                        color: const Color(0xFF2c2f3e),
+                        color: const Color.fromARGB(255, 171, 150, 76),
                       ),
                       borderRadius: BorderRadius.circular(20)),
-                  height: 500,
+                  height: 600,
                   width: 350,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(15),
@@ -120,16 +121,16 @@ class _ChampionTinderCardState extends State<ChampionTinderCard> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(
-                    top: 8,
-                    left: 8,
+                    top: 10,
+                    left: 10,
                   ),
                   child: Text(
                     widget.champion.name,
                     style: const TextStyle(
-                      color: Colors.white,
-                      backgroundColor: Colors.black54,
-                      fontSize: 28,
-                    ),
+                        color: Color.fromARGB(255, 171, 150, 76),
+                        backgroundColor: Colors.black87,
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
               ],

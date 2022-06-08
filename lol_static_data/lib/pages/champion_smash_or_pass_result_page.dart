@@ -5,8 +5,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
+import 'package:flutter_swipable/flutter_swipable.dart';
 
-import 'champion_smash_or_pass_page.dart';
+import './champion_smash_or_pass_page.dart';
 import '../helpers/gradient_text.dart';
 
 class ChampionSmashOrPassResultPage extends StatelessWidget {
@@ -17,6 +18,15 @@ class ChampionSmashOrPassResultPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void _pushPage() {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ChampionSmashOrPassPage(),
+        ),
+      );
+    }
+
     return FutureBuilder(
       future: FirebaseFirestore.instance
           .collection('champions')
@@ -82,15 +92,26 @@ class ChampionSmashOrPassResultPage extends StatelessWidget {
             ),
             child: Column(
               children: [
-                const SizedBox(
-                  height: 15,
+                GradientText(
+                  championName,
+                  gradient: const LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Color.fromARGB(255, 171, 150, 76),
+                      Color.fromARGB(255, 247, 217, 110),
+                    ],
+                  ),
+                  style: const TextStyle(
+                      fontSize: 28, fontWeight: FontWeight.bold),
                 ),
                 Flexible(
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Flexible(
+                        flex: 1,
                         child: Column(
                           children: [
                             const GradientText(
@@ -139,16 +160,32 @@ class ChampionSmashOrPassResultPage extends StatelessWidget {
                           ],
                         ),
                       ),
-                      Container(
-                        height: 100,
-                        width: 100,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: NetworkImage(champion.icon.url),
-                              fit: BoxFit.fill),
+                      Flexible(
+                        flex: 1,
+                        child: Container(
+                          height: 100,
+                          width: 100,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(
+                              width: 3,
+                              color: const Color.fromARGB(255, 171, 150, 76),
+                            ),
+                          ),
+                          child: ClipRRect(
+                              borderRadius: BorderRadius.circular(15),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: NetworkImage(champion.icon.url),
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                              )),
                         ),
                       ),
                       Flexible(
+                        flex: 1,
                         child: Column(
                           children: [
                             const GradientText(
@@ -200,54 +237,58 @@ class ChampionSmashOrPassResultPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                GradientText(
-                  championName,
-                  gradient: const LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Color.fromARGB(255, 171, 150, 76),
-                      Color.fromARGB(255, 247, 217, 110),
-                    ],
-                  ),
-                  style: const TextStyle(
-                      fontSize: 28, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(
-                  height: 30,
-                ),
-                Container(
-                  height: 400,
-                  width: 300,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: NetworkImage(championSplashUrl),
-                      fit: BoxFit.cover,
-                    ),
-                    border: Border.all(
-                      color: const Color(0xFF2c2f3e),
-                      width: 3,
-                    ),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    alignment: Alignment.bottomCenter,
-                    child: IconButton(
-                      icon: const Icon(
-                        Icons.arrow_circle_right,
-                        color: Colors.white,
-                      ),
-                      iconSize: 70,
-                      onPressed: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ChampionSmashOrPassPage(),
+                Flexible(
+                  flex: 4,
+                  child: Swipable(
+                    onSwipeDown: (finalPosition) {
+                      _pushPage();
+                    },
+                    onSwipeUp: (finalPosition) {
+                      _pushPage();
+                    },
+                    onSwipeLeft: (finalPosition) {
+                      _pushPage();
+                    },
+                    onSwipeRight: (finalPosition) {
+                      _pushPage();
+                    },
+                    child: Center(
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: Container(
+                          height: 500,
+                          width: 300,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                              image: NetworkImage(championSplashUrl),
+                              fit: BoxFit.cover,
+                            ),
+                            border: Border.all(
+                              color: const Color.fromARGB(255, 171, 150, 76),
+                              width: 3,
+                            ),
+                            borderRadius: BorderRadius.circular(15),
                           ),
-                        );
-                      },
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                const Flexible(
+                  flex: 0,
+                  child: GradientText(
+                    'Swipe anywhere to continue',
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Color.fromARGB(255, 171, 150, 76),
+                        Color.fromARGB(255, 247, 217, 110),
+                      ],
+                    ),
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
