@@ -10,6 +10,8 @@ import '../widgets/detail_text/champion_detail_text.dart';
 import '../helpers/gradient_text.dart';
 
 class ChampionsPage extends StatefulWidget {
+  static const routeName = 'champions-page';
+
   final List<champ.Champion> _championList;
 
   const ChampionsPage(this._championList);
@@ -41,7 +43,6 @@ class _ChampionsPageState extends State<ChampionsPage> {
   void initState() {
     super.initState();
 
-    HamburgerBar.page = DrawerPages.championsPage;
     _foundChamps = widget._championList;
   }
 

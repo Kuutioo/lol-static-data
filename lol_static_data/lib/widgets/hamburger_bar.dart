@@ -1,6 +1,7 @@
 // ignore_for_file: use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
+import 'package:lol_static_data/pages/champions_page.dart';
 
 import '../helpers/gradient_text.dart';
 
@@ -32,7 +33,7 @@ class _HamburgerBarState extends State<HamburgerBar> {
               ),
             ),
             child: GradientText(
-              'League Of Data',
+              'League Of Tinder',
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
@@ -45,32 +46,6 @@ class _HamburgerBarState extends State<HamburgerBar> {
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-            child: ListTile(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15),
-              ),
-              contentPadding: const EdgeInsets.symmetric(horizontal: 10),
-              selected: HamburgerBar.page == DrawerPages.championsPage,
-              selectedTileColor: const Color.fromARGB(255, 47, 69, 76),
-              tileColor: const Color.fromARGB(255, 170, 173, 180),
-              leading: const Icon(Icons.person),
-              selectedColor: const Color.fromARGB(255, 206, 167, 29),
-              title: const Text(
-                'Champions',
-                style: TextStyle(
-                  fontSize: 16,
-                ),
-              ),
-              onTap: () {
-                Navigator.pushReplacementNamed(context, '/');
-                setState(() {
-                  HamburgerBar.page = DrawerPages.championsPage;
-                });
-              },
             ),
           ),
           Padding(
@@ -92,10 +67,36 @@ class _HamburgerBarState extends State<HamburgerBar> {
                 ),
               ),
               onTap: () {
-                Navigator.pushReplacementNamed(
-                    context, 'champion-smash-or-pass-page');
+                Navigator.pushReplacementNamed(context, '/');
                 setState(() {
                   HamburgerBar.page = DrawerPages.tinderPage;
+                });
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            child: ListTile(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15),
+              ),
+              contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+              selected: HamburgerBar.page == DrawerPages.championsPage,
+              selectedTileColor: const Color.fromARGB(255, 47, 69, 76),
+              tileColor: const Color.fromARGB(255, 170, 173, 180),
+              leading: const Icon(Icons.person),
+              selectedColor: const Color.fromARGB(255, 206, 167, 29),
+              title: const Text(
+                'Champions',
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+              onTap: () {
+                Navigator.pushReplacementNamed(
+                    context, ChampionsPage.routeName);
+                setState(() {
+                  HamburgerBar.page = DrawerPages.championsPage;
                 });
               },
             ),

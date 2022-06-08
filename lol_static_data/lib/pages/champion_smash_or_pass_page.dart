@@ -30,6 +30,12 @@ class _ChampionSmashOrPassPageState extends State<ChampionSmashOrPassPage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    HamburgerBar.page = DrawerPages.tinderPage;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: _getChamps(),

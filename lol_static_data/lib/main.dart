@@ -37,11 +37,10 @@ class MyApp extends StatelessWidget {
           ),
           fontFamily: 'spiegel',
         ),
-        home: ChampionsPage(championList),
+        home: ChampionSmashOrPassPage(),
         routes: {
           ChampionDetailPage.routeName: (context) => ChampionDetailPage(),
-          ChampionSmashOrPassPage.routeName: (context) =>
-              ChampionSmashOrPassPage()
+          ChampionsPage.routeName: (context) => ChampionsPage(championList),
         });
   }
 }
