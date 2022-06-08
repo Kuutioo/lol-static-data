@@ -19,8 +19,8 @@ class ChampionsPage extends StatefulWidget {
 }
 
 class _ChampionsPageState extends State<ChampionsPage> {
-  Icon cusIcon = Icon(Icons.search);
-  Widget cusSearchBar = Text(
+  Icon customIcon = Icon(Icons.search);
+  Widget customSearchBar = Text(
     'Champions',
     style: TextStyle(color: Colors.white),
   );
@@ -184,15 +184,15 @@ class _ChampionsPageState extends State<ChampionsPage> {
         iconTheme: IconThemeData(
           color: Colors.white,
         ),
-        title: cusSearchBar,
+        title: customSearchBar,
         elevation: 0,
         actions: [
           IconButton(
             onPressed: () {
               setState(() {
-                if (cusIcon.icon == Icons.search) {
-                  cusIcon = Icon(Icons.cancel);
-                  cusSearchBar = TextField(
+                if (customIcon.icon == Icons.search) {
+                  customIcon = Icon(Icons.cancel);
+                  customSearchBar = TextField(
                     autofocus: true,
                     onChanged: (value) {
                       _runFilter(value);
@@ -211,8 +211,8 @@ class _ChampionsPageState extends State<ChampionsPage> {
                     ),
                   );
                 } else {
-                  cusIcon = Icon(Icons.search);
-                  cusSearchBar = Text(
+                  customIcon = Icon(Icons.search);
+                  customSearchBar = Text(
                     'Champions',
                     style: TextStyle(
                       color: Colors.white,
@@ -221,7 +221,7 @@ class _ChampionsPageState extends State<ChampionsPage> {
                 }
               });
             },
-            icon: cusIcon,
+            icon: customIcon,
           ),
           IconButton(
             onPressed: () => _showRoleSheet(context),
