@@ -92,19 +92,6 @@ class ChampionSmashOrPassResultPage extends StatelessWidget {
             ),
             child: Column(
               children: [
-                GradientText(
-                  championName,
-                  gradient: const LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Color.fromARGB(255, 171, 150, 76),
-                      Color.fromARGB(255, 247, 217, 110),
-                    ],
-                  ),
-                  style: const TextStyle(
-                      fontSize: 28, fontWeight: FontWeight.bold),
-                ),
                 Flexible(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -255,20 +242,39 @@ class ChampionSmashOrPassResultPage extends StatelessWidget {
                     child: Center(
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(15),
-                        child: Container(
-                          height: 500,
-                          width: 300,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: NetworkImage(championSplashUrl),
-                              fit: BoxFit.cover,
+                        child: Stack(
+                          children: [
+                            Container(
+                              height: 500,
+                              width: 300,
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: NetworkImage(championSplashUrl),
+                                  fit: BoxFit.cover,
+                                ),
+                                border: Border.all(
+                                  color:
+                                      const Color.fromARGB(255, 171, 150, 76),
+                                  width: 3,
+                                ),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
                             ),
-                            border: Border.all(
-                              color: const Color.fromARGB(255, 171, 150, 76),
-                              width: 3,
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                top: 10,
+                                left: 10,
+                              ),
+                              child: Text(
+                                championName,
+                                style: const TextStyle(
+                                    color: Color.fromARGB(255, 171, 150, 76),
+                                    backgroundColor: Colors.black87,
+                                    fontSize: 28,
+                                    fontWeight: FontWeight.bold),
+                              ),
                             ),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
+                          ],
                         ),
                       ),
                     ),
