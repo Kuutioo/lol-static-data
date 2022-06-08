@@ -93,11 +93,13 @@ class _ChampionSmashOrPassPageState extends State<ChampionSmashOrPassPage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: const [
                       Padding(
-                          padding: EdgeInsets.only(left: 20),
-                          child: ChampionDetailText('Pass', 28, true)),
+                        padding: EdgeInsets.only(left: 20),
+                        child: ChampionDetailText('Pass', 28, true),
+                      ),
                       Padding(
-                          padding: EdgeInsets.only(right: 20),
-                          child: ChampionDetailText('Smash', 28, true)),
+                        padding: EdgeInsets.only(right: 20),
+                        child: ChampionDetailText('Smash', 28, true),
+                      ),
                     ],
                   ),
                 ),
