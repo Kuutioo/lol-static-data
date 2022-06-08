@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
 import 'package:flutter_swipable/flutter_swipable.dart';
+import 'package:timer_count_down/timer_count_down.dart';
 
 import './champion_smash_or_pass_page.dart';
 import '../helpers/gradient_text.dart';
@@ -61,6 +62,7 @@ class ChampionSmashOrPassResultPage extends StatelessWidget {
         int smashCount = streamSnapshot.data.get('smash_count');
         int passCount = streamSnapshot.data.get('pass_count');
         int totalCount = streamSnapshot.data.get('total_count');
+        int currentTimerAmount = 5;
 
         double smashCountPercentage = smashCount / totalCount * 100.0;
         double passCountPercentage = passCount / totalCount * 100.0;
@@ -120,8 +122,10 @@ class ChampionSmashOrPassResultPage extends StatelessWidget {
                                 //width: double.infinity,
                                 lineHeight: 22.0,
                                 percent: passCount / totalCount,
-                                backgroundColor: Theme.of(context).primaryColor,
-                                progressColor: Colors.cyan,
+                                backgroundColor:
+                                    const Color.fromARGB(255, 80, 132, 153),
+                                progressColor:
+                                    const Color.fromARGB(255, 103, 188, 221),
                                 animation: true,
                                 animationDuration: 1000,
                                 center: Text(
@@ -194,8 +198,11 @@ class ChampionSmashOrPassResultPage extends StatelessWidget {
                                 // width: double.infinity,
                                 lineHeight: 22.0,
                                 percent: smashCount / totalCount,
-                                backgroundColor: Theme.of(context).primaryColor,
-                                progressColor: Colors.cyan,
+                                isRTL: true,
+                                backgroundColor:
+                                    const Color.fromARGB(255, 80, 132, 153),
+                                progressColor:
+                                    const Color.fromARGB(255, 103, 188, 221),
                                 animation: true,
                                 animationDuration: 1000,
                                 center: Text(
@@ -223,6 +230,83 @@ class ChampionSmashOrPassResultPage extends StatelessWidget {
                       ),
                     ],
                   ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Flexible(
+                      flex: 4,
+                      child: LinearPercentIndicator(
+                        // width: double.infinity,
+                        lineHeight: 12.0,
+                        percent: currentTimerAmount / 5,
+                        isRTL: false,
+                        backgroundColor:
+                            const Color.fromARGB(255, 87, 144, 167),
+                        linearGradient: const LinearGradient(
+                          begin: Alignment.centerRight,
+                          end: Alignment.centerLeft,
+                          colors: [
+                            Color.fromARGB(255, 122, 201, 213),
+                            Color.fromARGB(255, 0, 90, 128),
+                          ],
+                        ),
+                        clipLinearGradient: true,
+                        animation: true,
+                        animationDuration: 5000,
+                      ),
+                    ),
+                    Flexible(
+                      flex: 1,
+                      child: Countdown(
+                        seconds: 5,
+                        build: (BuildContext context, double time) {
+                          currentTimerAmount = time.toInt();
+                          return GradientText(
+                            time.toInt().toString(),
+                            gradient: const LinearGradient(
+                              begin: Alignment.bottomRight,
+                              end: Alignment.topLeft,
+                              colors: [
+                                Color.fromARGB(255, 167, 159, 143),
+                                Color.fromARGB(255, 205, 205, 203),
+                              ],
+                            ),
+                            style: const TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          );
+                        },
+                        interval: const Duration(milliseconds: 1000),
+                        onFinished: () {
+                          _pushPage();
+                        },
+                      ),
+                    ),
+                    Flexible(
+                      flex: 4,
+                      child: LinearPercentIndicator(
+                        // width: double.infinity,
+                        lineHeight: 12.0,
+                        percent: currentTimerAmount / 5,
+                        backgroundColor:
+                            const Color.fromARGB(255, 87, 144, 167),
+                        animation: true,
+                        animationDuration: 5000,
+                        clipLinearGradient: true,
+                        isRTL: true,
+                        linearGradient: const LinearGradient(
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                          colors: [
+                            Color.fromARGB(255, 122, 201, 213),
+                            Color.fromARGB(255, 0, 90, 128),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 Flexible(
                   flex: 4,
@@ -293,11 +377,14 @@ class ChampionSmashOrPassResultPage extends StatelessWidget {
                       ],
                     ),
                     style: TextStyle(
-                      fontSize: 18,
+                      fontSize: 24,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
+                const SizedBox(
+                  height: 10,
+                )
               ],
             ),
           ),
