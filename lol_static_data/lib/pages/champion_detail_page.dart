@@ -2,10 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:champions/champions.dart' as champ;
-import 'package:lol_static_data/widgets/champion_tinder_card.dart';
 import 'package:lol_static_data/widgets/detail_text/champion_detail_text_html.dart';
 import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+
+import '../helpers/utils.dart';
 
 import '../widgets/detail_text/champion_detail_text.dart';
 import '../widgets/abilities/champion_abilities.dart';
@@ -29,15 +30,6 @@ class _ChampionDetailPageState extends State<ChampionDetailPage> {
       List<champ.ChampionSkin> skinList = champSkin.toList();
 
       return skinList;
-    }
-
-    String _modifyUrl(String url, int index) {
-      String result = url.replaceAll('12.10.1/', '');
-      var pos = result.lastIndexOf('.');
-      result = result.substring(0, pos);
-      result = result + '_$index' + '.jpg';
-
-      return result;
     }
 
     String champName = champion.name;
@@ -78,11 +70,12 @@ class _ChampionDetailPageState extends State<ChampionDetailPage> {
                 ),
               );
             }
+
             List<String> _skinUrlList = [];
             for (var element in snapshot.data) {
-              _skinUrlList.add(
-                _modifyUrl(element.full.url, element.num),
-              );
+              String url =
+                  ''.modifyChampImageUrl(element.full.url, element.num);
+              _skinUrlList.add(url);
             }
 
             return Container(

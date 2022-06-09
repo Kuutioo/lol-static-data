@@ -5,8 +5,9 @@ import 'package:flutter_swipable/flutter_swipable.dart';
 import 'package:champions/champions.dart' as champ;
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../helpers/utils.dart';
+
 import '../pages/champion_smash_or_pass_result_page.dart';
-import '../helpers/gradient_text.dart';
 
 class ChampionTinderCard extends StatefulWidget {
   final champ.Champion champion;
@@ -17,7 +18,7 @@ class ChampionTinderCard extends StatefulWidget {
   State<ChampionTinderCard> createState() => _ChampionTinderCardState();
 }
 
-String result;
+String url;
 
 class _ChampionTinderCardState extends State<ChampionTinderCard> {
   Future<List<champ.ChampionSkin>> _getSkin() async {
@@ -25,15 +26,6 @@ class _ChampionTinderCardState extends State<ChampionTinderCard> {
     List<champ.ChampionSkin> skinList = champSkin.toList();
 
     return skinList;
-  }
-
-  String _modifyUrl(String url) {
-    String result = url.replaceAll('12.10.1/', '');
-    var pos = result.lastIndexOf('.');
-    result = result.substring(0, pos);
-    result = result + '_0' + '.jpg';
-
-    return result;
   }
 
   @override
@@ -84,8 +76,8 @@ class _ChampionTinderCardState extends State<ChampionTinderCard> {
             ),
           );
         }
-        String url = snapshot.data[0].compact.url;
-        result = _modifyUrl(url);
+        url = ''.modifyChampImageUrl(snapshot.data[0].compact.url, 0);
+
         return Swipable(
           verticalSwipe: false,
           onSwipeRight: (finalPosition) async {
@@ -114,7 +106,7 @@ class _ChampionTinderCardState extends State<ChampionTinderCard> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(15),
                     child: Image(
-                      image: NetworkImage(result),
+                      image: NetworkImage(url),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -146,7 +138,7 @@ class _ChampionTinderCardState extends State<ChampionTinderCard> {
       context,
       MaterialPageRoute(
         builder: (context) =>
-            ChampionSmashOrPassResultPage(widget.champion, result),
+            ChampionSmashOrPassResultPage(widget.champion, url),
       ),
     );
   }
