@@ -108,11 +108,21 @@ class _ChampionDetailPageState extends State<ChampionDetailPage> {
                           ),
                           itemCount: snapshot.data.length,
                           itemBuilder: (context, index, realIndex) {
-                            return ClipRRect(
-                              borderRadius: BorderRadius.circular(15),
-                              child: Image.network(
-                                _skinUrlList[index],
-                                fit: BoxFit.cover,
+                            return Container(
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  width: 3,
+                                  color:
+                                      const Color.fromARGB(255, 171, 150, 76),
+                                ),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(15),
+                                child: Image.network(
+                                  _skinUrlList[index],
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             );
                           },
@@ -146,7 +156,12 @@ class _ChampionDetailPageState extends State<ChampionDetailPage> {
                       32,
                       true,
                     ),
-                    ChampionDetailTextHtml(champion.blurb, 18),
+                    ChampionDetailTextHtml(
+                        champion.blurb
+                            .replaceAll('â', '-')
+                            .replaceAll('â', '"')
+                            .replaceAll('â', '"'),
+                        18),
                   ],
                 ),
               ),

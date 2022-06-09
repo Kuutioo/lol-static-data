@@ -115,7 +115,8 @@ class ChampionTips extends StatelessWidget {
             ),
             child: Card(
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)),
+                borderRadius: BorderRadius.circular(20),
+              ),
               elevation: 5,
               child: Stack(
                 children: [
@@ -151,9 +152,12 @@ class ChampionTips extends StatelessWidget {
                     ),
                   ),
                   Center(
-                    child: ChampionDetailTextHtml(
-                      '${dataSnapshot.data[0][index]}',
-                      18,
+                    child: FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: ChampionDetailTextHtml(
+                        '${dataSnapshot.data[0][index]}',
+                        18,
+                      ),
                     ),
                   ),
                 ],
