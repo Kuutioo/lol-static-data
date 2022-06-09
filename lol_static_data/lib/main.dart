@@ -28,6 +28,9 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    /*for (var champion in championList) {
+      print('${champion.name}: ${champion.blurb}');
+    }*/
     return MaterialApp(
         title: 'lol_static_data',
         debugShowCheckedModeBanner: false,

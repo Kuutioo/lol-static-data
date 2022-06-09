@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 
+import '../../helpers/extensions.dart';
+
 import '../detail_text/champion_detail_text.dart';
 import '../detail_text/champion_detail_text_html.dart';
 
@@ -83,7 +85,7 @@ class ChampionAbilitiesItem extends StatelessWidget {
                     ? SizedBox(
                         width: MediaQuery.of(context).size.width - 86,
                         child: ChampionDetailTextHtml(
-                          abilityDescription,
+                          abilityDescription.replaceJsonStringSymbols(),
                           16,
                         ),
                       )
@@ -121,7 +123,7 @@ class ChampionAbilitiesItem extends StatelessWidget {
         ),
         !isPassive
             ? ChampionDetailTextHtml(
-                abilityDescription,
+                abilityDescription.replaceJsonStringSymbols(),
                 16,
               )
             : const SizedBox.shrink(),

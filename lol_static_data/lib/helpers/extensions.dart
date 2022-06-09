@@ -7,4 +7,11 @@ extension StringExtensions on String {
 
     return result;
   }
+
+  String replaceJsonStringSymbols() {
+    return replaceAll('â¦', '')
+        .replaceAll('â', '"')
+        .replaceAll('â', '"')
+        .replaceAll('â', '-');
+  }
 }

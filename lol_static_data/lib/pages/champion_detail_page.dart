@@ -70,15 +70,9 @@ class _ChampionDetailPageState extends State<ChampionDetailPage> {
                 ),
               );
             }
+
             List<String> _skinUrlList = [];
-            for (var element in snapshot.data) {
-              _skinUrlList.add(
-                ''.modifyChampImageUrl(
-                  element.full.url,
-                  element.num,
-                ),
-              );
-            }
+            _getSkins(snapshot, _skinUrlList);
 
             return Container(
               decoration: const BoxDecoration(
@@ -157,11 +151,9 @@ class _ChampionDetailPageState extends State<ChampionDetailPage> {
                       true,
                     ),
                     ChampionDetailTextHtml(
-                        champion.blurb
-                            .replaceAll('â', '-')
-                            .replaceAll('â', '"')
-                            .replaceAll('â', '"'),
-                        18),
+                      champion.blurb.replaceJsonStringSymbols(),
+                      18,
+                    ),
                   ],
                 ),
               ),
@@ -170,5 +162,19 @@ class _ChampionDetailPageState extends State<ChampionDetailPage> {
         ),
       ),
     );
+  }
+
+  void _getSkins(
+    AsyncSnapshot<List<champ.ChampionSkin>> snapshot,
+    List<String> _skinUrlList,
+  ) {
+    for (var element in snapshot.data) {
+      _skinUrlList.add(
+        ''.modifyChampImageUrl(
+          element.full.url,
+          element.num,
+        ),
+      );
+    }
   }
 }
