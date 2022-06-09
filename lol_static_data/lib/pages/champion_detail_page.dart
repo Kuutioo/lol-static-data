@@ -40,6 +40,8 @@ class _ChampionDetailPageState extends State<ChampionDetailPage> {
       return result;
     }
 
+    String champName = champion.name;
+
     return Scaffold(
       body: NestedScrollView(
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
@@ -102,36 +104,29 @@ class _ChampionDetailPageState extends State<ChampionDetailPage> {
                       child: SizedBox(
                         height: 200,
                         width: double.infinity,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(15),
-                          child: CarouselSlider.builder(
-                            options: CarouselOptions(
-                              height: 400,
-                              pageSnapping: true,
-                              enableInfiniteScroll: false,
-                              enlargeCenterPage: true,
-                            ),
-                            itemCount: snapshot.data.length,
-                            itemBuilder: (context, index, realIndex) {
-                              return Image.network(
+                        child: CarouselSlider.builder(
+                          options: CarouselOptions(
+                            height: 400,
+                            pageSnapping: true,
+                            enableInfiniteScroll: true,
+                            enlargeCenterPage: true,
+                          ),
+                          itemCount: snapshot.data.length,
+                          itemBuilder: (context, index, realIndex) {
+                            return ClipRRect(
+                              borderRadius: BorderRadius.circular(15),
+                              child: Image.network(
                                 _skinUrlList[index],
                                 fit: BoxFit.cover,
-                              );
-                            },
-                          ),
-
-                          // Image(
-                          //   image: NetworkImage(
-                          //     result,
-                          //   ),
-                          //   fit: BoxFit.cover,
-                          // ),
+                              ),
+                            );
+                          },
                         ),
                       ),
                     ),
                     const SizedBox(height: 10),
                     ChampionDetailText(
-                      champion.name,
+                      champName,
                       32,
                       true,
                     ),
