@@ -5,6 +5,7 @@ import 'package:champions/champions.dart' as champ;
 import 'package:lol_static_data/widgets/detail_text/champion_detail_text_html.dart';
 import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
 
+import 'package:carousel_slider/carousel_slider.dart';
 import '../widgets/detail_text/champion_detail_text.dart';
 import '../widgets/abilities/champion_abilities.dart';
 import '../widgets/champion_tips.dart';
@@ -15,6 +16,14 @@ class ChampionDetailPage extends StatefulWidget {
   @override
   State<ChampionDetailPage> createState() => _ChampionDetailPageState();
 }
+
+Widget buildImage(int index) => Container(
+      color: Colors.grey,
+      child: Image.network(
+        'https://ae01.alicdn.com/kf/HTB14GAEKVXXXXcOXpXXq6xXFXXX3/226824586/HTB14GAEKVXXXXcOXpXXq6xXFXXX3.jpg',
+        fit: BoxFit.cover,
+      ),
+    );
 
 class _ChampionDetailPageState extends State<ChampionDetailPage> {
   @override
@@ -97,14 +106,22 @@ class _ChampionDetailPageState extends State<ChampionDetailPage> {
                         height: 200,
                         width: double.infinity,
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(15),
-                          child: Image(
-                            image: NetworkImage(
-                              result,
+                            borderRadius: BorderRadius.circular(15),
+                            child: CarouselSlider.builder(
+                              options: CarouselOptions(
+                                  height: 400, viewportFraction: 1),
+                              itemCount: 10,
+                              itemBuilder: (context, index, realIndex) {
+                                return buildImage(index);
+                              },
+                            )
+                            // Image(
+                            //   image: NetworkImage(
+                            //     result,
+                            //   ),
+                            //   fit: BoxFit.cover,
+                            // ),
                             ),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
                       ),
                     ),
                     const SizedBox(height: 10),

@@ -38,6 +38,7 @@ dependencies:
   scroll_snap_list: ^0.6.0
   new_gradient_app_bar: ^0.1.5
   timer_count_down: ^1.0.4+1
+  carousel_slider: ^3.0.0
 
 
   # The following adds the Cupertino Icons font to your application.
