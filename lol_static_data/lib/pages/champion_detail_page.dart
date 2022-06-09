@@ -2,10 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:champions/champions.dart' as champ;
+import 'package:lol_static_data/widgets/champion_tinder_card.dart';
 import 'package:lol_static_data/widgets/detail_text/champion_detail_text_html.dart';
 import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
-
 import 'package:carousel_slider/carousel_slider.dart';
+
 import '../widgets/detail_text/champion_detail_text.dart';
 import '../widgets/abilities/champion_abilities.dart';
 import '../widgets/champion_tips.dart';
@@ -16,14 +17,6 @@ class ChampionDetailPage extends StatefulWidget {
   @override
   State<ChampionDetailPage> createState() => _ChampionDetailPageState();
 }
-
-Widget buildImage(int index) => Container(
-      color: Colors.grey,
-      child: Image.network(
-        'https://ae01.alicdn.com/kf/HTB14GAEKVXXXXcOXpXXq6xXFXXX3/226824586/HTB14GAEKVXXXXcOXpXXq6xXFXXX3.jpg',
-        fit: BoxFit.cover,
-      ),
-    );
 
 class _ChampionDetailPageState extends State<ChampionDetailPage> {
   @override
@@ -38,11 +31,11 @@ class _ChampionDetailPageState extends State<ChampionDetailPage> {
       return skinList;
     }
 
-    String _modifyUrl(String url) {
+    String _modifyUrl(String url, int index) {
       String result = url.replaceAll('12.10.1/', '');
       var pos = result.lastIndexOf('.');
       result = result.substring(0, pos);
-      result = result + '_0' + '.jpg';
+      result = result + '_$index' + '.jpg';
 
       return result;
     }
@@ -83,8 +76,12 @@ class _ChampionDetailPageState extends State<ChampionDetailPage> {
                 ),
               );
             }
-            String url = snapshot.data[0].full.url;
-            String result = _modifyUrl(url);
+            List<String> _skinUrlList = [];
+            for (var element in snapshot.data) {
+              _skinUrlList.add(
+                _modifyUrl(element.full.url, element.num),
+              );
+            }
 
             return Container(
               decoration: const BoxDecoration(
@@ -106,22 +103,30 @@ class _ChampionDetailPageState extends State<ChampionDetailPage> {
                         height: 200,
                         width: double.infinity,
                         child: ClipRRect(
-                            borderRadius: BorderRadius.circular(15),
-                            child: CarouselSlider.builder(
-                              options: CarouselOptions(
-                                  height: 400, viewportFraction: 1),
-                              itemCount: 10,
-                              itemBuilder: (context, index, realIndex) {
-                                return buildImage(index);
-                              },
-                            )
-                            // Image(
-                            //   image: NetworkImage(
-                            //     result,
-                            //   ),
-                            //   fit: BoxFit.cover,
-                            // ),
+                          borderRadius: BorderRadius.circular(15),
+                          child: CarouselSlider.builder(
+                            options: CarouselOptions(
+                              height: 400,
+                              pageSnapping: true,
+                              enableInfiniteScroll: false,
+                              enlargeCenterPage: true,
                             ),
+                            itemCount: snapshot.data.length,
+                            itemBuilder: (context, index, realIndex) {
+                              return Image.network(
+                                _skinUrlList[index],
+                                fit: BoxFit.cover,
+                              );
+                            },
+                          ),
+
+                          // Image(
+                          //   image: NetworkImage(
+                          //     result,
+                          //   ),
+                          //   fit: BoxFit.cover,
+                          // ),
+                        ),
                       ),
                     ),
                     const SizedBox(height: 10),
