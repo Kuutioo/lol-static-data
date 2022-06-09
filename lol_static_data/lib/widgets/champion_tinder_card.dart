@@ -5,7 +5,7 @@ import 'package:flutter_swipable/flutter_swipable.dart';
 import 'package:champions/champions.dart' as champ;
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../helpers/utils.dart';
+import '../helpers/extensions.dart';
 
 import '../pages/champion_smash_or_pass_result_page.dart';
 
