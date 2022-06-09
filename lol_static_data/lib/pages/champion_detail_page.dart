@@ -6,7 +6,7 @@ import 'package:lol_static_data/widgets/detail_text/champion_detail_text_html.da
 import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
-import '../helpers/utils.dart';
+import '../helpers/extensions.dart';
 
 import '../widgets/detail_text/champion_detail_text.dart';
 import '../widgets/abilities/champion_abilities.dart';
