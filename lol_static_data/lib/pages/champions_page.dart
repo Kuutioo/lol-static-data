@@ -266,11 +266,24 @@ class _ChampionsPageState extends State<ChampionsPage> {
                 itemBuilder: ((context, index) {
                   return GridTile(
                     child: IconButton(
-                      icon: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Image.network(
-                          _foundChamps[index].icon.url,
-                          fit: BoxFit.cover,
+                      icon: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            border: Border.all(
+                              width: 3,
+                              color: Color.fromARGB(
+                                255,
+                                171,
+                                150,
+                                76,
+                              ),
+                            )),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Image.network(
+                            _foundChamps[index].icon.url,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                       onPressed: () {
