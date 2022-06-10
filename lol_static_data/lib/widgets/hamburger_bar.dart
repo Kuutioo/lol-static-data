@@ -33,7 +33,7 @@ class _HamburgerBarState extends State<HamburgerBar> {
               ),
             ),
             child: GradientText(
-              'League Of Tinder',
+              'LoL: Smash or Pass',
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
