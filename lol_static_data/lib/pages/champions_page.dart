@@ -28,10 +28,10 @@ class _ChampionsPageState extends State<ChampionsPage> {
         color: Colors.white,
         fontSize: MediaQueryData.fromWindow(WidgetsBinding.instance.window)
                     .size
-                    .height >
+                    .width >
                 700
             ? 32
-            : 14),
+            : 18),
   );
 
   List<champ.Champion> _foundChamps = [];

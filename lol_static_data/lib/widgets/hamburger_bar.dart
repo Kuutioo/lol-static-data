@@ -20,6 +20,8 @@ class _HamburgerBarState extends State<HamburgerBar> {
       child: Drawer(
         backgroundColor: const Color.fromARGB(255, 170, 173, 180),
         child: ListView(
+          physics: ScrollPhysics(),
+          shrinkWrap: true,
           padding: const EdgeInsets.all(0),
           children: [
             DrawerHeader(
@@ -103,12 +105,26 @@ class _HamburgerBarState extends State<HamburgerBar> {
                 onTap: () {
                   Navigator.pushReplacementNamed(
                       context, ChampionsPage.routeName);
-                  setState(() {
-                    HamburgerBar.page = DrawerPages.championsPage;
-                  });
+                  setState(
+                    () {
+                      HamburgerBar.page = DrawerPages.championsPage;
+                    },
+                  );
                 },
               ),
             ),
+            Container(
+              padding: const EdgeInsets.only(left: 5),
+              height: MediaQuery.of(context).size.height - 350,
+              alignment: Alignment.bottomLeft,
+              child: Text(
+                'LoL: Smash or Pass was created under Riot Games \"Legal Jibber Jabber\" policy using assets owned by Riot Games.  Riot Games does not endorse or sponsor this project.',
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize:
+                        MediaQuery.of(context).size.width > 700 ? 24 : 14),
+              ),
+            )
           ],
         ),
       ),

@@ -91,7 +91,7 @@ class _ChampionSmashOrPassPageState extends State<ChampionSmashOrPassPage> {
                 style: TextStyle(
                     color: Colors.white,
                     fontSize:
-                        MediaQuery.of(context).size.width > 700 ? 30 : 14),
+                        MediaQuery.of(context).size.width > 700 ? 30 : 18),
               ),
             ),
             body: Column(
