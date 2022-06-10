@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:champions/champions.dart' as champ;
+import 'package:flutter_html/style.dart';
 import 'package:lol_static_data/widgets/detail_text/champion_detail_text_html.dart';
 import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -39,7 +40,15 @@ class _ChampionDetailPageState extends State<ChampionDetailPage> {
         headerSliverBuilder: (context, innerBoxIsScrolled) => [
           SliverNewGradientAppBar(
             elevation: 0,
-            title: Text(champion.name),
+            iconTheme: IconThemeData(
+                color: Colors.white,
+                size: MediaQuery.of(context).size.width > 700 ? 36 : 24),
+            title: Text(
+              champion.name,
+              style: TextStyle(
+                fontSize: MediaQuery.of(context).size.width > 700 ? 36 : 18,
+              ),
+            ),
             gradient: const LinearGradient(
               begin: Alignment.bottomCenter,
               end: Alignment.topCenter,
@@ -91,11 +100,11 @@ class _ChampionDetailPageState extends State<ChampionDetailPage> {
                     Padding(
                       padding: const EdgeInsets.all(5),
                       child: SizedBox(
-                        height: 200,
+                        height:
+                            MediaQuery.of(context).size.width > 700 ? 400 : 200,
                         width: double.infinity,
                         child: CarouselSlider.builder(
                           options: CarouselOptions(
-                            height: 400,
                             pageSnapping: true,
                             enableInfiniteScroll: true,
                             enlargeCenterPage: true,
@@ -128,7 +137,7 @@ class _ChampionDetailPageState extends State<ChampionDetailPage> {
                       padding: const EdgeInsets.only(left: 10),
                       child: ChampionDetailText(
                         champName,
-                        32,
+                        MediaQuery.of(context).size.width > 700 ? 48 : 32,
                         true,
                       ),
                     ),
@@ -136,18 +145,18 @@ class _ChampionDetailPageState extends State<ChampionDetailPage> {
                       padding: const EdgeInsets.only(left: 10),
                       child: ChampionDetailText(
                         champion.title,
-                        20,
+                        MediaQuery.of(context).size.width > 700 ? 36 : 20,
                         false,
                       ),
                     ),
                     const SizedBox(height: 70),
-                    const Padding(
+                    Padding(
                       padding: EdgeInsets.only(
                         left: 10,
                       ),
                       child: ChampionDetailText(
                         'Abilities',
-                        32,
+                        MediaQuery.of(context).size.width > 700 ? 48 : 32,
                         true,
                       ),
                     ),
@@ -156,11 +165,11 @@ class _ChampionDetailPageState extends State<ChampionDetailPage> {
                     const SizedBox(height: 70),
                     ChampionTips(champion),
                     const SizedBox(height: 70),
-                    const Padding(
+                    Padding(
                       padding: EdgeInsets.only(left: 10),
                       child: ChampionDetailText(
                         'Lore',
-                        32,
+                        MediaQuery.of(context).size.width > 700 ? 48 : 32,
                         true,
                       ),
                     ),
@@ -168,7 +177,7 @@ class _ChampionDetailPageState extends State<ChampionDetailPage> {
                       padding: const EdgeInsets.only(left: 10),
                       child: ChampionDetailTextHtml(
                         champion.blurb.replaceJsonStringSymbols(),
-                        18,
+                        MediaQuery.of(context).size.width > 700 ? 34 : 18,
                       ),
                     ),
                   ],

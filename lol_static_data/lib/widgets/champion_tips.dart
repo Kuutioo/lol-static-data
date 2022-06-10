@@ -51,7 +51,7 @@ class ChampionTips extends StatelessWidget {
                       padding: const EdgeInsets.only(left: 15),
                       child: ChampionDetailText(
                         'Tips playing with ${champion.name}',
-                        24,
+                        MediaQuery.of(context).size.width > 700 ? 40 : 24,
                         true,
                       ),
                     ),
@@ -76,7 +76,7 @@ class ChampionTips extends StatelessWidget {
                       padding: const EdgeInsets.only(left: 15),
                       child: ChampionDetailText(
                         'Tips playing against ${champion.name}',
-                        24,
+                        MediaQuery.of(context).size.width > 700 ? 40 : 24,
                         true,
                       ),
                     ),
@@ -162,7 +162,7 @@ class ChampionTips extends StatelessWidget {
                       fit: BoxFit.fitWidth,
                       child: ChampionDetailTextHtml(
                         '${dataSnapshot.data[0][index]}',
-                        18,
+                        MediaQuery.of(context).size.width > 700 ? 34 : 18,
                       ),
                     ),
                   ),
@@ -230,7 +230,7 @@ class ChampionTips extends StatelessWidget {
                   Center(
                     child: ChampionDetailTextHtml(
                       '${dataSnapshot.data[1][index]}',
-                      18,
+                      MediaQuery.of(context).size.width > 700 ? 34 : 18,
                     ),
                   ),
                 ],

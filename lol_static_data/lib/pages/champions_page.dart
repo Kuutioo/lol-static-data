@@ -144,7 +144,10 @@ class _ChampionsPageState extends State<ChampionsPage> {
                             Color.fromARGB(255, 247, 217, 110),
                           ],
                         ),
-                        style: TextStyle(fontSize: 20),
+                        style: TextStyle(
+                            fontSize: MediaQuery.of(context).size.width > 700
+                                ? 34
+                                : 20),
                       ),
                       /*Text(
                         champ.Role.values[index].label,
@@ -216,7 +219,8 @@ class _ChampionsPageState extends State<ChampionsPage> {
                         )),
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 16.0,
+                      fontSize:
+                          MediaQuery.of(context).size.width > 700 ? 32 : 16,
                     ),
                   );
                 } else {
@@ -278,16 +282,17 @@ class _ChampionsPageState extends State<ChampionsPage> {
                     child: IconButton(
                       icon: Container(
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            border: Border.all(
-                              width: 3,
-                              color: Color.fromARGB(
-                                255,
-                                171,
-                                150,
-                                76,
-                              ),
-                            )),
+                          borderRadius: BorderRadius.circular(15),
+                          border: Border.all(
+                            width: 3,
+                            color: Color.fromARGB(
+                              255,
+                              171,
+                              150,
+                              76,
+                            ),
+                          ),
+                        ),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(10),
                           child: Image.network(
@@ -307,7 +312,7 @@ class _ChampionsPageState extends State<ChampionsPage> {
                       fit: BoxFit.scaleDown,
                       child: ChampionDetailText(
                         _foundChamps[index].name,
-                        20,
+                        MediaQuery.of(context).size.width > 700 ? 26 : 20,
                         true,
                       ),
                     ),
@@ -315,9 +320,12 @@ class _ChampionsPageState extends State<ChampionsPage> {
                 }),
               )
             : Center(
-                child: const Text(
+                child: Text(
                   'No results found',
-                  style: TextStyle(fontSize: 24),
+                  style: TextStyle(
+                    fontSize: MediaQuery.of(context).size.width > 700 ? 32 : 24,
+                    color: Colors.white,
+                  ),
                 ),
               ),
       ),

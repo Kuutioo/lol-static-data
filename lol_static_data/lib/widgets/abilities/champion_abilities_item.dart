@@ -39,12 +39,12 @@ class ChampionAbilitiesItem extends StatelessWidget {
         children: [
           ChampionDetailText(
             title,
-            20,
+            MediaQuery.of(context).size.width > 700 ? 36 : 20,
             false,
           ),
           ChampionDetailText(
             abilityName,
-            24,
+            MediaQuery.of(context).size.width > 700 ? 40 : 24,
             true,
           ),
           const SizedBox(
@@ -74,8 +74,8 @@ class ChampionAbilitiesItem extends StatelessWidget {
                   child: Image(
                     image: NetworkImage(abilityIconUrl),
                     fit: BoxFit.cover,
-                    height: 75,
-                    width: 75,
+                    height: MediaQuery.of(context).size.width > 700 ? 150 : 75,
+                    width: MediaQuery.of(context).size.width > 700 ? 150 : 75,
                   ),
                 ),
               ),
@@ -84,10 +84,12 @@ class ChampionAbilitiesItem extends StatelessWidget {
                 children: [
                   isPassive
                       ? SizedBox(
-                          width: MediaQuery.of(context).size.width - 100,
+                          width: MediaQuery.of(context).size.width > 700
+                              ? MediaQuery.of(context).size.width - 166
+                              : MediaQuery.of(context).size.width - 100,
                           child: ChampionDetailTextHtml(
                             abilityDescription.replaceJsonStringSymbols(),
-                            16,
+                            MediaQuery.of(context).size.width > 700 ? 32 : 16,
                           ),
                         )
                       : const SizedBox.shrink(),
@@ -95,7 +97,7 @@ class ChampionAbilitiesItem extends StatelessWidget {
                   !isPassive
                       ? ChampionDetailText(
                           'Range: $abilityRangeSpread',
-                          16,
+                          MediaQuery.of(context).size.width > 700 ? 32 : 16,
                           false,
                         )
                       : const SizedBox.shrink(),
@@ -103,7 +105,7 @@ class ChampionAbilitiesItem extends StatelessWidget {
                   !isPassive
                       ? ChampionDetailText(
                           'Cost: $abilityCostSpread',
-                          16,
+                          MediaQuery.of(context).size.width > 700 ? 32 : 16,
                           false,
                         )
                       : const SizedBox.shrink(),
@@ -111,7 +113,7 @@ class ChampionAbilitiesItem extends StatelessWidget {
                   !isPassive
                       ? ChampionDetailText(
                           'Cooldown: $abilityCooldownSpread',
-                          16,
+                          MediaQuery.of(context).size.width > 700 ? 32 : 16,
                           false,
                         )
                       : const SizedBox.shrink(),
@@ -125,7 +127,7 @@ class ChampionAbilitiesItem extends StatelessWidget {
           !isPassive
               ? ChampionDetailTextHtml(
                   abilityDescription.replaceJsonStringSymbols(),
-                  16,
+                  MediaQuery.of(context).size.width > 700 ? 32 : 16,
                 )
               : const SizedBox.shrink(),
           const SizedBox(
