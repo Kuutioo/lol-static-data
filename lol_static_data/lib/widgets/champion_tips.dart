@@ -145,7 +145,7 @@ class ChampionTips extends StatelessWidget {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
                         ),
-                        width: 350,
+                        width: MediaQuery.of(context).size.width - 40,
                         height: 150,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(15),
@@ -215,7 +215,7 @@ class ChampionTips extends StatelessWidget {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
                         ),
-                        width: 350,
+                        width: MediaQuery.of(context).size.width - 40,
                         height: 150,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(15),
