@@ -329,8 +329,8 @@ class ChampionSmashOrPassResultPage extends StatelessWidget {
                         child: Stack(
                           children: [
                             Container(
-                              height: 500,
-                              width: 300,
+                              height: MediaQuery.of(context).size.height - 300,
+                              width: MediaQuery.of(context).size.width - 75,
                               decoration: BoxDecoration(
                                 image: DecorationImage(
                                   image: NetworkImage(championSplashUrl),

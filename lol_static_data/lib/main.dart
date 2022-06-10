@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
       print('${champion.name}: ${champion.blurb}');
     }*/
     return MaterialApp(
-        title: 'lol_static_data',
+        title: 'LoL: Smash or Pass',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: buildMaterialColor(
