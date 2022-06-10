@@ -119,8 +119,8 @@ class _ChampionTinderCardState extends State<ChampionTinderCard> {
                         color: const Color.fromARGB(255, 171, 150, 76),
                       ),
                       borderRadius: BorderRadius.circular(20)),
-                  height: 600,
-                  width: 350,
+                  height: MediaQuery.of(context).size.height - 200,
+                  width: MediaQuery.of(context).size.width - 50,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(15),
                     child: Image(
