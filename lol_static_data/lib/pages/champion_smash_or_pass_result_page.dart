@@ -334,7 +334,7 @@ class ChampionSmashOrPassResultPage extends StatelessWidget {
                               decoration: BoxDecoration(
                                 image: DecorationImage(
                                   image: NetworkImage(championSplashUrl),
-                                  fit: BoxFit.cover,
+                                  fit: BoxFit.fill,
                                 ),
                                 border: Border.all(
                                   color:

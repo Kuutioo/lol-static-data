@@ -60,11 +60,11 @@ class ChampionTips extends StatelessWidget {
                     ),
                     SizedBox(
                       height: 150,
-                      width: 350,
+                      width: MediaQuery.of(context).size.width - 40,
                       child: ScrollSnapList(
                         updateOnScroll: true,
                         itemBuilder: _allytipsList,
-                        itemSize: 350,
+                        itemSize: MediaQuery.of(context).size.width - 40,
                         dynamicItemSize: true,
                         itemCount: dataSnapshot.data.length + 1,
                       ),
@@ -85,10 +85,10 @@ class ChampionTips extends StatelessWidget {
                     ),
                     SizedBox(
                       height: 150,
-                      width: 350,
+                      width: MediaQuery.of(context).size.width - 40,
                       child: ScrollSnapList(
                         itemBuilder: _enemytipsList,
-                        itemSize: 350,
+                        itemSize: MediaQuery.of(context).size.width - 40,
                         dynamicItemSize: true,
                         itemCount: dataSnapshot.data.length + 1,
                       ),
@@ -107,7 +107,7 @@ class ChampionTips extends StatelessWidget {
             dataSnapshot.data[0][index].isNotEmpty
         ? Container(
             height: 150,
-            width: 350,
+            width: MediaQuery.of(context).size.width - 40,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               gradient: const LinearGradient(
@@ -178,7 +178,7 @@ class ChampionTips extends StatelessWidget {
             dataSnapshot.data[1][index].isNotEmpty
         ? Container(
             height: 150,
-            width: 350,
+            width: MediaQuery.of(context).size.width - 40,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               gradient: const LinearGradient(

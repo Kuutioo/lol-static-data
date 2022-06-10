@@ -125,7 +125,7 @@ class _ChampionTinderCardState extends State<ChampionTinderCard> {
                     borderRadius: BorderRadius.circular(15),
                     child: Image(
                       image: NetworkImage(url),
-                      fit: BoxFit.cover,
+                      fit: BoxFit.fill,
                     ),
                   ),
                 ),
