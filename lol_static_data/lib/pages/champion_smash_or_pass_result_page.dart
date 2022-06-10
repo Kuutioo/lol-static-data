@@ -69,7 +69,11 @@ class ChampionSmashOrPassResultPage extends StatelessWidget {
 
         return Scaffold(
           appBar: NewGradientAppBar(
-            title: Text(championName),
+            title: Text(
+              championName,
+              style: TextStyle(
+                  fontSize: MediaQuery.of(context).size.width > 700 ? 38 : 18),
+            ),
             elevation: 0,
             centerTitle: true,
             gradient: const LinearGradient(
@@ -103,7 +107,7 @@ class ChampionSmashOrPassResultPage extends StatelessWidget {
                         flex: 1,
                         child: Column(
                           children: [
-                            const GradientText(
+                            GradientText(
                               'Pass',
                               gradient: LinearGradient(
                                 begin: Alignment.topCenter,
@@ -114,13 +118,19 @@ class ChampionSmashOrPassResultPage extends StatelessWidget {
                                 ],
                               ),
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize:
+                                    MediaQuery.of(context).size.width > 700
+                                        ? 32
+                                        : 16,
                               ),
                             ),
                             Flexible(
                               child: LinearPercentIndicator(
                                 //width: double.infinity,
-                                lineHeight: 22.0,
+                                lineHeight:
+                                    MediaQuery.of(context).size.width > 700
+                                        ? 34.0
+                                        : 22.0,
                                 percent: passCount / totalCount,
                                 backgroundColor:
                                     const Color.fromARGB(255, 80, 132, 153),
@@ -130,7 +140,13 @@ class ChampionSmashOrPassResultPage extends StatelessWidget {
                                 animationDuration: 1000,
                                 center: Text(
                                   '${passCountPercentage.toStringAsFixed(0)} %',
-                                  style: const TextStyle(color: Colors.white),
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize:
+                                          MediaQuery.of(context).size.width >
+                                                  700
+                                              ? 32
+                                              : 16),
                                 ),
                               ),
                             ),
@@ -144,8 +160,11 @@ class ChampionSmashOrPassResultPage extends StatelessWidget {
                                   Color.fromARGB(255, 247, 217, 110),
                                 ],
                               ),
-                              style: const TextStyle(
-                                fontSize: 14,
+                              style: TextStyle(
+                                fontSize:
+                                    MediaQuery.of(context).size.width > 700
+                                        ? 30
+                                        : 14,
                               ),
                             ),
                           ],
@@ -154,12 +173,18 @@ class ChampionSmashOrPassResultPage extends StatelessWidget {
                       Flexible(
                         flex: 1,
                         child: Container(
-                          height: 100,
-                          width: 100,
+                          height: MediaQuery.of(context).size.width > 700
+                              ? 200
+                              : 100,
+                          width: MediaQuery.of(context).size.width > 700
+                              ? 200
+                              : 100,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
                             border: Border.all(
-                              width: 3,
+                              width: MediaQuery.of(context).size.width > 700
+                                  ? 5
+                                  : 3,
                               color: const Color.fromARGB(255, 171, 150, 76),
                             ),
                           ),
@@ -179,7 +204,7 @@ class ChampionSmashOrPassResultPage extends StatelessWidget {
                         flex: 1,
                         child: Column(
                           children: [
-                            const GradientText(
+                            GradientText(
                               'Smash',
                               gradient: LinearGradient(
                                 begin: Alignment.topCenter,
@@ -190,13 +215,19 @@ class ChampionSmashOrPassResultPage extends StatelessWidget {
                                 ],
                               ),
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize:
+                                    MediaQuery.of(context).size.width > 700
+                                        ? 32
+                                        : 16,
                               ),
                             ),
                             Flexible(
                               child: LinearPercentIndicator(
                                 // width: double.infinity,
-                                lineHeight: 22.0,
+                                lineHeight:
+                                    MediaQuery.of(context).size.width > 700
+                                        ? 34.0
+                                        : 22.0,
                                 percent: smashCount / totalCount,
                                 isRTL: true,
                                 backgroundColor:
@@ -207,7 +238,13 @@ class ChampionSmashOrPassResultPage extends StatelessWidget {
                                 animationDuration: 1000,
                                 center: Text(
                                   '${smashCountPercentage.toStringAsFixed(0)} %',
-                                  style: const TextStyle(color: Colors.white),
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize:
+                                          MediaQuery.of(context).size.width >
+                                                  700
+                                              ? 24
+                                              : 18),
                                 ),
                               ),
                             ),
@@ -221,8 +258,11 @@ class ChampionSmashOrPassResultPage extends StatelessWidget {
                                   Color.fromARGB(255, 247, 217, 110),
                                 ],
                               ),
-                              style: const TextStyle(
-                                fontSize: 14,
+                              style: TextStyle(
+                                fontSize:
+                                    MediaQuery.of(context).size.width > 700
+                                        ? 30
+                                        : 14,
                               ),
                             ),
                           ],
@@ -238,7 +278,8 @@ class ChampionSmashOrPassResultPage extends StatelessWidget {
                       flex: 4,
                       child: LinearPercentIndicator(
                         // width: double.infinity,
-                        lineHeight: 12.0,
+                        lineHeight:
+                            MediaQuery.of(context).size.width > 700 ? 24 : 12.0,
                         percent: currentTimerAmount / 5,
                         isRTL: false,
                         backgroundColor:
@@ -272,8 +313,10 @@ class ChampionSmashOrPassResultPage extends StatelessWidget {
                                 Color.fromARGB(255, 205, 205, 203),
                               ],
                             ),
-                            style: const TextStyle(
-                              fontSize: 24,
+                            style: TextStyle(
+                              fontSize: MediaQuery.of(context).size.width > 700
+                                  ? 44
+                                  : 24,
                               fontWeight: FontWeight.bold,
                             ),
                           );
@@ -288,7 +331,8 @@ class ChampionSmashOrPassResultPage extends StatelessWidget {
                       flex: 4,
                       child: LinearPercentIndicator(
                         // width: double.infinity,
-                        lineHeight: 12.0,
+                        lineHeight:
+                            MediaQuery.of(context).size.width > 700 ? 24 : 12.0,
                         percent: currentTimerAmount / 5,
                         backgroundColor:
                             const Color.fromARGB(255, 87, 144, 167),
@@ -351,10 +395,13 @@ class ChampionSmashOrPassResultPage extends StatelessWidget {
                               ),
                               child: Text(
                                 championName,
-                                style: const TextStyle(
+                                style: TextStyle(
                                     color: Color.fromARGB(255, 171, 150, 76),
                                     backgroundColor: Colors.black87,
-                                    fontSize: 28,
+                                    fontSize:
+                                        MediaQuery.of(context).size.width > 700
+                                            ? 48
+                                            : 28,
                                     fontWeight: FontWeight.bold),
                               ),
                             ),
@@ -364,7 +411,7 @@ class ChampionSmashOrPassResultPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                const Flexible(
+                Flexible(
                   flex: 0,
                   child: GradientText(
                     'Swipe anywhere to continue',
@@ -377,7 +424,8 @@ class ChampionSmashOrPassResultPage extends StatelessWidget {
                       ],
                     ),
                     style: TextStyle(
-                      fontSize: 24,
+                      fontSize:
+                          MediaQuery.of(context).size.width > 700 ? 46 : 24,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
