@@ -80,16 +80,18 @@ class _ChampionSmashOrPassPageState extends State<ChampionSmashOrPassPage> {
             backgroundColor: Colors.transparent,
             drawer: HamburgerBar(),
             appBar: AppBar(
-              iconTheme: const IconThemeData(
+              iconTheme: IconThemeData(
                 color: Colors.white,
+                size: MediaQuery.of(context).size.width > 700 ? 34 : 24,
               ),
               elevation: 0,
               backgroundColor: Colors.transparent,
-              title: const Text(
+              title: Text(
                 'Smash Or Pass',
                 style: TextStyle(
-                  color: Colors.white,
-                ),
+                    color: Colors.white,
+                    fontSize:
+                        MediaQuery.of(context).size.width > 700 ? 30 : 14),
               ),
             ),
             body: Column(
@@ -97,14 +99,20 @@ class _ChampionSmashOrPassPageState extends State<ChampionSmashOrPassPage> {
                 SizedBox(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
+                    children: [
                       Padding(
                         padding: EdgeInsets.only(left: 20),
-                        child: ChampionDetailText('Pass', 28, true),
+                        child: ChampionDetailText(
+                            'Pass',
+                            MediaQuery.of(context).size.width > 700 ? 48 : 28,
+                            true),
                       ),
                       Padding(
                         padding: EdgeInsets.only(right: 20),
-                        child: ChampionDetailText('Smash', 28, true),
+                        child: ChampionDetailText(
+                            'Smash',
+                            MediaQuery.of(context).size.width > 700 ? 48 : 28,
+                            true),
                       ),
                     ],
                   ),

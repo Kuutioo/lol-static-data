@@ -24,7 +24,14 @@ class _ChampionsPageState extends State<ChampionsPage> {
   Icon customIcon = Icon(Icons.search);
   Widget customSearchBar = Text(
     'Champions',
-    style: TextStyle(color: Colors.white),
+    style: TextStyle(
+        color: Colors.white,
+        fontSize: MediaQueryData.fromWindow(WidgetsBinding.instance.window)
+                    .size
+                    .height >
+                700
+            ? 32
+            : 14),
   );
 
   List<champ.Champion> _foundChamps = [];
@@ -184,6 +191,7 @@ class _ChampionsPageState extends State<ChampionsPage> {
         ),
         iconTheme: IconThemeData(
           color: Colors.white,
+          size: MediaQuery.of(context).size.width > 700 ? 40 : 24,
         ),
         title: customSearchBar,
         elevation: 0,
@@ -217,6 +225,8 @@ class _ChampionsPageState extends State<ChampionsPage> {
                     'Champions',
                     style: TextStyle(
                       color: Colors.white,
+                      fontSize:
+                          MediaQuery.of(context).size.width > 700 ? 32 : 14,
                     ),
                   );
                 }
@@ -238,7 +248,7 @@ class _ChampionsPageState extends State<ChampionsPage> {
                 _foundChamps = widget._championList;
               });
             },
-            tooltip: 'Reset Filters',
+            tooltip: 'Reset Filters ',
             icon: Icon(Icons.delete),
           ),
         ],

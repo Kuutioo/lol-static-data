@@ -136,10 +136,11 @@ class _ChampionTinderCardState extends State<ChampionTinderCard> {
                   ),
                   child: Text(
                     widget.champion.name,
-                    style: const TextStyle(
+                    style: TextStyle(
                         color: Color.fromARGB(255, 171, 150, 76),
                         backgroundColor: Colors.black87,
-                        fontSize: 28,
+                        fontSize:
+                            MediaQuery.of(context).size.width > 700 ? 58 : 28,
                         fontWeight: FontWeight.bold),
                   ),
                 ),
