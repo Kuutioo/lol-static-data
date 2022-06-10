@@ -299,15 +299,7 @@ class _ChampionsPageState extends State<ChampionsPage> {
                         _foundChamps[index].name,
                         20,
                         true,
-                      ), /*Text(
-                        _foundChamps[index].name,
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),*/
+                      ),
                     ),
                   );
                 }),

@@ -30,28 +30,30 @@ class ChampionAbilitiesItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        ChampionDetailText(
-          title,
-          20,
-          false,
-        ),
-        ChampionDetailText(
-          abilityName,
-          24,
-          true,
-        ),
-        const SizedBox(
-          height: 6,
-        ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 5),
-              child: Container(
+    return Padding(
+      padding: const EdgeInsets.only(
+        left: 10,
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          ChampionDetailText(
+            title,
+            20,
+            false,
+          ),
+          ChampionDetailText(
+            abilityName,
+            24,
+            true,
+          ),
+          const SizedBox(
+            height: 6,
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
                 decoration: BoxDecoration(
                   border: Border.all(
                     width: 3,
@@ -77,60 +79,60 @@ class ChampionAbilitiesItem extends StatelessWidget {
                   ),
                 ),
               ),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                isPassive
-                    ? SizedBox(
-                        width: MediaQuery.of(context).size.width - 86,
-                        child: ChampionDetailTextHtml(
-                          abilityDescription.replaceJsonStringSymbols(),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  isPassive
+                      ? SizedBox(
+                          width: MediaQuery.of(context).size.width - 100,
+                          child: ChampionDetailTextHtml(
+                            abilityDescription.replaceJsonStringSymbols(),
+                            16,
+                          ),
+                        )
+                      : const SizedBox.shrink(),
+                  const SizedBox(height: 9),
+                  !isPassive
+                      ? ChampionDetailText(
+                          'Range: $abilityRangeSpread',
                           16,
-                        ),
-                      )
-                    : const SizedBox.shrink(),
-                const SizedBox(height: 9),
-                !isPassive
-                    ? ChampionDetailText(
-                        'Range: $abilityRangeSpread',
-                        16,
-                        false,
-                      )
-                    : const SizedBox.shrink(),
-                const SizedBox(height: 2),
-                !isPassive
-                    ? ChampionDetailText(
-                        'Cost: $abilityCostSpread',
-                        16,
-                        false,
-                      )
-                    : const SizedBox.shrink(),
-                const SizedBox(height: 2),
-                !isPassive
-                    ? ChampionDetailText(
-                        'Cooldown: $abilityCooldownSpread',
-                        16,
-                        false,
-                      )
-                    : const SizedBox.shrink(),
-              ],
-            ),
-          ],
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        !isPassive
-            ? ChampionDetailTextHtml(
-                abilityDescription.replaceJsonStringSymbols(),
-                16,
-              )
-            : const SizedBox.shrink(),
-        const SizedBox(
-          height: 20,
-        ),
-      ],
+                          false,
+                        )
+                      : const SizedBox.shrink(),
+                  const SizedBox(height: 2),
+                  !isPassive
+                      ? ChampionDetailText(
+                          'Cost: $abilityCostSpread',
+                          16,
+                          false,
+                        )
+                      : const SizedBox.shrink(),
+                  const SizedBox(height: 2),
+                  !isPassive
+                      ? ChampionDetailText(
+                          'Cooldown: $abilityCooldownSpread',
+                          16,
+                          false,
+                        )
+                      : const SizedBox.shrink(),
+                ],
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          !isPassive
+              ? ChampionDetailTextHtml(
+                  abilityDescription.replaceJsonStringSymbols(),
+                  16,
+                )
+              : const SizedBox.shrink(),
+          const SizedBox(
+            height: 20,
+          ),
+        ],
+      ),
     );
   }
 }

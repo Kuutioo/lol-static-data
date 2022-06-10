@@ -47,10 +47,13 @@ class ChampionTips extends StatelessWidget {
                   dataSnapshot.data[1].length > 0
               ? Column(
                   children: [
-                    ChampionDetailText(
-                      'Tips playing with ${champion.name}',
-                      24,
-                      true,
+                    Padding(
+                      padding: const EdgeInsets.only(left: 15),
+                      child: ChampionDetailText(
+                        'Tips playing with ${champion.name}',
+                        24,
+                        true,
+                      ),
                     ),
                     const SizedBox(
                       height: 5,
@@ -67,12 +70,15 @@ class ChampionTips extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(
-                      height: 15,
+                      height: 20,
                     ),
-                    ChampionDetailText(
-                      'Tips playing against ${champion.name}',
-                      24,
-                      true,
+                    Padding(
+                      padding: const EdgeInsets.only(left: 15),
+                      child: ChampionDetailText(
+                        'Tips playing against ${champion.name}',
+                        24,
+                        true,
+                      ),
                     ),
                     const SizedBox(
                       height: 5,

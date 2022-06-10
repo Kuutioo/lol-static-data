@@ -124,35 +124,52 @@ class _ChampionDetailPageState extends State<ChampionDetailPage> {
                       ),
                     ),
                     const SizedBox(height: 10),
-                    ChampionDetailText(
-                      champName,
-                      32,
-                      true,
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: ChampionDetailText(
+                        champName,
+                        32,
+                        true,
+                      ),
                     ),
-                    ChampionDetailText(
-                      champion.title,
-                      20,
-                      false,
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: ChampionDetailText(
+                        champion.title,
+                        20,
+                        false,
+                      ),
                     ),
                     const SizedBox(height: 70),
-                    const ChampionDetailText(
-                      'Abilities',
-                      32,
-                      true,
+                    const Padding(
+                      padding: EdgeInsets.only(
+                        left: 10,
+                      ),
+                      child: ChampionDetailText(
+                        'Abilities',
+                        32,
+                        true,
+                      ),
                     ),
                     const SizedBox(height: 15),
                     ChampionAbilities(champion),
                     const SizedBox(height: 70),
                     ChampionTips(champion),
                     const SizedBox(height: 70),
-                    const ChampionDetailText(
-                      'Lore',
-                      32,
-                      true,
+                    const Padding(
+                      padding: EdgeInsets.only(left: 10),
+                      child: ChampionDetailText(
+                        'Lore',
+                        32,
+                        true,
+                      ),
                     ),
-                    ChampionDetailTextHtml(
-                      champion.blurb.replaceJsonStringSymbols(),
-                      18,
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: ChampionDetailTextHtml(
+                        champion.blurb.replaceJsonStringSymbols(),
+                        18,
+                      ),
                     ),
                   ],
                 ),
