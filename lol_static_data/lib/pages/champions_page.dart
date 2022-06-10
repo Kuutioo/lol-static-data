@@ -238,7 +238,7 @@ class _ChampionsPageState extends State<ChampionsPage> {
                 _foundChamps = widget._championList;
               });
             },
-            tooltip: 'FIX ALL BUGS :)',
+            tooltip: 'Reset Filters',
             icon: Icon(Icons.delete),
           ),
         ],

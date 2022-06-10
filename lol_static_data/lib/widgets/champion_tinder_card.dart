@@ -76,6 +76,24 @@ class _ChampionTinderCardState extends State<ChampionTinderCard> {
             ),
           );
         }
+        if (snapshot.hasError) {
+          showDialog(
+            context: context,
+            builder: (_) => AlertDialog(
+              title: const Text('An error has occured!'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('Okay'),
+                ),
+              ],
+              elevation: 24,
+            ),
+          );
+        }
+
         url = ''.modifyChampImageUrl(snapshot.data[0].compact.url, 0);
 
         return Swipable(
