@@ -44,8 +44,8 @@ class _ChampionSmashOrPassPageState extends State<ChampionSmashOrPassPage> {
           return Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
                 colors: [
                   Color.fromARGB(255, 47, 69, 76),
                   Color.fromARGB(255, 7, 32, 44),
