@@ -20,17 +20,19 @@ extension StringExtensions on String {
         .replaceAll('Ã§', 'ç');
   }
 
-  String translateText() {
+  Future<String> translateText() async {
     String defaultLocale = Platform.localeName;
+    print(defaultLocale);
     String translatedString = '';
 
     GoogleTranslator translator = GoogleTranslator();
 
-    translator.translate(this, to: 'es').then((value) {
-      translatedString = value.toString();
-      print(translatedString);
-    });
-
+    if (defaultLocale == 'fi_FI') {
+      await translator.translate(this, to: 'es').then((value) {
+        translatedString = value.toString();
+        return translatedString;
+      });
+    }
     return translatedString;
   }
 }

@@ -7,6 +7,7 @@ import 'package:lol_static_data/widgets/hamburger_bar.dart';
 
 import '../widgets/champion_tinder_card.dart';
 import '../widgets/detail_text/champion_detail_text.dart';
+import '../helpers/extensions.dart';
 
 class ChampionSmashOrPassPage extends StatefulWidget {
   @override

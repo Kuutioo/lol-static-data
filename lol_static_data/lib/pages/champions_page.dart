@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:champions/champions.dart' as champ;
 import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
-import 'package:translator/translator.dart';
 
 import '../widgets/hamburger_bar.dart';
 import './champion_detail_page.dart';
@@ -22,26 +21,35 @@ class ChampionsPage extends StatefulWidget {
   State<ChampionsPage> createState() => _ChampionsPageState();
 }
 
-String text = 'Champions';
-
 class _ChampionsPageState extends State<ChampionsPage> {
-  GoogleTranslator translator = GoogleTranslator();
+  String text = 'Champions';
 
   Icon customIcon = Icon(Icons.search);
-  Widget customSearchBar = Text(
-    'Champions'.translateText(),
-    style: TextStyle(
-        color: Colors.white,
-        fontSize: MediaQueryData.fromWindow(WidgetsBinding.instance.window)
-                    .size
-                    .width >
-                700
-            ? 32
-            : 18),
-  );
+  Widget customSearchBar;
+  _ChampionsPageState() {
+    customSearchBar = Text(
+      text,
+      style: TextStyle(
+          color: Colors.white,
+          fontSize: MediaQueryData.fromWindow(WidgetsBinding.instance.window)
+                      .size
+                      .width >
+                  700
+              ? 32
+              : 18),
+    );
+  }
 
   List<champ.Champion> _foundChamps = [];
   List<champ.Champion> _filteredChamps = [];
+
+  void getTranslation() async {
+    Future<String> translation = text.translateText();
+    String message = await translation;
+    setState(() {
+      text = message;
+    });
+  }
 
   final Map<champ.Role, bool> _isSelectedMap = {
     champ.Role.assassin: false,
@@ -55,6 +63,7 @@ class _ChampionsPageState extends State<ChampionsPage> {
   @override
   void initState() {
     super.initState();
+
     _foundChamps = widget._championList;
   }
 
@@ -182,7 +191,6 @@ class _ChampionsPageState extends State<ChampionsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //backgroundColor: Color.fromARGB(255, 199, 203, 212),
       drawer: HamburgerBar(),
       appBar: NewGradientAppBar(
         gradient: const LinearGradient(
