@@ -3,11 +3,13 @@
 import 'package:flutter/material.dart';
 import 'package:champions/champions.dart' as champ;
 import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
+import 'package:translator/translator.dart';
 
 import '../widgets/hamburger_bar.dart';
 import './champion_detail_page.dart';
 import '../widgets/detail_text/champion_detail_text.dart';
 import '../helpers/gradient_text.dart';
+import '../helpers/extensions.dart';
 
 class ChampionsPage extends StatefulWidget {
   static const routeName = 'champions-page';
@@ -20,10 +22,14 @@ class ChampionsPage extends StatefulWidget {
   State<ChampionsPage> createState() => _ChampionsPageState();
 }
 
+String text = 'Champions';
+
 class _ChampionsPageState extends State<ChampionsPage> {
+  GoogleTranslator translator = GoogleTranslator();
+
   Icon customIcon = Icon(Icons.search);
   Widget customSearchBar = Text(
-    'Champions',
+    'Champions'.translateText(),
     style: TextStyle(
         color: Colors.white,
         fontSize: MediaQueryData.fromWindow(WidgetsBinding.instance.window)
@@ -49,7 +55,6 @@ class _ChampionsPageState extends State<ChampionsPage> {
   @override
   void initState() {
     super.initState();
-
     _foundChamps = widget._championList;
   }
 
@@ -149,10 +154,6 @@ class _ChampionsPageState extends State<ChampionsPage> {
                                 ? 34
                                 : 20),
                       ),
-                      /*Text(
-                        champ.Role.values[index].label,
-                        style: TextStyle(color: Colors.black, fontSize: 20),
-                      ),*/
                       value: _isSelectedMap[champ.Role.values[index]],
                       onChanged: (newValue) {
                         setState(() {
@@ -226,11 +227,11 @@ class _ChampionsPageState extends State<ChampionsPage> {
                 } else {
                   customIcon = Icon(Icons.search);
                   customSearchBar = Text(
-                    'Champions',
+                    text,
                     style: TextStyle(
                       color: Colors.white,
                       fontSize:
-                          MediaQuery.of(context).size.width > 700 ? 32 : 14,
+                          MediaQuery.of(context).size.width > 700 ? 32 : 18,
                     ),
                   );
                 }

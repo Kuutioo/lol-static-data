@@ -1,3 +1,7 @@
+import 'dart:io';
+
+import 'package:translator/translator.dart';
+
 extension StringExtensions on String {
   String modifyChampImageUrl(String url, int index) {
     String result = url.replaceAll('12.10.1/', '');
@@ -14,5 +18,19 @@ extension StringExtensions on String {
         .replaceAll('â', '"')
         .replaceAll('â', '-')
         .replaceAll('Ã§', 'ç');
+  }
+
+  String translateText() {
+    String defaultLocale = Platform.localeName;
+    String translatedString = '';
+
+    GoogleTranslator translator = GoogleTranslator();
+
+    translator.translate(this, to: 'es').then((value) {
+      translatedString = value.toString();
+      print(translatedString);
+    });
+
+    return translatedString;
   }
 }
