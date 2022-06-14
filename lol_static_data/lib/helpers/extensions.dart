@@ -12,6 +12,7 @@ extension StringExtensions on String {
     return replaceAll('â¦', '')
         .replaceAll('â', '"')
         .replaceAll('â', '"')
-        .replaceAll('â', '-');
+        .replaceAll('â', '-')
+        .replaceAll('Ã§', 'ç');
   }
 }

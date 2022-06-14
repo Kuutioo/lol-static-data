@@ -77,8 +77,8 @@ class ChampionSmashOrPassResultPage extends StatelessWidget {
             elevation: 0,
             centerTitle: true,
             gradient: const LinearGradient(
-              begin: Alignment.bottomCenter,
-              end: Alignment.topCenter,
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
               colors: [
                 Color.fromARGB(255, 47, 69, 76),
                 Color.fromARGB(255, 7, 32, 44),
@@ -88,8 +88,8 @@ class ChampionSmashOrPassResultPage extends StatelessWidget {
           body: Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
                 colors: [
                   Color.fromARGB(255, 47, 69, 76),
                   Color.fromARGB(255, 7, 32, 44),
