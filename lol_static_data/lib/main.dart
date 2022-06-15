@@ -16,7 +16,7 @@ void main() async {
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
-  Champions champions = await Champions.forRegion(Region.na);
+  Champions champions = Champions();
   championList = (await champions.all).values.toList();
 
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,9 +28,9 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    /*for (var champion in championList) {
+    for (var champion in championList) {
       print('${champion.name}: ${champion.blurb}');
-    }*/
+    }
     return MaterialApp(
         title: 'LoL: Smash or Pass',
         debugShowCheckedModeBanner: false,
