@@ -26,11 +26,16 @@ extension StringExtensions on String {
 
     GoogleTranslator translator = GoogleTranslator();
 
-    if (defaultLocale == 'fi_FI') {
+    if (defaultLocale == 'es_ES') {
       await translator.translate(this, to: 'es').then((value) {
         translatedString = value.toString();
-        return translatedString;
       });
+    } else if (defaultLocale == 'fi_FI') {
+      await translator.translate(this, to: 'fi').then((value) {
+        translatedString = value.toString();
+      });
+    } else {
+      translatedString = this;
     }
     return translatedString;
   }
