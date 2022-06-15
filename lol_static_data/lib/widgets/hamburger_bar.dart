@@ -146,7 +146,7 @@ class _HamburgerBarState extends State<HamburgerBar> {
             ),
             Container(
               padding: const EdgeInsets.only(left: 5),
-              height: MediaQuery.of(context).size.height - 400,
+              height: MediaQuery.of(context).size.height - 415,
               alignment: Alignment.bottomLeft,
               child: Text(
                 'LoL: Smash or Pass was created under Riot Games \"Legal Jibber Jabber\" policy using assets owned by Riot Games.  Riot Games does not endorse or sponsor this project.',

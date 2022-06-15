@@ -4,8 +4,10 @@ import 'package:video_player/video_player.dart';
 import 'video_player_widget.dart';
 
 class NetworkPlayerWidget extends StatefulWidget {
-  String url;
+  final String url;
+
   NetworkPlayerWidget(this.url);
+
   @override
   _NetworkPlayerWidgetState createState() => _NetworkPlayerWidgetState();
 }
