@@ -1,6 +1,8 @@
 // ignore_for_file: use_key_in_widget_constructors
 
 import 'package:flutter/material.dart';
+import 'package:lol_static_data/pages/video_player_page.dart';
+import '../Video_widgets/network_player_widget.dart';
 
 import '../../helpers/extensions.dart';
 
@@ -53,29 +55,36 @@ class ChampionAbilitiesItem extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    width: 3,
-                    color: const Color.fromARGB(255, 171, 150, 76),
+              MaterialButton(
+                padding: EdgeInsets.all(0),
+                onPressed: () {
+                  Navigator.pushNamed(context, 'video-player-page');
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      width: 3,
+                      color: const Color.fromARGB(255, 171, 150, 76),
+                    ),
+                    gradient: const LinearGradient(
+                      begin: Alignment.bottomRight,
+                      end: Alignment.topLeft,
+                      colors: [
+                        Color.fromARGB(255, 109, 85, 39),
+                        Color.fromARGB(255, 231, 195, 123),
+                      ],
+                    ),
+                    borderRadius: BorderRadius.circular(15),
                   ),
-                  gradient: const LinearGradient(
-                    begin: Alignment.bottomRight,
-                    end: Alignment.topLeft,
-                    colors: [
-                      Color.fromARGB(255, 109, 85, 39),
-                      Color.fromARGB(255, 231, 195, 123),
-                    ],
-                  ),
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
-                  child: Image(
-                    image: NetworkImage(abilityIconUrl),
-                    fit: BoxFit.cover,
-                    height: MediaQuery.of(context).size.width > 700 ? 150 : 75,
-                    width: MediaQuery.of(context).size.width > 700 ? 150 : 75,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: Image(
+                      image: NetworkImage(abilityIconUrl),
+                      fit: BoxFit.cover,
+                      height:
+                          MediaQuery.of(context).size.width > 700 ? 150 : 75,
+                      width: MediaQuery.of(context).size.width > 700 ? 150 : 75,
+                    ),
                   ),
                 ),
               ),

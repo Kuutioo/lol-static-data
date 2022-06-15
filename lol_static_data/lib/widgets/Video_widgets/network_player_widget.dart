@@ -31,10 +31,6 @@ class _NetworkPlayerWidgetState extends State<NetworkPlayerWidget> {
   @override
   Widget build(BuildContext context) => Container(
         alignment: Alignment.center,
-        child: Column(
-          children: [
-            VideoPlayerWidget(controller: controller),
-          ],
-        ),
+        child: VideoPlayerWidget(controller: controller),
       );
 }

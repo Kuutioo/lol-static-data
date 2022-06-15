@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 import './pages/champions_page.dart';
 import './pages/champion_detail_page.dart';
 import './pages/champion_smash_or_pass_page.dart';
-import './pages/test.dart';
+import 'pages/video_player_page.dart';
 
 List<Champion> championList;
 void main() async {
@@ -44,6 +44,7 @@ class MyApp extends StatelessWidget {
         routes: {
           ChampionDetailPage.routeName: (context) => ChampionDetailPage(),
           ChampionsPage.routeName: (context) => ChampionsPage(championList),
+          VideoPlayerPage.routeName: (context) => VideoPlayerPage(),
         });
   }
 }
