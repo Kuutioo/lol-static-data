@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:lol_static_data/pages/champions_page.dart';
+import 'package:lol_static_data/pages/settings_page.dart';
 
 import '../helpers/gradient_text.dart';
 
@@ -113,9 +114,39 @@ class _HamburgerBarState extends State<HamburgerBar> {
                 },
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              child: ListTile(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+                selected: HamburgerBar.page == DrawerPages.settingsPage,
+                selectedTileColor: const Color.fromARGB(255, 47, 69, 76),
+                tileColor: const Color.fromARGB(255, 170, 173, 180),
+                leading: Icon(
+                  Icons.settings,
+                  size: MediaQuery.of(context).size.width > 700 ? 32 : 24,
+                ),
+                selectedColor: const Color.fromARGB(255, 206, 167, 29),
+                title: Text(
+                  'Settings',
+                  style: TextStyle(
+                    fontSize: MediaQuery.of(context).size.width > 700 ? 28 : 16,
+                  ),
+                ),
+                onTap: () {
+                  Navigator.pushReplacementNamed(
+                      context, SettingsPage.routeName);
+                  setState(() {
+                    HamburgerBar.page = DrawerPages.settingsPage;
+                  });
+                },
+              ),
+            ),
             Container(
               padding: const EdgeInsets.only(left: 5),
-              height: MediaQuery.of(context).size.height - 350,
+              height: MediaQuery.of(context).size.height - 400,
               alignment: Alignment.bottomLeft,
               child: Text(
                 'LoL: Smash or Pass was created under Riot Games \"Legal Jibber Jabber\" policy using assets owned by Riot Games.  Riot Games does not endorse or sponsor this project.',
@@ -135,4 +166,5 @@ class _HamburgerBarState extends State<HamburgerBar> {
 enum DrawerPages {
   championsPage,
   tinderPage,
+  settingsPage,
 }
