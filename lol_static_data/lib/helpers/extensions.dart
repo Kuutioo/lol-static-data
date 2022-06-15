@@ -30,10 +30,6 @@ extension StringExtensions on String {
       await translator.translate(this, to: 'es').then((value) {
         translatedString = value.toString();
       });
-    } else if (defaultLocale == 'fi_FI') {
-      await translator.translate(this, to: 'fi').then((value) {
-        translatedString = value.toString();
-      });
     } else {
       translatedString = this;
     }

@@ -21,10 +21,6 @@ class _ChampionAbilitiesState extends State<ChampionAbilities> {
     Iterable<champ.ChampionSpell> championSpells = await widget.champion.spells;
     List<champ.ChampionSpell> list = championSpells.toList();
 
-    for (var spell in list) {
-      print(spell.clip.url);
-    }
-
     return list;
   }
 
