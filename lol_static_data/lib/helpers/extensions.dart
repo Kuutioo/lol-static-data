@@ -1,10 +1,13 @@
 import 'dart:io';
 
 import 'package:translator/translator.dart';
+import 'package:champions/storage.dart';
 
 extension StringExtensions on String {
   String modifyChampImageUrl(String url, int index) {
-    String result = url.replaceAll('12.11.1/', '');
+    Store store = Store();
+
+    String result = url.replaceAll('${store.version}/', '');
     var pos = result.lastIndexOf('.');
     result = result.substring(0, pos);
     result = result + '_$index' + '.jpg';
