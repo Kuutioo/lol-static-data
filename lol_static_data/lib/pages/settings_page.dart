@@ -20,8 +20,8 @@ class _SettingsPageState extends State<SettingsPage> {
       drawer: HamburgerBar(),
       appBar: NewGradientAppBar(
         gradient: const LinearGradient(
-          begin: Alignment.bottomCenter,
-          end: Alignment.topCenter,
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
           colors: [
             Color.fromARGB(255, 47, 69, 76),
             Color.fromARGB(255, 7, 32, 44),
@@ -39,8 +39,8 @@ class _SettingsPageState extends State<SettingsPage> {
         height: MediaQuery.of(context).size.height,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
+            begin: Alignment.centerLeft,
+            end: Alignment.centerRight,
             colors: [
               Color.fromARGB(255, 47, 69, 76),
               Color.fromARGB(255, 7, 32, 44),
@@ -49,38 +49,48 @@ class _SettingsPageState extends State<SettingsPage> {
         ),
         child: Padding(
           padding: const EdgeInsets.all(20),
-          child: DropdownButtonFormField<String>(
-              isExpanded: true,
-              dropdownColor: Color.fromARGB(255, 50, 74, 82),
-              decoration: InputDecoration(
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(
-                    width: 3,
-                    color: Color.fromARGB(255, 171, 150, 76),
-                  ),
+          child: Column(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    border: Border.all(
+                      width: 3,
+                      color: Color.fromARGB(255, 171, 150, 76),
+                    )),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButtonFormField<String>(
+                      dropdownColor: Color.fromARGB(255, 50, 74, 82),
+                      value: selectedItem,
+                      items: items
+                          .map(
+                            (item) => DropdownMenuItem<String>(
+                              value: item,
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 5),
+                                child: Text(
+                                  item,
+                                  style: TextStyle(
+                                      fontSize: 22, color: Colors.white),
+                                ),
+                              ),
+                            ),
+                          )
+                          .toList(),
+                      onChanged: (item) {
+                        setState(
+                          (() {
+                            selectedItem = item;
+                          }),
+                        );
+                        final index = items.indexOf(item);
+                        items[index] = items[0];
+                        items[0] = item;
+                      }),
                 ),
               ),
-              value: selectedItem,
-              items: items
-                  .map((item) => DropdownMenuItem<String>(
-                        value: item,
-                        child: Text(
-                          item,
-                          style: TextStyle(fontSize: 22, color: Colors.white),
-                        ),
-                      ))
-                  .toList(),
-              onChanged: (item) {
-                setState(
-                  (() {
-                    selectedItem = item;
-                  }),
-                );
-                final index = items.indexOf(item);
-                items[index] = items[0];
-                items[0] = item;
-              }),
+            ],
+          ),
         ),
       ),
     );

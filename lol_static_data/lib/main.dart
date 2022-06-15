@@ -29,9 +29,9 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    for (var champion in championList) {
+    /*for (var champion in championList) {
       print('${champion.name}: ${champion.blurb}');
-    }
+    }*/
     return MaterialApp(
         title: 'LoL: Smash or Pass',
         debugShowCheckedModeBanner: false,
