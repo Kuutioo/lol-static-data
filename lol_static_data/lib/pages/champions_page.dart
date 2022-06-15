@@ -22,33 +22,49 @@ class ChampionsPage extends StatefulWidget {
 }
 
 class _ChampionsPageState extends State<ChampionsPage> {
-  String text = 'Champions';
-
   Icon customIcon = Icon(Icons.search);
   Widget customSearchBar;
+  String pageTitle = 'Champions';
+
   _ChampionsPageState() {
-    customSearchBar = Text(
-      text,
-      style: TextStyle(
-          color: Colors.white,
-          fontSize: MediaQueryData.fromWindow(WidgetsBinding.instance.window)
-                      .size
-                      .width >
-                  700
-              ? 32
-              : 18),
+    customSearchBar = FutureBuilder(
+      future: getTranslation(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Scaffold(
+            body: Container(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            ),
+          );
+        }
+        return Text(
+          pageTitle,
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: MediaQueryData.fromWindow(WidgetsBinding.instance.window)
+                        .size
+                        .width >
+                    700
+                ? 32
+                : 18,
+          ),
+        );
+      },
     );
   }
 
   List<champ.Champion> _foundChamps = [];
   List<champ.Champion> _filteredChamps = [];
 
-  void getTranslation() async {
-    Future<String> translation = text.translateText();
+  Future<void> getTranslation() async {
+    Future<String> translation = pageTitle.translateText();
     String message = await translation;
-    setState(() {
-      text = message;
-    });
+
+    pageTitle = message;
   }
 
   final Map<champ.Role, bool> _isSelectedMap = {
@@ -63,7 +79,6 @@ class _ChampionsPageState extends State<ChampionsPage> {
   @override
   void initState() {
     super.initState();
-
     _foundChamps = widget._championList;
   }
 
@@ -235,7 +250,7 @@ class _ChampionsPageState extends State<ChampionsPage> {
                 } else {
                   customIcon = Icon(Icons.search);
                   customSearchBar = Text(
-                    text,
+                    pageTitle,
                     style: TextStyle(
                       color: Colors.white,
                       fontSize:

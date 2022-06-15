@@ -22,7 +22,6 @@ extension StringExtensions on String {
 
   Future<String> translateText() async {
     String defaultLocale = Platform.localeName;
-    print(defaultLocale);
     String translatedString = '';
 
     GoogleTranslator translator = GoogleTranslator();

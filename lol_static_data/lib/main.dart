@@ -7,7 +7,6 @@ import 'package:flutter/services.dart';
 import './pages/champions_page.dart';
 import './pages/champion_detail_page.dart';
 import './pages/champion_smash_or_pass_page.dart';
-import './pages/test.dart';
 
 List<Champion> championList;
 void main() async {
