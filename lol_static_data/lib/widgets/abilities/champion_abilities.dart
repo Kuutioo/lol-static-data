@@ -66,6 +66,7 @@ class _ChampionAbilitiesState extends State<ChampionAbilities> {
                 abilityRangeSpread: snapshot.data[0][0].range.spread,
                 abilityCostSpread: snapshot.data[0][0].cost.spread,
                 abilityCooldownSpread: snapshot.data[0][0].cooldown.spread,
+                abilityVideoUrl: snapshot.data[0][0].clip.url,
                 isPassive: false,
               ),
               ChampionAbilitiesItem(
@@ -76,6 +77,7 @@ class _ChampionAbilitiesState extends State<ChampionAbilities> {
                 abilityRangeSpread: snapshot.data[0][1].range.spread,
                 abilityCostSpread: snapshot.data[0][1].cost.spread,
                 abilityCooldownSpread: snapshot.data[0][1].cooldown.spread,
+                abilityVideoUrl: snapshot.data[0][1].clip.url,
                 isPassive: false,
               ),
               ChampionAbilitiesItem(
@@ -86,6 +88,7 @@ class _ChampionAbilitiesState extends State<ChampionAbilities> {
                 abilityRangeSpread: snapshot.data[0][2].range.spread,
                 abilityCostSpread: snapshot.data[0][2].cost.spread,
                 abilityCooldownSpread: snapshot.data[0][2].cooldown.spread,
+                abilityVideoUrl: snapshot.data[0][2].clip.url,
                 isPassive: false,
               ),
               ChampionAbilitiesItem(
@@ -96,6 +99,7 @@ class _ChampionAbilitiesState extends State<ChampionAbilities> {
                 abilityRangeSpread: snapshot.data[0][3].range.spread,
                 abilityCostSpread: snapshot.data[0][3].cost.spread,
                 abilityCooldownSpread: snapshot.data[0][3].cooldown.spread,
+                abilityVideoUrl: snapshot.data[0][3].clip.url,
                 isPassive: false,
               ),
             ],

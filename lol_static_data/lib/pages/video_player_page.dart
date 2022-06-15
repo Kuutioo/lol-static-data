@@ -11,6 +11,8 @@ class VideoPlayerPage extends StatefulWidget {
 class _VideoPlayerPageState extends State<VideoPlayerPage> {
   @override
   Widget build(BuildContext context) {
-    return NetworkPlayerWidget();
+    var arguments = ModalRoute.of(context).settings.arguments;
+
+    return NetworkPlayerWidget(arguments);
   }
 }

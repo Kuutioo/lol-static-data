@@ -17,6 +17,7 @@ class ChampionAbilitiesItem extends StatelessWidget {
   final String abilityRangeSpread;
   final String abilityCostSpread;
   final String abilityCooldownSpread;
+  final String abilityVideoUrl;
   final bool isPassive;
 
   const ChampionAbilitiesItem({
@@ -27,6 +28,7 @@ class ChampionAbilitiesItem extends StatelessWidget {
     this.abilityRangeSpread,
     this.abilityCostSpread,
     this.abilityCooldownSpread,
+    this.abilityVideoUrl,
     this.isPassive,
   });
 
@@ -58,7 +60,13 @@ class ChampionAbilitiesItem extends StatelessWidget {
               MaterialButton(
                 padding: EdgeInsets.all(0),
                 onPressed: () {
-                  Navigator.pushNamed(context, 'video-player-page');
+                  !isPassive
+                      ? Navigator.pushNamed(
+                          context,
+                          VideoPlayerPage.routeName,
+                          arguments: abilityVideoUrl,
+                        )
+                      : null;
                 },
                 child: Container(
                   decoration: BoxDecoration(

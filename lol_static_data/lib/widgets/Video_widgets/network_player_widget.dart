@@ -4,6 +4,8 @@ import 'package:video_player/video_player.dart';
 import 'video_player_widget.dart';
 
 class NetworkPlayerWidget extends StatefulWidget {
+  String url;
+  NetworkPlayerWidget(this.url);
   @override
   _NetworkPlayerWidgetState createState() => _NetworkPlayerWidgetState();
 }
@@ -15,8 +17,7 @@ class _NetworkPlayerWidgetState extends State<NetworkPlayerWidget> {
   void initState() {
     super.initState();
 
-    controller = VideoPlayerController.network(
-        'https://d28xe8vt774jo5.cloudfront.net/champion-abilities/0103/ability_0103_Q1.webm')
+    controller = VideoPlayerController.network(widget.url)
       ..addListener(() => setState(() {}))
       ..setLooping(true)
       ..initialize().then((_) => controller.play());
