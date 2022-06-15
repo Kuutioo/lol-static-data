@@ -16,7 +16,7 @@ class _NetworkPlayerWidgetState extends State<NetworkPlayerWidget> {
     super.initState();
 
     controller = VideoPlayerController.network(
-        'https://samplelib.com/lib/preview/mp4/sample-5s.mp4')
+        'https://d28xe8vt774jo5.cloudfront.net/champion-abilities/0103/ability_0103_Q1.webm')
       ..addListener(() => setState(() {}))
       ..setLooping(true)
       ..initialize().then((_) => controller.play());
