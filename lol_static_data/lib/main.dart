@@ -2,22 +2,26 @@
 
 import 'package:flutter/material.dart';
 import 'package:champions/champions.dart';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:lol_static_data/pages/settings_page.dart';
+
 import './pages/champions_page.dart';
 import './pages/champion_detail_page.dart';
 import './pages/champion_smash_or_pass_page.dart';
-import 'pages/video_player_page.dart';
+import './pages/video_player_page.dart';
 
 List<Champion> championList;
+Champions champions;
 void main() async {
   Paint.enableDithering = true;
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
-  Champions champions = Champions();
+  await changeLanguage(Region.lan);
+
   championList = (await champions.all).values.toList();
 
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,12 +30,18 @@ void main() async {
   runApp(MyApp());
 }
 
+void changeLanguage(Region region) async {
+  champions = await Champions.forRegion(region);
+
+  championList = (await champions.all).values.toList();
+}
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    /*for (var champion in championList) {
+    for (var champion in championList) {
       print('${champion.name}: ${champion.blurb}');
-    }*/
+    }
     return MaterialApp(
         title: 'LoL: Smash or Pass',
         debugShowCheckedModeBanner: false,

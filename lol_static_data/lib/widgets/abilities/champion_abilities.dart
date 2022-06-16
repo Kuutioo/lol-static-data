@@ -43,7 +43,6 @@ class _ChampionAbilitiesState extends State<ChampionAbilities> {
               child: CircularProgressIndicator(),
             );
           }
-          print(snapshot.data[0][0].clip.url);
           return Column(
             children: [
               ChampionAbilitiesItem(

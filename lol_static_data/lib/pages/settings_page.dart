@@ -1,8 +1,10 @@
+import 'package:champions/champions.dart';
 import 'package:flutter/material.dart';
-import 'package:lol_static_data/widgets/hamburger_bar.dart';
 import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
-
 import 'package:dropdown_button2/dropdown_button2.dart';
+
+import '../main.dart';
+import '../widgets/hamburger_bar.dart';
 
 class SettingsPage extends StatefulWidget {
   static const routeName = 'settings-page';
@@ -84,6 +86,11 @@ class _SettingsPageState extends State<SettingsPage> {
                         setState(
                           (() {
                             selectedItem = item;
+                            if (item == 'Spanish') {
+                              changeLanguage(Region.lan);
+                            } else if (item == 'English') {
+                              changeLanguage(Region.na);
+                            }
                           }),
                         );
                         final index = items.indexOf(item);
