@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:champions/champions.dart' as champ;
 import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../widgets/hamburger_bar.dart';
 import './champion_detail_page.dart';
@@ -21,49 +22,24 @@ class ChampionsPage extends StatefulWidget {
   State<ChampionsPage> createState() => _ChampionsPageState();
 }
 
+String pageTitle = "";
+
 class _ChampionsPageState extends State<ChampionsPage> {
   Icon customIcon = Icon(Icons.search);
-  Widget customSearchBar;
-  String pageTitle = 'Champions';
-
-  _ChampionsPageState() {
-    customSearchBar = FutureBuilder(
-      future: getTranslation(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Container(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            child: Center(
-              child: CircularProgressIndicator(),
-            ),
-          );
-        }
-        return Text(
-          pageTitle,
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: MediaQueryData.fromWindow(WidgetsBinding.instance.window)
-                        .size
-                        .width >
-                    700
-                ? 32
-                : 18,
-          ),
-        );
-      },
-    );
-  }
+  Widget customSearchBar = Text(
+    pageTitle,
+    style: TextStyle(
+      color: Colors.white,
+      fontSize:
+          MediaQueryData.fromWindow(WidgetsBinding.instance.window).size.width >
+                  700
+              ? 32
+              : 18,
+    ),
+  );
 
   List<champ.Champion> _foundChamps = [];
   List<champ.Champion> _filteredChamps = [];
-
-  Future<void> getTranslation() async {
-    Future<String> translation = pageTitle.translateText();
-    String message = await translation;
-
-    pageTitle = message;
-  }
 
   final Map<champ.Role, bool> _isSelectedMap = {
     champ.Role.assassin: false,
@@ -203,6 +179,8 @@ class _ChampionsPageState extends State<ChampionsPage> {
 
   @override
   Widget build(BuildContext context) {
+    pageTitle = AppLocalizations.of(context).champions;
+
     return Scaffold(
       drawer: HamburgerBar(),
       appBar: NewGradientAppBar(

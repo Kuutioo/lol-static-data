@@ -42,7 +42,10 @@ dependencies:
   translator: ^0.1.5
   dropdown_button2: ^1.4.0
   shared_preferences: ^2.0.15
-  
+
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.17.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -75,7 +78,7 @@ flutter_icons:
 
 # The following section is specific to Flutter.
 flutter:
-
+  generate: true
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

@@ -1,10 +1,13 @@
+import 'dart:convert';
 import 'dart:ffi';
 
 import 'package:champions/champions.dart';
 import 'package:flutter/material.dart';
+import 'package:lol_static_data/helpers/locale_provider.dart';
 import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider/provider.dart';
 
 import '../main.dart';
 import '../widgets/hamburger_bar.dart';
@@ -108,13 +111,27 @@ class _SettingsPageState extends State<SettingsPage> {
                           .toList(),
                       onChanged: (item) {
                         preferences.setString('language', item);
+                        final provider = Provider.of<LocaleProvider>(
+                          context,
+                          listen: false,
+                        );
                         setState(
                           (() {
                             selectedItem = item;
                             if (item == 'Spanish') {
                               changeLanguage(Region.lan);
+                              provider.setLocale(Locale('es'));
+                              preferences.setString(
+                                'locale',
+                                provider.locale.toString(),
+                              );
                             } else if (item == 'English') {
                               changeLanguage(Region.na);
+                              provider.setLocale(Locale('en'));
+                              preferences.setString(
+                                'locale',
+                                provider.locale.toString(),
+                              );
                             }
                           }),
                         );

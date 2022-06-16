@@ -1,0 +1,87 @@
+{
+    "language": "English",
+    "@language": {
+        "description": "The current language"
+    },
+    
+
+
+    "champions": "Champions",
+    "@champions": {
+        "description": "Champions page title"
+    },
+    "searchAChampion": "Search a champion",
+    "@searchAChampion": {
+        "description": "Search bar text"
+    },
+    "assassin": "Assassin",
+    "@assasin": {
+        "description": "Filter text"
+    }, 
+    "fighter": "Fighter",
+    "@fighter": {
+        "description": "Filter text"
+    }, 
+    "mage": "Mage",
+    "@mage": {
+        "description": "Filter text"
+    }, 
+    "marksman": "Marksman",
+    "@marksman": {
+        "description": "Filter text"
+    }, 
+    "support": "Support",
+    "@support": {
+        "description": "Filter text"
+    }, 
+    "tank": "Tank",
+    "@tank": {
+        "description": "Filter text"
+    }, 
+
+
+
+    "smashOrPass": "Smash or Pass",
+    "@smashOrPass": {
+        "description": "Smash or Pass page title"
+    },
+    "pass": "Pass",
+    "@pass": {
+        "description": "Smash or Pass page/result page Pass word"
+    },
+    "smash": "Smash",
+    "@smash": {
+        "description": "Smash or Pass page/result page Smash word"
+    },
+
+    "passed": "Passed",
+    "@passed": {
+        "description": "Times a champion has been passed"
+    },
+    "smashed": "Smashed",
+    "@smashed": {
+        "description": "Times a champion has been smashed"
+    },
+    "times": "times",
+    "@times": {
+        "description": "times word in Smash or Pass result page"
+    },
+    "swipeAnywhereToContinue": "Swipe anywhere to continue",
+    "@swipeAnywhereToContinue": {
+        "description": "Text at the bottom of the Smash or Pass result page"
+    },
+
+
+
+    "settings": "Settings",
+    "@settings": {
+        "description": "Text for settings"
+    },
+
+
+    
+    "policy": "LoL: Smash or Pass was created under Riot Games' \"Legal Jibber Jabber\" policy using assets owned by Riot Games. Riot Games does not endorse or sponsor this project.",
+    "@policy": {
+        "description": "Text to let people know that Riot Games does not sponsor this project"
+    }
+}

@@ -1,0 +1,30 @@
+{
+    "language": "Español",
+    "champions": "Campeones",
+    "searchAChampion": "Buscar un campeón",
+    "assassin": "Asesino",
+    "fighter": "Caza",
+    "mage": "Mago",
+    "marksman": "Marksman",
+    "support": "Soporte",
+    "tank": "Tanque",
+
+
+
+    "smashOrPass": "Aplastar o pasar",
+    "pass": "Pasar",
+    "smash": "Smash",
+
+    "passed": "Aprobado",
+    "smashed": "Aplastado",
+    "times": "veces",
+    "swipeAnywhereToContinue": "Desliza el dedo en cualquier lugar para continuar",
+
+
+
+    "settings": "Ajustes",
+
+
+    
+    "policy": "LoL: Smash or Pass ha sido creado bajo la política de \"Legal Jibber Jabber\" de Riot Games utilizando activos que son propiedad de Riot Games. Riot Games no respalda ni patrocina este proyecto."
+}
