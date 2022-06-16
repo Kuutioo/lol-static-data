@@ -136,7 +136,7 @@ class _ChampionDetailPageState extends State<ChampionDetailPage> {
                     Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: ChampionDetailText(
-                        champName,
+                        champName.replaceJsonStringSymbols(),
                         MediaQuery.of(context).size.width > 700 ? 48 : 32,
                         true,
                       ),
@@ -144,7 +144,7 @@ class _ChampionDetailPageState extends State<ChampionDetailPage> {
                     Padding(
                       padding: const EdgeInsets.only(left: 10),
                       child: ChampionDetailText(
-                        champion.title,
+                        champion.title.replaceJsonStringSymbols(),
                         MediaQuery.of(context).size.width > 700 ? 36 : 20,
                         false,
                       ),

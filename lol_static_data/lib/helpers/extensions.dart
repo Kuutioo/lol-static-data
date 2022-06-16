@@ -20,7 +20,13 @@ extension StringExtensions on String {
         .replaceAll('â', '"')
         .replaceAll('â', '"')
         .replaceAll('â', '-')
-        .replaceAll('Ã§', 'ç');
+        .replaceAll('Ã§', 'ç')
+        .replaceAll('Ã', 'í')
+        .replaceAll('íº', 'ú')
+        .replaceAll('í©', 'é')
+        .replaceAll('í±', 'ñ')
+        .replaceAll('í³', 'ó')
+        .replaceAll('í¡', 'á');
   }
 
   Future<String> translateText() async {

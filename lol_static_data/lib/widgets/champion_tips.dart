@@ -6,6 +6,7 @@ import 'package:scroll_snap_list/scroll_snap_list.dart';
 
 import './detail_text/champion_detail_text.dart';
 import './detail_text/champion_detail_text_html.dart';
+import '../helpers/extensions.dart';
 
 class ChampionTips extends StatelessWidget {
   final champ.Champion champion;
@@ -161,7 +162,8 @@ class ChampionTips extends StatelessWidget {
                     child: FittedBox(
                       fit: BoxFit.fitWidth,
                       child: ChampionDetailTextHtml(
-                        '${dataSnapshot.data[0][index]}',
+                        '${dataSnapshot.data[0][index]}'
+                            .replaceJsonStringSymbols(),
                         MediaQuery.of(context).size.width > 700 ? 34 : 18,
                       ),
                     ),
@@ -229,7 +231,8 @@ class ChampionTips extends StatelessWidget {
                   ),
                   Center(
                     child: ChampionDetailTextHtml(
-                      '${dataSnapshot.data[1][index]}',
+                      '${dataSnapshot.data[1][index]}'
+                          .replaceJsonStringSymbols(),
                       MediaQuery.of(context).size.width > 700 ? 34 : 18,
                     ),
                   ),

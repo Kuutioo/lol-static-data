@@ -20,7 +20,7 @@ void main() async {
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
-  await changeLanguage(Region.lan);
+  await changeLanguage(Region.na);
 
   championList = (await champions.all).values.toList();
 
@@ -39,9 +39,9 @@ void changeLanguage(Region region) async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    for (var champion in championList) {
+    /*for (var champion in championList) {
       print('${champion.name}: ${champion.blurb}');
-    }
+    }*/
     return MaterialApp(
         title: 'LoL: Smash or Pass',
         debugShowCheckedModeBanner: false,

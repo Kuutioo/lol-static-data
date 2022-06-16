@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:lol_static_data/pages/video_player_page.dart';
-import '../Video_widgets/network_player_widget.dart';
 
 import '../../helpers/extensions.dart';
 
@@ -42,12 +41,12 @@ class ChampionAbilitiesItem extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           ChampionDetailText(
-            title,
+            title.replaceJsonStringSymbols(),
             MediaQuery.of(context).size.width > 700 ? 36 : 20,
             false,
           ),
           ChampionDetailText(
-            abilityName,
+            abilityName.replaceJsonStringSymbols(),
             MediaQuery.of(context).size.width > 700 ? 40 : 24,
             true,
           ),
