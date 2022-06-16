@@ -99,30 +99,34 @@ class ChampionAbilitiesItem extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Positioned(
-                      top: MediaQuery.of(context).size.width > 700 ? 100 : 50,
-                      left: MediaQuery.of(context).size.width > 700 ? 100 : 50,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.black54,
-                          border: Border.all(
-                            color: Colors.black,
-                          ),
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(5),
-                          ),
-                        ),
-                        child: isPassive
-                            ? null
-                            : Icon(
+                    isPassive
+                        ? SizedBox.shrink()
+                        : Positioned(
+                            top: MediaQuery.of(context).size.width > 700
+                                ? 100
+                                : 50,
+                            left: MediaQuery.of(context).size.width > 700
+                                ? 100
+                                : 50,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.black54,
+                                border: Border.all(
+                                  color: Colors.black,
+                                ),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(5),
+                                ),
+                              ),
+                              child: Icon(
                                 Icons.play_arrow_sharp,
                                 color: Color.fromARGB(255, 231, 195, 123),
                                 size: MediaQuery.of(context).size.width > 700
                                     ? 50
                                     : 26,
                               ),
-                      ),
-                    )
+                            ),
+                          )
                   ],
                 ),
               ),
