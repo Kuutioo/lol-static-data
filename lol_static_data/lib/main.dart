@@ -55,6 +55,19 @@ class MyApp extends StatelessWidget {
       print('${champion.name}: ${champion.blurb}');
     }*/
     return MaterialApp(
+        onGenerateRoute: (settings) {
+          if (settings.name == ChampionDetailPage.routeName) {
+            return PageRouteBuilder(
+              settings:
+                  settings, // Pass this to make popUntil(), pushNamedAndRemoveUntil(), works
+              pageBuilder: (_, __, ___) => ChampionsPage(championList),
+              transitionsBuilder: (_, a, __, c) =>
+                  FadeTransition(opacity: a, child: c),
+            );
+          }
+          // Unknown route
+          return MaterialPageRoute(builder: (_) => ChampionDetailPage());
+        },
         title: 'LoL: Smash or Pass',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
