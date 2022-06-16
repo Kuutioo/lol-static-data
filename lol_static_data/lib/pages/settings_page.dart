@@ -32,7 +32,6 @@ class _SettingsPageState extends State<SettingsPage> {
 
   Future init() async {
     preferences = await SharedPreferences.getInstance();
-    print(preferences);
 
     String selectedItem = preferences.getString('language');
     if (selectedItem == null) return;

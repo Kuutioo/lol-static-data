@@ -6,6 +6,7 @@ import 'package:champions/champions.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:lol_static_data/pages/settings_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import './pages/champions_page.dart';
 import './pages/champion_detail_page.dart';
@@ -20,7 +21,7 @@ void main() async {
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
-  await changeLanguage(Region.na);
+  await _getLanguage();
 
   championList = (await champions.all).values.toList();
 
@@ -28,6 +29,17 @@ void main() async {
   await Firebase.initializeApp();
 
   runApp(MyApp());
+}
+
+Future<void> _getLanguage() async {
+  preferences = await SharedPreferences.getInstance();
+  if (preferences.getString('language') == null) {
+    await changeLanguage(Region.na);
+  } else if (preferences.getString('language') == 'English') {
+    await changeLanguage(Region.na);
+  } else if (preferences.getString('language') == 'Spanish') {
+    await changeLanguage(Region.lan);
+  }
 }
 
 void changeLanguage(Region region) async {
