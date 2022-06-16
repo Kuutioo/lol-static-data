@@ -68,7 +68,6 @@ class MyApp extends StatelessWidget {
         preferences.getString('locale') == null
             ? provider.locale = Locale('en')
             : provider.locale = Locale(preferences.getString('locale'));
-        print(provider.locale);
         return MaterialApp(
           onGenerateRoute: (settings) {
             if (settings.name == ChampionDetailPage.routeName) {

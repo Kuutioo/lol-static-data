@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:lol_static_data/pages/champions_page.dart';
 import 'package:lol_static_data/pages/settings_page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../helpers/gradient_text.dart';
 
@@ -16,6 +17,11 @@ class HamburgerBar extends StatefulWidget {
 class _HamburgerBarState extends State<HamburgerBar> {
   @override
   Widget build(BuildContext context) {
+    String smashOrPass = AppLocalizations.of(context).smashOrPass;
+    String champions = AppLocalizations.of(context).champions;
+    String settings = AppLocalizations.of(context).settings;
+    String policy = AppLocalizations.of(context).policy;
+
     return Container(
       width: MediaQuery.of(context).size.width * 0.75,
       child: Drawer(
@@ -69,7 +75,7 @@ class _HamburgerBarState extends State<HamburgerBar> {
                 ),
                 selectedColor: const Color.fromARGB(255, 206, 167, 29),
                 title: Text(
-                  'Smash or Pass',
+                  smashOrPass,
                   style: TextStyle(
                     fontSize: MediaQuery.of(context).size.width > 700 ? 28 : 16,
                   ),
@@ -98,7 +104,7 @@ class _HamburgerBarState extends State<HamburgerBar> {
                 ),
                 selectedColor: const Color.fromARGB(255, 206, 167, 29),
                 title: Text(
-                  'Champions',
+                  champions,
                   style: TextStyle(
                     fontSize: MediaQuery.of(context).size.width > 700 ? 28 : 16,
                   ),
@@ -130,7 +136,7 @@ class _HamburgerBarState extends State<HamburgerBar> {
                 ),
                 selectedColor: const Color.fromARGB(255, 206, 167, 29),
                 title: Text(
-                  'Settings',
+                  settings,
                   style: TextStyle(
                     fontSize: MediaQuery.of(context).size.width > 700 ? 28 : 16,
                   ),
@@ -149,7 +155,7 @@ class _HamburgerBarState extends State<HamburgerBar> {
               height: MediaQuery.of(context).size.height - 415,
               alignment: Alignment.bottomLeft,
               child: Text(
-                'LoL: Smash or Pass was created under Riot Games \"Legal Jibber Jabber\" policy using assets owned by Riot Games.  Riot Games does not endorse or sponsor this project.',
+                policy,
                 style: TextStyle(
                     color: Colors.black,
                     fontSize:

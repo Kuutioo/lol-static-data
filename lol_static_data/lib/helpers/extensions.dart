@@ -26,22 +26,8 @@ extension StringExtensions on String {
         .replaceAll('í©', 'é')
         .replaceAll('í±', 'ñ')
         .replaceAll('í³', 'ó')
-        .replaceAll('í¡', 'á');
-  }
-
-  Future<String> translateText() async {
-    String defaultLocale = Platform.localeName;
-    String translatedString = '';
-
-    GoogleTranslator translator = GoogleTranslator();
-
-    if (defaultLocale == 'es_ES') {
-      await translator.translate(this, to: 'es').then((value) {
-        translatedString = value.toString();
-      });
-    } else {
-      translatedString = this;
-    }
-    return translatedString;
+        .replaceAll('í¡', 'á')
+        .replaceAll('í', 'Ú')
+        .replaceAll('Â¡', '¡');
   }
 }

@@ -24,6 +24,10 @@ class ChampionTips extends StatelessWidget {
     Iterable<String> enemytips = await champion.enemyTips;
     List<String> enemyTipsList = enemytips.toList();
 
+    // enemyTipsList.forEach((element) {
+    //   print(element);
+    // });
+
     return enemyTipsList;
   }
 

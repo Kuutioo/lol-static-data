@@ -9,7 +9,6 @@ import '../widgets/hamburger_bar.dart';
 import './champion_detail_page.dart';
 import '../widgets/detail_text/champion_detail_text.dart';
 import '../helpers/gradient_text.dart';
-import '../helpers/extensions.dart';
 
 class ChampionsPage extends StatefulWidget {
   static const routeName = 'champions-page';

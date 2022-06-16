@@ -4,10 +4,10 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:champions/champions.dart' as champ;
 import 'package:lol_static_data/widgets/hamburger_bar.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../widgets/champion_tinder_card.dart';
 import '../widgets/detail_text/champion_detail_text.dart';
-import '../helpers/extensions.dart';
 
 class ChampionSmashOrPassPage extends StatefulWidget {
   @override
@@ -38,6 +38,10 @@ class _ChampionSmashOrPassPageState extends State<ChampionSmashOrPassPage> {
 
   @override
   Widget build(BuildContext context) {
+    String pageTitle = AppLocalizations.of(context).smashOrPass;
+    String pass = AppLocalizations.of(context).pass;
+    String smash = AppLocalizations.of(context).smash;
+
     return FutureBuilder(
       future: _getChamps(),
       builder: (context, snapshot) {
@@ -88,7 +92,7 @@ class _ChampionSmashOrPassPageState extends State<ChampionSmashOrPassPage> {
               elevation: 0,
               backgroundColor: Colors.transparent,
               title: Text(
-                'Smash Or Pass',
+                pageTitle,
                 style: TextStyle(
                     color: Colors.white,
                     fontSize:
@@ -104,14 +108,14 @@ class _ChampionSmashOrPassPageState extends State<ChampionSmashOrPassPage> {
                       Padding(
                         padding: EdgeInsets.only(left: 20),
                         child: ChampionDetailText(
-                            'Pass',
+                            pass,
                             MediaQuery.of(context).size.width > 700 ? 48 : 28,
                             true),
                       ),
                       Padding(
                         padding: EdgeInsets.only(right: 20),
                         child: ChampionDetailText(
-                            'Smash',
+                            smash,
                             MediaQuery.of(context).size.width > 700 ? 48 : 28,
                             true),
                       ),

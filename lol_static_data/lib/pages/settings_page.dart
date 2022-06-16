@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'dart:ffi';
-
 import 'package:champions/champions.dart';
 import 'package:flutter/material.dart';
 import 'package:lol_static_data/helpers/locale_provider.dart';
@@ -8,6 +5,7 @@ import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../main.dart';
 import '../widgets/hamburger_bar.dart';
@@ -46,6 +44,8 @@ class _SettingsPageState extends State<SettingsPage> {
 
   @override
   Widget build(BuildContext context) {
+    String pageTitle = AppLocalizations.of(context).settings;
+
     return Scaffold(
       drawer: HamburgerBar(),
       appBar: NewGradientAppBar(
@@ -62,7 +62,7 @@ class _SettingsPageState extends State<SettingsPage> {
           color: Colors.white,
           size: MediaQuery.of(context).size.width > 700 ? 40 : 24,
         ),
-        title: Text('Settings'),
+        title: Text(pageTitle),
       ),
       body: Container(
         width: MediaQuery.of(context).size.width,

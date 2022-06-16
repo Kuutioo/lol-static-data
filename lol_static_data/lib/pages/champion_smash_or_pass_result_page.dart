@@ -7,6 +7,7 @@ import 'package:percent_indicator/percent_indicator.dart';
 import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
 import 'package:flutter_swipable/flutter_swipable.dart';
 import 'package:timer_count_down/timer_count_down.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import './champion_smash_or_pass_page.dart';
 import '../helpers/gradient_text.dart';
@@ -64,6 +65,13 @@ class ChampionSmashOrPassResultPage extends StatelessWidget {
         int totalCount = streamSnapshot.data.get('total_count');
         int currentTimerAmount = 5;
 
+        String smash = AppLocalizations.of(context).smash;
+        String pass = AppLocalizations.of(context).pass;
+        String passed = AppLocalizations.of(context).passed;
+        String smashed = AppLocalizations.of(context).smashed;
+        String times = AppLocalizations.of(context).times;
+        String swipeText = AppLocalizations.of(context).swipeAnywhereToContinue;
+
         double smashCountPercentage = smashCount / totalCount * 100.0;
         double passCountPercentage = passCount / totalCount * 100.0;
 
@@ -108,7 +116,7 @@ class ChampionSmashOrPassResultPage extends StatelessWidget {
                         child: Column(
                           children: [
                             GradientText(
-                              'Pass',
+                              pass,
                               gradient: LinearGradient(
                                 begin: Alignment.topCenter,
                                 end: Alignment.bottomCenter,
@@ -151,7 +159,7 @@ class ChampionSmashOrPassResultPage extends StatelessWidget {
                               ),
                             ),
                             GradientText(
-                              'Passed: $passCount times',
+                              '$passed: $passCount $times',
                               gradient: const LinearGradient(
                                 begin: Alignment.topCenter,
                                 end: Alignment.bottomCenter,
@@ -205,7 +213,7 @@ class ChampionSmashOrPassResultPage extends StatelessWidget {
                         child: Column(
                           children: [
                             GradientText(
-                              'Smash',
+                              smash,
                               gradient: LinearGradient(
                                 begin: Alignment.topCenter,
                                 end: Alignment.bottomCenter,
@@ -249,7 +257,7 @@ class ChampionSmashOrPassResultPage extends StatelessWidget {
                               ),
                             ),
                             GradientText(
-                              'Smashed: $smashCount times',
+                              '$smashed: $smashCount $times',
                               gradient: const LinearGradient(
                                 begin: Alignment.topCenter,
                                 end: Alignment.bottomCenter,
@@ -414,7 +422,7 @@ class ChampionSmashOrPassResultPage extends StatelessWidget {
                 Flexible(
                   flex: 0,
                   child: GradientText(
-                    'Swipe anywhere to continue',
+                    swipeText,
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
