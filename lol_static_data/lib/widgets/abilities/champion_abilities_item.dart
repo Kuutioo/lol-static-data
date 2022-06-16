@@ -112,12 +112,15 @@ class ChampionAbilitiesItem extends StatelessWidget {
                             Radius.circular(5),
                           ),
                         ),
-                        child: Icon(
-                          Icons.play_arrow_sharp,
-                          color: Color.fromARGB(255, 231, 195, 123),
-                          size:
-                              MediaQuery.of(context).size.width > 700 ? 50 : 26,
-                        ),
+                        child: isPassive
+                            ? null
+                            : Icon(
+                                Icons.play_arrow_sharp,
+                                color: Color.fromARGB(255, 231, 195, 123),
+                                size: MediaQuery.of(context).size.width > 700
+                                    ? 50
+                                    : 26,
+                              ),
                       ),
                     )
                   ],

@@ -1,7 +1,10 @@
+import 'dart:ffi';
+
 import 'package:champions/champions.dart';
 import 'package:flutter/material.dart';
 import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../main.dart';
 import '../widgets/hamburger_bar.dart';
@@ -13,9 +16,31 @@ class SettingsPage extends StatefulWidget {
   State<SettingsPage> createState() => _SettingsPageState();
 }
 
+SharedPreferences preferences;
+
 class _SettingsPageState extends State<SettingsPage> {
   List<String> items = ['English', 'Spanish'];
+
   String selectedItem = 'English';
+
+  @override
+  void initState() {
+    super.initState();
+
+    init();
+  }
+
+  Future init() async {
+    preferences = await SharedPreferences.getInstance();
+    print(preferences);
+
+    String selectedItem = preferences.getString('language');
+    if (selectedItem == null) return;
+
+    setState(() {
+      this.selectedItem = selectedItem;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,6 +108,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           )
                           .toList(),
                       onChanged: (item) {
+                        preferences.setString('language', item);
                         setState(
                           (() {
                             selectedItem = item;
