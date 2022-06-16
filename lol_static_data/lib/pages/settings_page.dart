@@ -1,7 +1,8 @@
-import 'package:champions/items.dart';
 import 'package:flutter/material.dart';
 import 'package:lol_static_data/widgets/hamburger_bar.dart';
 import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
+
+import 'package:dropdown_button2/dropdown_button2.dart';
 
 class SettingsPage extends StatefulWidget {
   static const routeName = 'settings-page';
@@ -59,8 +60,10 @@ class _SettingsPageState extends State<SettingsPage> {
                       color: Color.fromARGB(255, 171, 150, 76),
                     )),
                 child: DropdownButtonHideUnderline(
-                  child: DropdownButtonFormField<String>(
-                      dropdownColor: Color.fromARGB(255, 50, 74, 82),
+                  child: DropdownButtonFormField2<String>(
+                      dropdownDecoration: BoxDecoration(
+                        color: Color.fromARGB(255, 50, 74, 82),
+                      ),
                       value: selectedItem,
                       items: items
                           .map(

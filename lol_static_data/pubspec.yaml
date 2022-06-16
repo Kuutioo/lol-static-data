@@ -40,6 +40,7 @@ dependencies:
   timer_count_down: ^1.0.4+1
   carousel_slider: ^3.0.0
   translator: ^0.1.5
+  dropdown_button2: ^1.4.0
   
 
 
