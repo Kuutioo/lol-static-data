@@ -68,32 +68,60 @@ class ChampionAbilitiesItem extends StatelessWidget {
                         )
                       : null;
                 },
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      width: 3,
-                      color: const Color.fromARGB(255, 171, 150, 76),
+                child: Stack(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          width: 3,
+                          color: const Color.fromARGB(255, 171, 150, 76),
+                        ),
+                        gradient: const LinearGradient(
+                          begin: Alignment.bottomRight,
+                          end: Alignment.topLeft,
+                          colors: [
+                            Color.fromARGB(255, 109, 85, 39),
+                            Color.fromARGB(255, 231, 195, 123),
+                          ],
+                        ),
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: Image(
+                          image: NetworkImage(abilityIconUrl),
+                          fit: BoxFit.cover,
+                          height: MediaQuery.of(context).size.width > 700
+                              ? 150
+                              : 75,
+                          width: MediaQuery.of(context).size.width > 700
+                              ? 150
+                              : 75,
+                        ),
+                      ),
                     ),
-                    gradient: const LinearGradient(
-                      begin: Alignment.bottomRight,
-                      end: Alignment.topLeft,
-                      colors: [
-                        Color.fromARGB(255, 109, 85, 39),
-                        Color.fromARGB(255, 231, 195, 123),
-                      ],
-                    ),
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(12),
-                    child: Image(
-                      image: NetworkImage(abilityIconUrl),
-                      fit: BoxFit.cover,
-                      height:
-                          MediaQuery.of(context).size.width > 700 ? 150 : 75,
-                      width: MediaQuery.of(context).size.width > 700 ? 150 : 75,
-                    ),
-                  ),
+                    Positioned(
+                      top: MediaQuery.of(context).size.width > 700 ? 100 : 50,
+                      left: MediaQuery.of(context).size.width > 700 ? 100 : 50,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.black54,
+                          border: Border.all(
+                            color: Colors.black,
+                          ),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(5),
+                          ),
+                        ),
+                        child: Icon(
+                          Icons.play_arrow_sharp,
+                          color: Color.fromARGB(255, 231, 195, 123),
+                          size:
+                              MediaQuery.of(context).size.width > 700 ? 50 : 26,
+                        ),
+                      ),
+                    )
+                  ],
                 ),
               ),
               Column(
