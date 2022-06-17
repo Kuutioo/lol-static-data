@@ -197,15 +197,16 @@ class ChampionSmashOrPassResultPage extends StatelessWidget {
                             ),
                           ),
                           child: ClipRRect(
-                              borderRadius: BorderRadius.circular(15),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: NetworkImage(champion.icon.url),
-                                    fit: BoxFit.fill,
-                                  ),
+                            borderRadius: BorderRadius.circular(15),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: NetworkImage(champion.icon.url),
+                                  fit: BoxFit.fill,
                                 ),
-                              )),
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                       Flexible(

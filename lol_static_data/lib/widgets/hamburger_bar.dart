@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:lol_static_data/pages/champions_page.dart';
 import 'package:lol_static_data/pages/settings_page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:lol_static_data/pages/smash_or_pass_stats_page.dart';
 
 import '../helpers/gradient_text.dart';
 
@@ -127,6 +128,36 @@ class _HamburgerBarState extends State<HamburgerBar> {
                   borderRadius: BorderRadius.circular(15),
                 ),
                 contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+                selected: HamburgerBar.page == DrawerPages.statsPage,
+                selectedTileColor: const Color.fromARGB(255, 47, 69, 76),
+                tileColor: const Color.fromARGB(255, 170, 173, 180),
+                leading: Icon(
+                  Icons.leaderboard,
+                  size: MediaQuery.of(context).size.width > 700 ? 32 : 24,
+                ),
+                selectedColor: const Color.fromARGB(255, 206, 167, 29),
+                title: Text(
+                  'Stats',
+                  style: TextStyle(
+                    fontSize: MediaQuery.of(context).size.width > 700 ? 28 : 16,
+                  ),
+                ),
+                onTap: () {
+                  Navigator.pushReplacementNamed(
+                      context, SmashOrPassStatsPage.routeName);
+                  setState(() {
+                    HamburgerBar.page = DrawerPages.statsPage;
+                  });
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              child: ListTile(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 10),
                 selected: HamburgerBar.page == DrawerPages.settingsPage,
                 selectedTileColor: const Color.fromARGB(255, 47, 69, 76),
                 tileColor: const Color.fromARGB(255, 170, 173, 180),
@@ -173,4 +204,5 @@ enum DrawerPages {
   championsPage,
   tinderPage,
   settingsPage,
+  statsPage,
 }

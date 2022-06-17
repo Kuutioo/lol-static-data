@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:lol_static_data/helpers/locale_provider.dart';
 import 'package:lol_static_data/pages/settings_page.dart';
+import 'package:lol_static_data/pages/smash_or_pass_stats_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -98,12 +99,13 @@ class MyApp extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
           ],
-          home: ChampionSmashOrPassPage(),
+          home: SmashOrPassStatsPage(),
           routes: {
             ChampionDetailPage.routeName: (context) => ChampionDetailPage(),
             ChampionsPage.routeName: (context) => ChampionsPage(championList),
             VideoPlayerPage.routeName: (context) => VideoPlayerPage(),
             SettingsPage.routeName: (context) => SettingsPage(),
+            SmashOrPassStatsPage.routeName: (context) => SmashOrPassStatsPage(),
           },
         );
       },
