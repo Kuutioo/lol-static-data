@@ -137,7 +137,7 @@ class _HamburgerBarState extends State<HamburgerBar> {
                 ),
                 selectedColor: const Color.fromARGB(255, 206, 167, 29),
                 title: Text(
-                  'Stats',
+                  AppLocalizations.of(context).stats,
                   style: TextStyle(
                     fontSize: MediaQuery.of(context).size.width > 700 ? 28 : 16,
                   ),
@@ -183,7 +183,7 @@ class _HamburgerBarState extends State<HamburgerBar> {
             ),
             Container(
               padding: const EdgeInsets.only(left: 5),
-              height: MediaQuery.of(context).size.height - 415,
+              height: MediaQuery.of(context).size.height - 480,
               alignment: Alignment.bottomLeft,
               child: Text(
                 policy,

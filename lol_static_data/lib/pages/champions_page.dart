@@ -21,7 +21,7 @@ class ChampionsPage extends StatefulWidget {
   State<ChampionsPage> createState() => _ChampionsPageState();
 }
 
-String pageTitle = "";
+String pageTitle = "Champions";
 
 class _ChampionsPageState extends State<ChampionsPage> {
   Icon customIcon = Icon(Icons.search);
@@ -117,6 +117,8 @@ class _ChampionsPageState extends State<ChampionsPage> {
     showModalBottomSheet(
       context: context,
       builder: (context) {
+        String roleLabelString = AppLocalizations.of(context).filterRoleLabels;
+        List<String> roleLabels = roleLabelString.split(':');
         return StatefulBuilder(
           builder: ((context, setState) {
             return Drawer(
@@ -137,7 +139,7 @@ class _ChampionsPageState extends State<ChampionsPage> {
                     return SwitchListTile(
                       activeColor: const Color.fromARGB(255, 206, 167, 29),
                       title: GradientText(
-                        champ.Role.values[index].label,
+                        roleLabels[index],
                         gradient: const LinearGradient(
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
@@ -251,7 +253,7 @@ class _ChampionsPageState extends State<ChampionsPage> {
                 _foundChamps = widget._championList;
               });
             },
-            tooltip: 'Reset Filters',
+            tooltip: AppLocalizations.of(context).resetFilters,
             icon: Icon(Icons.delete),
           ),
         ],

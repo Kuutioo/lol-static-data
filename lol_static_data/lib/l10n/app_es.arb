@@ -2,15 +2,9 @@
     "champions": "Campeones",
     "searchAChampion": "Buscar un campeón",
     "noResultsFound": "No se han encontrado resultados",
+    "resetFilters": "Restablecer filtros",
 
-    "assassin": "Asesino",
-    "fighter": "Caza",
-    "mage": "Mago",
-    "marksman": "Marksman",
-    "support": "Soporte",
-    "tank": "Tanque",
-
-
+    "filterRoleLabels": "Asesino:Caza:Mago:Marksman:Soporte:Tanque",
 
     "smashOrPass": "Aplastar o pasar",
     "pass": "Pasar",
@@ -21,7 +15,7 @@
     "times": "veces",
     "swipeAnywhereToContinue": "Desliza el dedo en cualquier lugar para continuar",
 
-
+    "stats": "Estadística",
 
     "settings": "Ajustes",
     "englishLanguage": "Inglés",

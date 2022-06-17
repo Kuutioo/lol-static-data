@@ -11,32 +11,15 @@
     "@noResultsFound": {
         "description": "When no results are found when searching a champion"
     },
+    "resetFilters": "Reset filters",
+    "@resetFilters": {
+        "description": "Tooltip for garbage can button"
+    },
 
-    "assassin": "Assassin",
-    "@assasin": {
-        "description": "Filter text"
+    "filterRoleLabels": "Assassin:Fighter:Mage:Marksman:Support:Tank",
+    "@filterRoleLabels": {
+        "description": "Array for all of the role labels"
     }, 
-    "fighter": "Fighter",
-    "@fighter": {
-        "description": "Filter text"
-    }, 
-    "mage": "Mage",
-    "@mage": {
-        "description": "Filter text"
-    }, 
-    "marksman": "Marksman",
-    "@marksman": {
-        "description": "Filter text"
-    }, 
-    "support": "Support",
-    "@support": {
-        "description": "Filter text"
-    }, 
-    "tank": "Tank",
-    "@tank": {
-        "description": "Filter text"
-    }, 
-
 
 
     "smashOrPass": "Smash or Pass",
@@ -69,7 +52,10 @@
         "description": "Text at the bottom of the Smash or Pass result page"
     },
 
-
+    "stats": "Statistics",
+    "@stats": {
+        "description": "Text for the page where user can see smash/pass ratio on champions"
+    },
 
     "settings": "Settings",
     "@settings": {
