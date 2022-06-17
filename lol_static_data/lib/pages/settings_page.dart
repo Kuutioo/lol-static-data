@@ -45,6 +45,11 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     String pageTitle = AppLocalizations.of(context).settings;
+    String english = AppLocalizations.of(context).englishLanguage;
+    String spanish = AppLocalizations.of(context).spanishLanguage;
+
+    // items[0] = english;
+    // items[1] = spanish;
 
     return Scaffold(
       drawer: HamburgerBar(),
@@ -90,55 +95,59 @@ class _SettingsPageState extends State<SettingsPage> {
                     )),
                 child: DropdownButtonHideUnderline(
                   child: DropdownButtonFormField2<String>(
-                      dropdownDecoration: BoxDecoration(
-                        color: Color.fromARGB(255, 50, 74, 82),
-                      ),
-                      value: selectedItem,
-                      items: items
-                          .map(
-                            (item) => DropdownMenuItem<String>(
-                              value: item,
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 5),
-                                child: Text(
-                                  item,
-                                  style: TextStyle(
-                                      fontSize: 22, color: Colors.white),
+                    dropdownDecoration: BoxDecoration(
+                      color: Color.fromARGB(255, 50, 74, 82),
+                    ),
+                    value: selectedItem,
+                    items: items
+                        .map(
+                          (item) => DropdownMenuItem<String>(
+                            value: item,
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 5),
+                              child: Text(
+                                item,
+                                style: TextStyle(
+                                  fontSize: 22,
+                                  color: Colors.white,
                                 ),
                               ),
                             ),
-                          )
-                          .toList(),
-                      onChanged: (item) {
-                        preferences.setString('language', item);
-                        final provider = Provider.of<LocaleProvider>(
-                          context,
-                          listen: false,
-                        );
-                        setState(
-                          (() {
-                            selectedItem = item;
-                            if (item == 'Spanish') {
-                              changeLanguage(Region.lan);
-                              provider.setLocale(Locale('es'));
-                              preferences.setString(
-                                'locale',
-                                provider.locale.toString(),
-                              );
-                            } else if (item == 'English') {
-                              changeLanguage(Region.na);
-                              provider.setLocale(Locale('en'));
-                              preferences.setString(
-                                'locale',
-                                provider.locale.toString(),
-                              );
-                            }
-                          }),
-                        );
-                        final index = items.indexOf(item);
-                        items[index] = items[0];
-                        items[0] = item;
-                      }),
+                          ),
+                        )
+                        .toList(),
+                    onChanged: (item) {
+                      print(item);
+                      final provider = Provider.of<LocaleProvider>(
+                        context,
+                        listen: false,
+                      );
+                      selectedItem = item;
+                      preferences.setString('language', item);
+                      setState(
+                        (() {
+                          if (item == 'Spanish') {
+                            changeLanguage(Region.lan);
+                            provider.setLocale(Locale('es'));
+                            preferences.setString(
+                              'locale',
+                              provider.locale.toString(),
+                            );
+                          } else if (item == 'English') {
+                            changeLanguage(Region.na);
+                            provider.setLocale(Locale('en'));
+                            preferences.setString(
+                              'locale',
+                              provider.locale.toString(),
+                            );
+                          }
+                        }),
+                      );
+                      final index = items.indexOf(item);
+                      items[index] = items[0];
+                      items[0] = item;
+                    },
+                  ),
                 ),
               ),
             ],

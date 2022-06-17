@@ -1,11 +1,4 @@
 {
-    "language": "English",
-    "@language": {
-        "description": "The current language"
-    },
-    
-
-
     "champions": "Champions",
     "@champions": {
         "description": "Champions page title"
@@ -14,6 +7,11 @@
     "@searchAChampion": {
         "description": "Search bar text"
     },
+    "noResultsFound": "No Results Found",
+    "@noResultsFound": {
+        "description": "When no results are found when searching a champion"
+    },
+
     "assassin": "Assassin",
     "@assasin": {
         "description": "Filter text"
@@ -76,6 +74,14 @@
     "settings": "Settings",
     "@settings": {
         "description": "Text for settings"
+    },
+    "englishLanguage": "English",
+    "@englishLanguage": {
+        "description": "English language text"
+    },
+    "spanishLanguage": "Spanish",
+    "@spanishLanguage": {
+        "description": "Spanish language text"
     },
 
 

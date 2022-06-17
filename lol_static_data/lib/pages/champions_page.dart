@@ -212,7 +212,7 @@ class _ChampionsPageState extends State<ChampionsPage> {
                     textInputAction: TextInputAction.go,
                     decoration: InputDecoration(
                         border: InputBorder.none,
-                        hintText: 'Search a champion',
+                        hintText: AppLocalizations.of(context).searchAChampion,
                         hintStyle: TextStyle(
                           color: Colors.white,
                         )),
@@ -251,7 +251,7 @@ class _ChampionsPageState extends State<ChampionsPage> {
                 _foundChamps = widget._championList;
               });
             },
-            tooltip: 'Reset Filters ',
+            tooltip: 'Reset Filters',
             icon: Icon(Icons.delete),
           ),
         ],
@@ -320,7 +320,7 @@ class _ChampionsPageState extends State<ChampionsPage> {
               )
             : Center(
                 child: Text(
-                  'No results found',
+                  AppLocalizations.of(context).noResultsFound,
                   style: TextStyle(
                     fontSize: MediaQuery.of(context).size.width > 700 ? 32 : 24,
                     color: Colors.white,

@@ -99,7 +99,7 @@ class MyApp extends StatelessWidget {
             GlobalCupertinoLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
           ],
-          home: SmashOrPassStatsPage(),
+          home: ChampionSmashOrPassPage(),
           routes: {
             ChampionDetailPage.routeName: (context) => ChampionDetailPage(),
             ChampionsPage.routeName: (context) => ChampionsPage(championList),
