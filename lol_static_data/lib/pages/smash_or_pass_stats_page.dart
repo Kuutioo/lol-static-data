@@ -83,6 +83,7 @@ class SmashOrPassStatsPage extends StatelessWidget {
                           ),
                         ),
                         Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               'Smashed: 10 times',
@@ -92,7 +93,7 @@ class SmashOrPassStatsPage extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              'passed: 15 times',
+                              'Passed: 15 times',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,
