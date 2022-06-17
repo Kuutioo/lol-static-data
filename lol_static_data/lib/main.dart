@@ -10,7 +10,6 @@ import 'package:lol_static_data/helpers/locale_provider.dart';
 import 'package:lol_static_data/pages/settings_page.dart';
 import 'package:lol_static_data/pages/smash_or_pass_stats_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 

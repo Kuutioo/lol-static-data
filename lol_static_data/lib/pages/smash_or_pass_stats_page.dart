@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:lol_static_data/helpers/gradient_text.dart';
 import 'package:lol_static_data/main.dart';
 import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:lol_static_data/widgets/hamburger_bar.dart';
 
@@ -10,6 +11,12 @@ class SmashOrPassStatsPage extends StatelessWidget {
   static const routeName = 'smash-or-pass-stats-page';
   @override
   Widget build(BuildContext context) {
+    String smashOrPass = AppLocalizations.of(context).smashOrPass;
+    String smashed = AppLocalizations.of(context).smashed;
+    String passed = AppLocalizations.of(context).passed;
+    String times = AppLocalizations.of(context).times;
+    String stats = AppLocalizations.of(context).stats;
+
     return Scaffold(
       drawer: HamburgerBar(),
       appBar: NewGradientAppBar(
@@ -32,7 +39,7 @@ class SmashOrPassStatsPage extends StatelessWidget {
           color: Colors.white,
           size: MediaQuery.of(context).size.width > 700 ? 40 : 24,
         ),
-        title: Text('Smash or Pass Stats'),
+        title: Text('$smashOrPass $stats'),
       ),
       body: Container(
         decoration: const BoxDecoration(
@@ -68,7 +75,8 @@ class SmashOrPassStatsPage extends StatelessWidget {
                           Color.fromARGB(255, 247, 217, 110),
                         ],
                       ),
-                      style: TextStyle(fontSize: 24),
+                      style:
+                          TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                     ),
                     Row(
                       children: [
@@ -86,14 +94,14 @@ class SmashOrPassStatsPage extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Smashed: 10 times',
+                              '$smashed: 10 $times',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,
                               ),
                             ),
                             Text(
-                              'Passed: 15 times',
+                              '$passed: 15 $times',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,
