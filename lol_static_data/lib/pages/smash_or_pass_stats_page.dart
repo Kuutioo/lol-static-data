@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:champions/champions.dart' as champ;
 import 'package:lol_static_data/helpers/gradient_text.dart';
 import 'package:lol_static_data/main.dart';
 import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
@@ -8,8 +9,28 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:lol_static_data/widgets/hamburger_bar.dart';
 
-class SmashOrPassStatsPage extends StatelessWidget {
+class SmashOrPassStatsPage extends StatefulWidget {
   static const routeName = 'smash-or-pass-stats-page';
+
+  @override
+  State<SmashOrPassStatsPage> createState() => _SmashOrPassStatsPageState();
+}
+
+class _SmashOrPassStatsPageState extends State<SmashOrPassStatsPage> {
+  List<champ.Champion> sortList = championList;
+  int smashCount;
+  int passCount;
+
+  bool sort = false;
+
+  Future<Query> sortChampions() async {
+    Query collectionReference = await FirebaseFirestore.instance
+        .collection("champions")
+        .orderBy('smash_count');
+
+    return collectionReference;
+  }
+
   @override
   Widget build(BuildContext context) {
     String smashOrPass = AppLocalizations.of(context).smashOrPass;
@@ -19,14 +40,17 @@ class SmashOrPassStatsPage extends StatelessWidget {
     String stats = AppLocalizations.of(context).stats;
 
     return FutureBuilder(
-      future: FirebaseFirestore.instance.collection('champions').get(),
-      builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
+      future: Future.wait([
+        FirebaseFirestore.instance.collection('champions').get(),
+        sortChampions(),
+      ]),
+      builder: (context, streamSnapshot) {
         if (streamSnapshot.connectionState == ConnectionState.waiting) {
           return Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
-                begin: Alignment.bottomCenter,
-                end: Alignment.topCenter,
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
                 colors: [
                   Color.fromARGB(255, 47, 69, 76),
                   Color.fromARGB(255, 7, 32, 44),
@@ -44,14 +68,35 @@ class SmashOrPassStatsPage extends StatelessWidget {
             child: Text('Error: ${streamSnapshot.error}'),
           );
         }
-        var documents = streamSnapshot.data.docs;
+        var documentsNoSort = streamSnapshot.data[0].docs;
+        var documentsSort = streamSnapshot.data[1].snapshots();
 
         return Scaffold(
           drawer: HamburgerBar(),
           appBar: NewGradientAppBar(
             actions: [
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  // setState(() {
+                  //   //sortChampions();
+                  //   sort = !sort;
+                  //   for (int i = 0; i < sortList.length; i++) {
+                  //     //print(sortList[i].name);
+                  //     if (sortList.any(
+                  //       (element) {
+                  //         documentsSort.elementAt(i).then(
+                  //           (value) {
+                  //             value.docs[i]['champion_name'];
+                  //           },
+                  //         );
+                  //         return true;
+                  //       },
+                  //     )) {
+                  //       sortList.insert(0, sortList[i]);
+                  //     }
+                  //   }
+                  // });
+                },
                 icon: Icon(
                   Icons.filter_alt_rounded,
                 ),
@@ -88,10 +133,18 @@ class SmashOrPassStatsPage extends StatelessWidget {
               ),
             ),
             child: ListView.builder(
-              itemCount: championList.length,
+              itemCount: sortList.length,
               itemBuilder: (context, index) {
-                int smashCount = documents[index]['smash_count'];
-                int passCount = documents[index]['pass_count'];
+                if (sort) {
+                  documentsSort.forEach((element) {
+                    smashCount = element.docs[index]['smash_count'];
+                    passCount = element.docs[index]['pass_count'];
+                  });
+                } else {
+                  smashCount = documentsNoSort[index]['smash_count'];
+                  passCount = documentsNoSort[index]['pass_count'];
+                }
+
                 return Container(
                   key: UniqueKey(),
                   child: Padding(
@@ -103,7 +156,7 @@ class SmashOrPassStatsPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         GradientText(
-                          championList[index].name,
+                          sortList[index].name,
                           gradient: const LinearGradient(
                             begin: Alignment.topCenter,
                             end: Alignment.bottomCenter,
@@ -129,8 +182,7 @@ class SmashOrPassStatsPage extends StatelessWidget {
                                   : 75,
                               decoration: BoxDecoration(
                                 image: DecorationImage(
-                                  image: NetworkImage(
-                                      championList[index].icon.url),
+                                  image: NetworkImage(sortList[index].icon.url),
                                   fit: BoxFit.fill,
                                 ),
                               ),
