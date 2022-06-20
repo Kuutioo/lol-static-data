@@ -67,7 +67,12 @@ class _SettingsPageState extends State<SettingsPage> {
           color: Colors.white,
           size: MediaQuery.of(context).size.width > 700 ? 40 : 24,
         ),
-        title: Text(pageTitle),
+        title: Text(
+          pageTitle,
+          style: TextStyle(
+            fontSize: MediaQuery.of(context).size.width > 700 ? 36 : 18,
+          ),
+        ),
       ),
       body: Container(
         width: MediaQuery.of(context).size.width,
@@ -95,6 +100,8 @@ class _SettingsPageState extends State<SettingsPage> {
                     )),
                 child: DropdownButtonHideUnderline(
                   child: DropdownButtonFormField2<String>(
+                    buttonHeight:
+                        MediaQuery.of(context).size.width > 700 ? 60 : 36,
                     dropdownDecoration: BoxDecoration(
                       color: Color.fromARGB(255, 50, 74, 82),
                     ),
@@ -104,11 +111,16 @@ class _SettingsPageState extends State<SettingsPage> {
                           (item) => DropdownMenuItem<String>(
                             value: item,
                             child: Padding(
-                              padding: const EdgeInsets.only(left: 5),
+                              padding: const EdgeInsets.only(
+                                left: 5,
+                              ),
                               child: Text(
                                 item,
                                 style: TextStyle(
-                                  fontSize: 22,
+                                  fontSize:
+                                      MediaQuery.of(context).size.width > 700
+                                          ? 40
+                                          : 22,
                                   color: Colors.white,
                                 ),
                               ),
