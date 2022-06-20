@@ -92,6 +92,7 @@ class SmashOrPassStatsPage extends StatelessWidget {
                         ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
                               '$smashed: 10 $times',
