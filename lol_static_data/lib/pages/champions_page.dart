@@ -178,9 +178,25 @@ class _ChampionsPageState extends State<ChampionsPage> {
     );
   }
 
+  bool firstLoad = true;
+
   @override
   Widget build(BuildContext context) {
     pageTitle = AppLocalizations.of(context).champions;
+    if (firstLoad) {
+      customSearchBar = Text(
+        pageTitle,
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: MediaQueryData.fromWindow(WidgetsBinding.instance.window)
+                      .size
+                      .width >
+                  700
+              ? 32
+              : 18,
+        ),
+      );
+    }
 
     return Scaffold(
       drawer: HamburgerBar(),
@@ -202,6 +218,7 @@ class _ChampionsPageState extends State<ChampionsPage> {
         actions: [
           IconButton(
             onPressed: () {
+              firstLoad = false;
               setState(() {
                 if (customIcon.icon == Icons.search) {
                   customIcon = Icon(Icons.cancel);
