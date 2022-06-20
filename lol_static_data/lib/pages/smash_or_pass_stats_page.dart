@@ -52,7 +52,9 @@ class SmashOrPassStatsPage extends StatelessWidget {
             actions: [
               IconButton(
                 onPressed: () {},
-                icon: Icon(Icons.filter_alt_rounded),
+                icon: Icon(
+                  Icons.filter_alt_rounded,
+                ),
               )
             ],
             gradient: const LinearGradient(
@@ -68,7 +70,11 @@ class SmashOrPassStatsPage extends StatelessWidget {
               color: Colors.white,
               size: MediaQuery.of(context).size.width > 700 ? 40 : 24,
             ),
-            title: Text('$smashOrPass $stats'),
+            title: Text(
+              '$smashOrPass $stats',
+              style: TextStyle(
+                  fontSize: MediaQuery.of(context).size.width > 700 ? 30 : 18),
+            ),
           ),
           body: Container(
             decoration: const BoxDecoration(
@@ -107,13 +113,20 @@ class SmashOrPassStatsPage extends StatelessWidget {
                             ],
                           ),
                           style: TextStyle(
-                              fontSize: 24, fontWeight: FontWeight.bold),
+                              fontSize: MediaQuery.of(context).size.width > 700
+                                  ? 36
+                                  : 24,
+                              fontWeight: FontWeight.bold),
                         ),
                         Row(
                           children: [
                             Container(
-                              width: 75,
-                              height: 75,
+                              width: MediaQuery.of(context).size.width > 700
+                                  ? 150
+                                  : 75,
+                              height: MediaQuery.of(context).size.width > 700
+                                  ? 150
+                                  : 75,
                               decoration: BoxDecoration(
                                 image: DecorationImage(
                                   image: NetworkImage(
@@ -130,14 +143,20 @@ class SmashOrPassStatsPage extends StatelessWidget {
                                   '$smashed: $smashCount $times',
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 18,
+                                    fontSize:
+                                        MediaQuery.of(context).size.width > 700
+                                            ? 30
+                                            : 18,
                                   ),
                                 ),
                                 Text(
                                   '$passed: $passCount $times',
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 18,
+                                    fontSize:
+                                        MediaQuery.of(context).size.width > 700
+                                            ? 30
+                                            : 18,
                                   ),
                                 ),
                               ],
