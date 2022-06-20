@@ -12,6 +12,7 @@ import 'package:lol_static_data/pages/smash_or_pass_stats_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import './pages/champions_page.dart';
 import './pages/champion_detail_page.dart';
@@ -34,6 +35,8 @@ void main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
+  await FirebaseAuth.instance.signInAnonymously();
 
   runApp(MyApp());
 }
