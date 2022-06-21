@@ -21,6 +21,11 @@
     "englishLanguage": "Inglés",
     "spanishLanguage": "Español",
     "language": "Idioma",
+
+    "error": "Se ha producido un error",
+    "okay": "Vale",
+    "abilityPreview": "Vista previa de la capacidad",
+
     
     
     "policy": "LoL: Smash or Pass ha sido creado bajo la política de \"Legal Jibber Jabber\" de Riot Games utilizando activos que son propiedad de Riot Games. Riot Games no respalda ni patrocina este proyecto."

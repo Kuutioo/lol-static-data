@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'video_player_widget.dart';
 
 class NetworkPlayerWidget extends StatefulWidget {
@@ -32,14 +33,14 @@ class _NetworkPlayerWidgetState extends State<NetworkPlayerWidget> {
         showDialog(
           context: context,
           builder: (_) => AlertDialog(
-            title: Text('An error has occurred'),
+            title: Text(AppLocalizations.of(context).error),
             content: Text(controller.value.errorDescription),
             actions: [
               TextButton(
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: const Text('Okay'),
+                child: Text(AppLocalizations.of(context).okay),
               ),
             ],
             elevation: 24,

@@ -73,6 +73,18 @@
     "@language": {
         "description": "Text in settings page for language part"
     },
+    "error": "An error has occurred",
+    "@error": {
+        "description": "Error text"
+    },
+    "okay": "Okay",
+    "@okay": {
+        "description": "Okay text"
+    },
+    "abilityPreview": "Ability Preview",
+    "@abilityPreview": {
+        "description": "ability preview text"
+    },
 
 
     

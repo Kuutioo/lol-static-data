@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../widgets/Video_widgets/network_player_widget.dart';
 
 class VideoPlayerPage extends StatefulWidget {
@@ -15,7 +16,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Ability Preview'),
+        title: Text(AppLocalizations.of(context).abilityPreview),
         backgroundColor: Colors.black,
         elevation: 0,
       ),
