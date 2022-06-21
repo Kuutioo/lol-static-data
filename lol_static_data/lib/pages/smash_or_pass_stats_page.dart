@@ -116,7 +116,7 @@ class _SmashOrPassStatsPageState extends State<SmashOrPassStatsPage> {
               size: MediaQuery.of(context).size.width > 700 ? 40 : 24,
             ),
             title: Text(
-              '$smashOrPass $stats',
+              '$stats',
               style: TextStyle(
                   fontSize: MediaQuery.of(context).size.width > 700 ? 30 : 18),
             ),
@@ -174,17 +174,26 @@ class _SmashOrPassStatsPageState extends State<SmashOrPassStatsPage> {
                         ),
                         Row(
                           children: [
-                            Container(
-                              width: MediaQuery.of(context).size.width > 700
-                                  ? 150
-                                  : 75,
-                              height: MediaQuery.of(context).size.width > 700
-                                  ? 150
-                                  : 75,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: NetworkImage(sortList[index].icon.url),
-                                  fit: BoxFit.fill,
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Container(
+                                width: MediaQuery.of(context).size.width > 700
+                                    ? 150
+                                    : 75,
+                                height: MediaQuery.of(context).size.width > 700
+                                    ? 150
+                                    : 75,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  border: Border.all(
+                                    width: 3,
+                                    color: Color.fromARGB(255, 171, 150, 76),
+                                  ),
+                                  image: DecorationImage(
+                                    image:
+                                        NetworkImage(sortList[index].icon.url),
+                                    fit: BoxFit.fill,
+                                  ),
                                 ),
                               ),
                             ),
@@ -192,24 +201,35 @@ class _SmashOrPassStatsPageState extends State<SmashOrPassStatsPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  '$smashed: $smashCount $times',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize:
-                                        MediaQuery.of(context).size.width > 700
-                                            ? 30
-                                            : 18,
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 5),
+                                  child: Text(
+                                    '$smashed: $smashCount $times',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize:
+                                          MediaQuery.of(context).size.width >
+                                                  700
+                                              ? 30
+                                              : 18,
+                                    ),
                                   ),
                                 ),
-                                Text(
-                                  '$passed: $passCount $times',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize:
-                                        MediaQuery.of(context).size.width > 700
-                                            ? 30
-                                            : 18,
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 5),
+                                  child: Text(
+                                    '$passed: $passCount $times',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize:
+                                          MediaQuery.of(context).size.width >
+                                                  700
+                                              ? 30
+                                              : 18,
+                                    ),
                                   ),
                                 ),
                               ],

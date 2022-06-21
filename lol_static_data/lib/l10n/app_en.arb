@@ -69,6 +69,10 @@
     "@spanishLanguage": {
         "description": "Spanish language text"
     },
+    "language": "Language",
+    "@language": {
+        "description": "Text in settings page for language part"
+    },
 
 
     

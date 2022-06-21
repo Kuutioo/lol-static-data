@@ -9,6 +9,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../main.dart';
 import '../widgets/hamburger_bar.dart';
+import '../helpers/gradient_text.dart';
 
 class SettingsPage extends StatefulWidget {
   static const routeName = 'settings-page';
@@ -45,6 +46,7 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     String pageTitle = AppLocalizations.of(context).settings;
+    String language = AppLocalizations.of(context).language;
     String english = AppLocalizations.of(context).englishLanguage;
     String spanish = AppLocalizations.of(context).spanishLanguage;
 
@@ -88,9 +90,27 @@ class _SettingsPageState extends State<SettingsPage> {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.only(left: 10, top: 5),
           child: Column(
             children: [
+              Align(
+                alignment: Alignment.centerLeft,
+                child: GradientText(
+                  '$language',
+                  gradient: const LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Color.fromARGB(255, 171, 150, 76),
+                      Color.fromARGB(255, 247, 217, 110),
+                    ],
+                  ),
+                  style: TextStyle(fontSize: 28),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
               Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),

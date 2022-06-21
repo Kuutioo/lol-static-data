@@ -303,12 +303,7 @@ class _ChampionsPageState extends State<ChampionsPage> {
                           borderRadius: BorderRadius.circular(15),
                           border: Border.all(
                             width: 3,
-                            color: Color.fromARGB(
-                              255,
-                              171,
-                              150,
-                              76,
-                            ),
+                            color: Color.fromARGB(255, 171, 150, 76),
                           ),
                         ),
                         child: ClipRRect(
