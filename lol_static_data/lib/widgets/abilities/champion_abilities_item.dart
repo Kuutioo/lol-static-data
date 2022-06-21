@@ -114,8 +114,11 @@ class ChampionAbilitiesItem extends StatelessWidget {
                                 border: Border.all(
                                   color: Colors.black,
                                 ),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(5),
+                                borderRadius: BorderRadius.only(
+                                  bottomRight: Radius.circular(10),
+                                  bottomLeft: Radius.circular(5),
+                                  topLeft: Radius.circular(5),
+                                  topRight: Radius.circular(5),
                                 ),
                               ),
                               child: Icon(

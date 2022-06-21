@@ -42,7 +42,7 @@ class _SmashOrPassStatsPageState extends State<SmashOrPassStatsPage> {
     return FutureBuilder(
       future: Future.wait([
         FirebaseFirestore.instance.collection('champions').get(),
-        sortChampions(),
+        // sortChampions(),
       ]),
       builder: (context, streamSnapshot) {
         if (streamSnapshot.connectionState == ConnectionState.waiting) {
@@ -69,7 +69,7 @@ class _SmashOrPassStatsPageState extends State<SmashOrPassStatsPage> {
           );
         }
         var documentsNoSort = streamSnapshot.data[0].docs;
-        var documentsSort = streamSnapshot.data[1].snapshots();
+        // var documentsSort = streamSnapshot.data[1].snapshots();
 
         return Scaffold(
           drawer: HamburgerBar(),
@@ -135,16 +135,17 @@ class _SmashOrPassStatsPageState extends State<SmashOrPassStatsPage> {
             child: ListView.builder(
               itemCount: sortList.length,
               itemBuilder: (context, index) {
-                if (sort) {
-                  documentsSort.forEach((element) {
-                    smashCount = element.docs[index]['smash_count'];
-                    passCount = element.docs[index]['pass_count'];
-                  });
-                } else {
-                  smashCount = documentsNoSort[index]['smash_count'];
-                  passCount = documentsNoSort[index]['pass_count'];
-                }
-
+                // if (sort) {
+                //   documentsSort.forEach((element) {
+                //     smashCount = element.docs[index]['smash_count'];
+                //     passCount = element.docs[index]['pass_count'];
+                //   });
+                // } else {
+                //   smashCount = documentsNoSort[index]['smash_count'];
+                //   passCount = documentsNoSort[index]['pass_count'];
+                // }
+                smashCount = documentsNoSort[index]['smash_count'];
+                passCount = documentsNoSort[index]['pass_count'];
                 return Container(
                   key: UniqueKey(),
                   child: Padding(

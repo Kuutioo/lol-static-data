@@ -116,9 +116,10 @@ class MyApp extends StatelessWidget {
 }
 
 // Cheers to Stackoverflow for this https://stackoverflow.com/a/62433225
-// No idea what it does but it works :)
+// We can use this to get any color as primary swatch.
+// No idea how it works but it does :)
 // This is not needed any more but I will leave it here
-// if we need it in the future
+// if we need it in the future + it looks cool
 MaterialColor buildMaterialColor(Color color) {
   List strengths = <double>[.05];
   Map<int, Color> swatch = {};
