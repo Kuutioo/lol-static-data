@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
 
 import 'video_player_widget.dart';
@@ -20,9 +21,32 @@ class _NetworkPlayerWidgetState extends State<NetworkPlayerWidget> {
     super.initState();
 
     controller = VideoPlayerController.network(widget.url)
-      ..addListener(() => setState(() {}))
+      ..addListener(() {
+        setState(() {});
+      })
       ..setLooping(true)
       ..initialize().then((_) => controller.play());
+    controller.addListener(() {
+      if (controller.value.hasError) {
+        print(controller.value.errorDescription);
+        showDialog(
+          context: context,
+          builder: (_) => AlertDialog(
+            title: Text('An error has occurred'),
+            content: Text(controller.value.errorDescription),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('Okay'),
+              ),
+            ],
+            elevation: 24,
+          ),
+        );
+      }
+    });
   }
 
   @override
