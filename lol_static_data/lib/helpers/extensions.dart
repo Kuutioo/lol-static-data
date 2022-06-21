@@ -1,6 +1,3 @@
-import 'dart:io';
-
-import 'package:translator/translator.dart';
 import 'package:champions/storage.dart';
 
 extension StringExtensions on String {

@@ -33,17 +33,13 @@ class _SmashOrPassStatsPageState extends State<SmashOrPassStatsPage> {
 
   @override
   Widget build(BuildContext context) {
-    String smashOrPass = AppLocalizations.of(context).smashOrPass;
     String smashed = AppLocalizations.of(context).smashed;
     String passed = AppLocalizations.of(context).passed;
     String times = AppLocalizations.of(context).times;
     String stats = AppLocalizations.of(context).stats;
 
     return FutureBuilder(
-      future: Future.wait([
-        FirebaseFirestore.instance.collection('champions').get(),
-        // sortChampions(),
-      ]),
+      future: FirebaseFirestore.instance.collection('champions').get(),
       builder: (context, streamSnapshot) {
         if (streamSnapshot.connectionState == ConnectionState.waiting) {
           return Container(
@@ -68,40 +64,40 @@ class _SmashOrPassStatsPageState extends State<SmashOrPassStatsPage> {
             child: Text('Error: ${streamSnapshot.error}'),
           );
         }
-        var documentsNoSort = streamSnapshot.data[0].docs;
+        var documentsNoSort = streamSnapshot.data.docs;
         // var documentsSort = streamSnapshot.data[1].snapshots();
 
         return Scaffold(
           drawer: HamburgerBar(),
           appBar: NewGradientAppBar(
-            actions: [
-              IconButton(
-                onPressed: () {
-                  // setState(() {
-                  //   //sortChampions();
-                  //   sort = !sort;
-                  //   for (int i = 0; i < sortList.length; i++) {
-                  //     //print(sortList[i].name);
-                  //     if (sortList.any(
-                  //       (element) {
-                  //         documentsSort.elementAt(i).then(
-                  //           (value) {
-                  //             value.docs[i]['champion_name'];
-                  //           },
-                  //         );
-                  //         return true;
-                  //       },
-                  //     )) {
-                  //       sortList.insert(0, sortList[i]);
-                  //     }
-                  //   }
-                  // });
-                },
-                icon: Icon(
-                  Icons.filter_alt_rounded,
-                ),
-              )
-            ],
+            // actions: [
+            // IconButton(
+            //   onPressed: () {
+            //      setState(() {
+            //        //sortChampions();
+            //        sort = !sort;
+            //        for (int i = 0; i < sortList.length; i++) {
+            //          //print(sortList[i].name);
+            //          if (sortList.any(
+            //            (element) {
+            //              documentsSort.elementAt(i).then(
+            //                (value) {
+            //                  value.docs[i]['champion_name'];
+            //                },
+            //              );
+            //              return true;
+            //            },
+            //          )) {
+            //            sortList.insert(0, sortList[i]);
+            //          }
+            //        }
+            //      });
+            //   },
+            //   icon: Icon(
+            //     Icons.filter_alt_rounded,
+            //   ),
+            // )
+            // ],
             gradient: const LinearGradient(
               begin: Alignment.centerLeft,
               end: Alignment.centerRight,

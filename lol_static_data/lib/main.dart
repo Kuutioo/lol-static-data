@@ -33,6 +33,10 @@ void main() async {
 
   championList = (await champions.all).values.toList();
 
+  // For whatever reason Wukong wasn't in alphabetical order
+  Champion wukong = championList.removeAt(77);
+  championList.insert(145, wukong);
+
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 

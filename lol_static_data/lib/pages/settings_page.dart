@@ -47,8 +47,8 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     String pageTitle = AppLocalizations.of(context).settings;
     String language = AppLocalizations.of(context).language;
-    String english = AppLocalizations.of(context).englishLanguage;
-    String spanish = AppLocalizations.of(context).spanishLanguage;
+    // String english = AppLocalizations.of(context).englishLanguage;
+    // String spanish = AppLocalizations.of(context).spanishLanguage;
 
     // items[0] = english;
     // items[1] = spanish;

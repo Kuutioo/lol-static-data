@@ -8,7 +8,6 @@ import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
 import 'package:flutter_swipable/flutter_swipable.dart';
 import 'package:timer_count_down/timer_count_down.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 import './champion_smash_or_pass_page.dart';
 import '../helpers/gradient_text.dart';

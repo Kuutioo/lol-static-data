@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:champions/champions.dart' as champ;
-import 'package:flutter_html/style.dart';
 import 'package:lol_static_data/widgets/detail_text/champion_detail_text_html.dart';
 import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
