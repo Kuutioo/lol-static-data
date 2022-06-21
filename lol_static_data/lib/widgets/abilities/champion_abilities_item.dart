@@ -162,10 +162,13 @@ class ChampionAbilitiesItem extends StatelessWidget {
                       : const SizedBox.shrink(),
                   const SizedBox(height: 2),
                   !isPassive
-                      ? ChampionDetailText(
-                          'Cooldown: $abilityCooldownSpread',
-                          MediaQuery.of(context).size.width > 700 ? 32 : 16,
-                          false,
+                      ? SizedBox(
+                          width: MediaQuery.of(context).size.width - 98,
+                          child: ChampionDetailText(
+                            'Cooldown: $abilityCooldownSpread',
+                            MediaQuery.of(context).size.width > 700 ? 32 : 16,
+                            false,
+                          ),
                         )
                       : const SizedBox.shrink(),
                 ],
