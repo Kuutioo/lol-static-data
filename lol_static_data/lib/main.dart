@@ -31,6 +31,7 @@ void main() async {
 
   await _getLanguage();
 
+  champions = Champions();
   championList = (await champions.all).values.toList();
 
   // For whatever reason Wukong wasn't in alphabetical order

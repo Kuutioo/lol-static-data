@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_swipable/flutter_swipable.dart';
 import 'package:champions/champions.dart' as champ;
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../helpers/extensions.dart';
-
 import '../pages/champion_smash_or_pass_result_page.dart';
 
 class ChampionTinderCard extends StatefulWidget {
@@ -80,13 +80,13 @@ class _ChampionTinderCardState extends State<ChampionTinderCard> {
           showDialog(
             context: context,
             builder: (_) => AlertDialog(
-              title: const Text('An error has occured!'),
+              title: Text(AppLocalizations.of(context).error),
               actions: [
                 TextButton(
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: const Text('Okay'),
+                  child: Text(AppLocalizations.of(context).okay),
                 ),
               ],
               elevation: 24,

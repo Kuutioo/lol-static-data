@@ -21,9 +21,9 @@ class SettingsPage extends StatefulWidget {
 SharedPreferences preferences;
 
 class _SettingsPageState extends State<SettingsPage> {
-  List<String> items = ['English', 'Spanish'];
+  List<String> items = ['English (US)', 'Español'];
 
-  String selectedItem = 'English';
+  String selectedItem = 'English (US)';
 
   @override
   void initState() {
@@ -158,14 +158,14 @@ class _SettingsPageState extends State<SettingsPage> {
                       preferences.setString('language', item);
                       setState(
                         (() {
-                          if (item == 'Spanish') {
+                          if (item == 'Español') {
                             changeLanguage(Region.lan);
                             provider.setLocale(Locale('es'));
                             preferences.setString(
                               'locale',
                               provider.locale.toString(),
                             );
-                          } else if (item == 'English') {
+                          } else if (item == 'English (US)') {
                             changeLanguage(Region.na);
                             provider.setLocale(Locale('en'));
                             preferences.setString(
