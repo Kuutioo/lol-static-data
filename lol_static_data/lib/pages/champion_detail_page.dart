@@ -5,6 +5,7 @@ import 'package:champions/champions.dart' as champ;
 import 'package:lol_static_data/widgets/detail_text/champion_detail_text_html.dart';
 import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:animated_widgets/animated_widgets.dart';
 
 import '../helpers/extensions.dart';
 
@@ -94,92 +95,105 @@ class _ChampionDetailPageState extends State<ChampionDetailPage> {
                 ),
               ),
               child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(5),
-                      child: SizedBox(
-                        height:
-                            MediaQuery.of(context).size.width > 700 ? 400 : 200,
-                        width: double.infinity,
-                        child: CarouselSlider.builder(
-                          options: CarouselOptions(
-                            pageSnapping: true,
-                            enableInfiniteScroll: true,
-                            enlargeCenterPage: true,
+                child: OpacityAnimatedWidget.tween(
+                  enabled: true,
+                  opacityDisabled: 0,
+                  opacityEnabled: 1,
+                  duration: Duration(milliseconds: 800),
+                  child: TranslationAnimatedWidget.tween(
+                    duration: Duration(milliseconds: 400),
+                    translationDisabled: Offset(800, 0),
+                    translationEnabled: Offset(0, 0),
+                    enabled: true,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(5),
+                          child: SizedBox(
+                            height: MediaQuery.of(context).size.width > 700
+                                ? 400
+                                : 200,
+                            width: double.infinity,
+                            child: CarouselSlider.builder(
+                              options: CarouselOptions(
+                                pageSnapping: true,
+                                enableInfiniteScroll: true,
+                                enlargeCenterPage: true,
+                              ),
+                              itemCount: snapshot.data.length,
+                              itemBuilder: (context, index, realIndex) {
+                                return Container(
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      width: 3,
+                                      color: const Color.fromARGB(
+                                          255, 171, 150, 76),
+                                    ),
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(15),
+                                    child: Image.network(
+                                      _skinUrlList[index],
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
                           ),
-                          itemCount: snapshot.data.length,
-                          itemBuilder: (context, index, realIndex) {
-                            return Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  width: 3,
-                                  color:
-                                      const Color.fromARGB(255, 171, 150, 76),
-                                ),
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(15),
-                                child: Image.network(
-                                  _skinUrlList[index],
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            );
-                          },
                         ),
-                      ),
+                        const SizedBox(height: 10),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: ChampionDetailText(
+                            champName.replaceJsonStringSymbols(),
+                            MediaQuery.of(context).size.width > 700 ? 48 : 32,
+                            true,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: ChampionDetailText(
+                            champion.title.replaceJsonStringSymbols(),
+                            MediaQuery.of(context).size.width > 700 ? 36 : 20,
+                            false,
+                          ),
+                        ),
+                        const SizedBox(height: 70),
+                        Padding(
+                          padding: EdgeInsets.only(
+                            left: 10,
+                          ),
+                          child: ChampionDetailText(
+                            'Abilities',
+                            MediaQuery.of(context).size.width > 700 ? 48 : 32,
+                            true,
+                          ),
+                        ),
+                        const SizedBox(height: 15),
+                        ChampionAbilities(champion),
+                        const SizedBox(height: 70),
+                        ChampionTips(champion),
+                        const SizedBox(height: 70),
+                        Padding(
+                          padding: EdgeInsets.only(left: 10),
+                          child: ChampionDetailText(
+                            'Lore',
+                            MediaQuery.of(context).size.width > 700 ? 48 : 32,
+                            true,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: ChampionDetailTextHtml(
+                            champion.blurb.replaceJsonStringSymbols(),
+                            MediaQuery.of(context).size.width > 700 ? 34 : 18,
+                          ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(height: 10),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 10),
-                      child: ChampionDetailText(
-                        champName.replaceJsonStringSymbols(),
-                        MediaQuery.of(context).size.width > 700 ? 48 : 32,
-                        true,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 10),
-                      child: ChampionDetailText(
-                        champion.title.replaceJsonStringSymbols(),
-                        MediaQuery.of(context).size.width > 700 ? 36 : 20,
-                        false,
-                      ),
-                    ),
-                    const SizedBox(height: 70),
-                    Padding(
-                      padding: EdgeInsets.only(
-                        left: 10,
-                      ),
-                      child: ChampionDetailText(
-                        'Abilities',
-                        MediaQuery.of(context).size.width > 700 ? 48 : 32,
-                        true,
-                      ),
-                    ),
-                    const SizedBox(height: 15),
-                    ChampionAbilities(champion),
-                    const SizedBox(height: 70),
-                    ChampionTips(champion),
-                    const SizedBox(height: 70),
-                    Padding(
-                      padding: EdgeInsets.only(left: 10),
-                      child: ChampionDetailText(
-                        'Lore',
-                        MediaQuery.of(context).size.width > 700 ? 48 : 32,
-                        true,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 10),
-                      child: ChampionDetailTextHtml(
-                        champion.blurb.replaceJsonStringSymbols(),
-                        MediaQuery.of(context).size.width > 700 ? 34 : 18,
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ),
             );

@@ -12,23 +12,17 @@ class ChampionDetailTextHtml extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TranslationAnimatedWidget.tween(
-      duration: Duration(milliseconds: 500),
-      translationDisabled: Offset(200, 0),
-      translationEnabled: Offset(0, 0),
-      enabled: true,
-      child: Html(
-        data: text,
-        shrinkWrap: false,
-        style: {
-          'body': Style(
-            fontSize: FontSize(fontSize),
-            color: Colors.white,
-            margin: const EdgeInsets.all(0),
-            padding: const EdgeInsets.only(left: 5),
-          ),
-        },
-      ),
+    return Html(
+      data: text,
+      shrinkWrap: false,
+      style: {
+        'body': Style(
+          fontSize: FontSize(fontSize),
+          color: Colors.white,
+          margin: const EdgeInsets.all(0),
+          padding: const EdgeInsets.only(left: 5),
+        ),
+      },
     );
   }
 }

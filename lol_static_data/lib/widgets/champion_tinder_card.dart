@@ -5,6 +5,7 @@ import 'package:flutter_swipable/flutter_swipable.dart';
 import 'package:champions/champions.dart' as champ;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:animated_widgets/animated_widgets.dart';
 
 import '../helpers/extensions.dart';
 import '../pages/champion_smash_or_pass_result_page.dart';
@@ -109,42 +110,61 @@ class _ChampionTinderCardState extends State<ChampionTinderCard> {
 
             _showResult();
           },
-          child: Center(
-            child: Stack(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                      border: Border.all(
-                        width: 3,
-                        color: const Color.fromARGB(255, 171, 150, 76),
+          child: TranslationAnimatedWidget.tween(
+            duration: Duration(milliseconds: 400),
+            translationDisabled: Offset(0, -1000),
+            translationEnabled: Offset(0, 0),
+            enabled: true,
+            child: OpacityAnimatedWidget.tween(
+              enabled: true,
+              opacityDisabled: 0,
+              opacityEnabled: 1,
+              duration: Duration(milliseconds: 800),
+              child: ScaleAnimatedWidget.tween(
+                duration: Duration(milliseconds: 400),
+                scaleDisabled: 0.5,
+                scaleEnabled: 1,
+                enabled: true,
+                child: Center(
+                  child: Stack(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                              width: 3,
+                              color: const Color.fromARGB(255, 171, 150, 76),
+                            ),
+                            borderRadius: BorderRadius.circular(20)),
+                        height: MediaQuery.of(context).size.height - 200,
+                        width: MediaQuery.of(context).size.width - 50,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(15),
+                          child: Image(
+                            image: NetworkImage(url),
+                            fit: BoxFit.fill,
+                          ),
+                        ),
                       ),
-                      borderRadius: BorderRadius.circular(20)),
-                  height: MediaQuery.of(context).size.height - 200,
-                  width: MediaQuery.of(context).size.width - 50,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(15),
-                    child: Image(
-                      image: NetworkImage(url),
-                      fit: BoxFit.fill,
-                    ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          top: 10,
+                          left: 10,
+                        ),
+                        child: Text(
+                          widget.champion.name,
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 171, 150, 76),
+                              backgroundColor: Colors.black87,
+                              fontSize: MediaQuery.of(context).size.width > 700
+                                  ? 58
+                                  : 28,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    top: 10,
-                    left: 10,
-                  ),
-                  child: Text(
-                    widget.champion.name,
-                    style: TextStyle(
-                        color: Color.fromARGB(255, 171, 150, 76),
-                        backgroundColor: Colors.black87,
-                        fontSize:
-                            MediaQuery.of(context).size.width > 700 ? 58 : 28,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ],
+              ),
             ),
           ),
         );
