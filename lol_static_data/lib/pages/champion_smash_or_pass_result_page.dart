@@ -437,6 +437,7 @@ class ChampionSmashOrPassResultPage extends StatelessWidget {
                           MediaQuery.of(context).size.width > 700 ? 46 : 24,
                       fontWeight: FontWeight.bold,
                     ),
+                    textAlign: TextAlign.center,
                   ),
                 ),
                 const SizedBox(

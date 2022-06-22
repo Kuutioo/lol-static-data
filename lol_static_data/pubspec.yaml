@@ -93,6 +93,8 @@ flutter:
   assets:
     - assets/images/bar_sketch_green.png
     - assets/images/bar_sketch_blue.png
+    - assets/images/bar_sketch_yellow.png
+    - assets/images/bar_sketch_red.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
