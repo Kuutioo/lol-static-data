@@ -17,6 +17,18 @@ class SmashOrPassStatsPage extends StatefulWidget {
 }
 
 class _SmashOrPassStatsPageState extends State<SmashOrPassStatsPage> {
+  Icon customIcon = Icon(Icons.search);
+  Widget customSearchBar = Text(
+    'Stats',
+    style: TextStyle(
+      color: Colors.white,
+      fontSize:
+          MediaQueryData.fromWindow(WidgetsBinding.instance.window).size.width >
+                  700
+              ? 32
+              : 18,
+    ),
+  );
   List<champ.Champion> sortList = championList;
   int smashCount;
   int passCount;
@@ -70,53 +82,90 @@ class _SmashOrPassStatsPageState extends State<SmashOrPassStatsPage> {
         return Scaffold(
           drawer: HamburgerBar(),
           appBar: NewGradientAppBar(
-            // actions: [
-            // IconButton(
-            //   onPressed: () {
-            //      setState(() {
-            //        //sortChampions();
-            //        sort = !sort;
-            //        for (int i = 0; i < sortList.length; i++) {
-            //          //print(sortList[i].name);
-            //          if (sortList.any(
-            //            (element) {
-            //              documentsSort.elementAt(i).then(
-            //                (value) {
-            //                  value.docs[i]['champion_name'];
-            //                },
-            //              );
-            //              return true;
-            //            },
-            //          )) {
-            //            sortList.insert(0, sortList[i]);
-            //          }
-            //        }
-            //      });
-            //   },
-            //   icon: Icon(
-            //     Icons.filter_alt_rounded,
-            //   ),
-            // )
-            // ],
-            gradient: const LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-              colors: [
-                Color.fromARGB(255, 47, 69, 76),
-                Color.fromARGB(255, 7, 32, 44),
+              actions: [
+                IconButton(
+                  onPressed: () {
+                    setState(() {
+                      if (customIcon.icon == Icons.search) {
+                        customIcon = Icon(Icons.cancel);
+                        customSearchBar = TextField(
+                          autofocus: true,
+                          onChanged: (value) {},
+                          cursorColor: Colors.white,
+                          textInputAction: TextInputAction.go,
+                          decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText:
+                                  AppLocalizations.of(context).searchAChampion,
+                              hintStyle: TextStyle(
+                                color: Colors.white,
+                              )),
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: MediaQuery.of(context).size.width > 700
+                                ? 32
+                                : 16,
+                          ),
+                        );
+                      } else {
+                        customIcon = Icon(Icons.search);
+                        customSearchBar = Text(
+                          'search',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: MediaQuery.of(context).size.width > 700
+                                ? 32
+                                : 18,
+                          ),
+                        );
+                      }
+                    });
+                  },
+                  icon: customIcon,
+                )
               ],
-            ),
-            elevation: 0,
-            iconTheme: IconThemeData(
-              color: Colors.white,
-              size: MediaQuery.of(context).size.width > 700 ? 40 : 24,
-            ),
-            title: Text(
-              '$stats',
-              style: TextStyle(
-                  fontSize: MediaQuery.of(context).size.width > 700 ? 30 : 18),
-            ),
-          ),
+              // actions: [
+              // IconButton(
+              //   onPressed: () {
+              //      setState(() {
+              //        //sortChampions();
+              //        sort = !sort;
+              //        for (int i = 0; i < sortList.length; i++) {
+              //          //print(sortList[i].name);
+              //          if (sortList.any(
+              //            (element) {
+              //              documentsSort.elementAt(i).then(
+              //                (value) {
+              //                  value.docs[i]['champion_name'];
+              //                },
+              //              );
+              //              return true;
+              //            },
+              //          )) {
+              //            sortList.insert(0, sortList[i]);
+              //          }
+              //        }
+              //      });
+              //   },
+              //   icon: Icon(
+              //     Icons.filter_alt_rounded,
+              //   ),
+              // )
+              // ],
+              gradient: const LinearGradient(
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                colors: [
+                  Color.fromARGB(255, 47, 69, 76),
+                  Color.fromARGB(255, 7, 32, 44),
+                ],
+              ),
+              elevation: 0,
+              iconTheme: IconThemeData(
+                color: Colors.white,
+                size: MediaQuery.of(context).size.width > 700 ? 40 : 24,
+              ),
+              title: customSearchBar),
           body: Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
