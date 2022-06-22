@@ -6,6 +6,7 @@ import 'package:lol_static_data/main.dart';
 import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:async/async.dart';
 
 import 'package:lol_static_data/widgets/hamburger_bar.dart';
 
@@ -17,6 +18,8 @@ class SmashOrPassStatsPage extends StatefulWidget {
 }
 
 class _SmashOrPassStatsPageState extends State<SmashOrPassStatsPage> {
+  Future firebaseChamps;
+
   Icon customIcon = Icon(Icons.search);
   Widget customSearchBar = Text(
     'Stats',
@@ -34,6 +37,18 @@ class _SmashOrPassStatsPageState extends State<SmashOrPassStatsPage> {
   int passCount;
 
   bool sort = false;
+  bool firstLoad = true;
+  bool makeCombinedList = true;
+
+  List<CombinedChampion> combinedList = [];
+  List<CombinedChampion> combinedFoundList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    firebaseChamps = _fetchData();
+    combinedFoundList = combinedList;
+  }
 
   Future<Query> sortChampions() async {
     Query collectionReference = await FirebaseFirestore.instance
@@ -43,6 +58,26 @@ class _SmashOrPassStatsPageState extends State<SmashOrPassStatsPage> {
     return collectionReference;
   }
 
+  _fetchData() async {
+    return await FirebaseFirestore.instance.collection('champions').get();
+  }
+
+  void _runFilter(String enteredKeyword) {
+    List<CombinedChampion> result = [];
+    if (enteredKeyword.isEmpty) {
+      result = combinedList;
+    } else {
+      result = combinedList
+          .where((champion) => champion.name
+              .toLowerCase()
+              .contains(enteredKeyword.toLowerCase()))
+          .toList();
+    }
+    setState(() {
+      combinedFoundList = result;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     String smashed = AppLocalizations.of(context).smashed;
@@ -50,8 +85,23 @@ class _SmashOrPassStatsPageState extends State<SmashOrPassStatsPage> {
     String times = AppLocalizations.of(context).times;
     String stats = AppLocalizations.of(context).stats;
 
+    if (firstLoad) {
+      customSearchBar = Text(
+        stats,
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: MediaQueryData.fromWindow(WidgetsBinding.instance.window)
+                      .size
+                      .width >
+                  700
+              ? 32
+              : 18,
+        ),
+      );
+    }
+
     return FutureBuilder(
-      future: FirebaseFirestore.instance.collection('champions').get(),
+      future: firebaseChamps,
       builder: (context, streamSnapshot) {
         if (streamSnapshot.connectionState == ConnectionState.waiting) {
           return Container(
@@ -77,95 +127,84 @@ class _SmashOrPassStatsPageState extends State<SmashOrPassStatsPage> {
           );
         }
         var documentsNoSort = streamSnapshot.data.docs;
-        // var documentsSort = streamSnapshot.data[1].snapshots();
+        if (makeCombinedList) {
+          for (int i = 0; i < championList.length; i++) {
+            CombinedChampion combinedChampion;
+
+            if (championList[i].name == documentsNoSort[i]['champion_name']) {
+              combinedChampion = CombinedChampion(
+                name: championList[i].name,
+                smashCount: documentsNoSort[i]['smash_count'],
+                passCount: documentsNoSort[i]['pass_count'],
+                iconUrl: championList[i].icon.url,
+              );
+              combinedList.add(combinedChampion);
+            }
+          }
+          makeCombinedList = false;
+        }
 
         return Scaffold(
           drawer: HamburgerBar(),
           appBar: NewGradientAppBar(
-              actions: [
-                IconButton(
-                  onPressed: () {
-                    setState(() {
-                      if (customIcon.icon == Icons.search) {
-                        customIcon = Icon(Icons.cancel);
-                        customSearchBar = TextField(
-                          autofocus: true,
-                          onChanged: (value) {},
-                          cursorColor: Colors.white,
-                          textInputAction: TextInputAction.go,
-                          decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText:
-                                  AppLocalizations.of(context).searchAChampion,
-                              hintStyle: TextStyle(
-                                color: Colors.white,
-                              )),
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: MediaQuery.of(context).size.width > 700
-                                ? 32
-                                : 16,
-                          ),
-                        );
-                      } else {
-                        customIcon = Icon(Icons.search);
-                        customSearchBar = Text(
-                          'search',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: MediaQuery.of(context).size.width > 700
-                                ? 32
-                                : 18,
-                          ),
-                        );
-                      }
-                    });
-                  },
-                  icon: customIcon,
-                )
+            actions: [
+              IconButton(
+                onPressed: () {
+                  firstLoad = false;
+                  setState(() {
+                    if (customIcon.icon == Icons.search) {
+                      customIcon = Icon(Icons.cancel);
+                      customSearchBar = TextField(
+                        autofocus: true,
+                        onChanged: (value) {
+                          _runFilter(value);
+                        },
+                        cursorColor: Colors.white,
+                        textInputAction: TextInputAction.go,
+                        decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText:
+                                AppLocalizations.of(context).searchAChampion,
+                            hintStyle: TextStyle(
+                              color: Colors.white,
+                            )),
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize:
+                              MediaQuery.of(context).size.width > 700 ? 32 : 16,
+                        ),
+                      );
+                    } else {
+                      customIcon = Icon(Icons.search);
+                      customSearchBar = Text(
+                        stats,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize:
+                              MediaQuery.of(context).size.width > 700 ? 32 : 18,
+                        ),
+                      );
+                    }
+                  });
+                },
+                icon: customIcon,
+              )
+            ],
+            gradient: const LinearGradient(
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+              colors: [
+                Color.fromARGB(255, 47, 69, 76),
+                Color.fromARGB(255, 7, 32, 44),
               ],
-              // actions: [
-              // IconButton(
-              //   onPressed: () {
-              //      setState(() {
-              //        //sortChampions();
-              //        sort = !sort;
-              //        for (int i = 0; i < sortList.length; i++) {
-              //          //print(sortList[i].name);
-              //          if (sortList.any(
-              //            (element) {
-              //              documentsSort.elementAt(i).then(
-              //                (value) {
-              //                  value.docs[i]['champion_name'];
-              //                },
-              //              );
-              //              return true;
-              //            },
-              //          )) {
-              //            sortList.insert(0, sortList[i]);
-              //          }
-              //        }
-              //      });
-              //   },
-              //   icon: Icon(
-              //     Icons.filter_alt_rounded,
-              //   ),
-              // )
-              // ],
-              gradient: const LinearGradient(
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-                colors: [
-                  Color.fromARGB(255, 47, 69, 76),
-                  Color.fromARGB(255, 7, 32, 44),
-                ],
-              ),
-              elevation: 0,
-              iconTheme: IconThemeData(
-                color: Colors.white,
-                size: MediaQuery.of(context).size.width > 700 ? 40 : 24,
-              ),
-              title: customSearchBar),
+            ),
+            elevation: 0,
+            iconTheme: IconThemeData(
+              color: Colors.white,
+              size: MediaQuery.of(context).size.width > 700 ? 40 : 24,
+            ),
+            title: customSearchBar,
+          ),
           body: Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
@@ -178,19 +217,8 @@ class _SmashOrPassStatsPageState extends State<SmashOrPassStatsPage> {
               ),
             ),
             child: ListView.builder(
-              itemCount: sortList.length,
+              itemCount: combinedFoundList.length,
               itemBuilder: (context, index) {
-                // if (sort) {
-                //   documentsSort.forEach((element) {
-                //     smashCount = element.docs[index]['smash_count'];
-                //     passCount = element.docs[index]['pass_count'];
-                //   });
-                // } else {
-                //   smashCount = documentsNoSort[index]['smash_count'];
-                //   passCount = documentsNoSort[index]['pass_count'];
-                // }
-                smashCount = documentsNoSort[index]['smash_count'];
-                passCount = documentsNoSort[index]['pass_count'];
                 return Container(
                   key: UniqueKey(),
                   child: Padding(
@@ -202,7 +230,7 @@ class _SmashOrPassStatsPageState extends State<SmashOrPassStatsPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         GradientText(
-                          sortList[index].name,
+                          combinedFoundList[index].name,
                           gradient: const LinearGradient(
                             begin: Alignment.topCenter,
                             end: Alignment.bottomCenter,
@@ -235,8 +263,8 @@ class _SmashOrPassStatsPageState extends State<SmashOrPassStatsPage> {
                                     color: Color.fromARGB(255, 171, 150, 76),
                                   ),
                                   image: DecorationImage(
-                                    image:
-                                        NetworkImage(sortList[index].icon.url),
+                                    image: NetworkImage(
+                                        combinedFoundList[index].iconUrl),
                                     fit: BoxFit.fill,
                                   ),
                                 ),
@@ -249,7 +277,7 @@ class _SmashOrPassStatsPageState extends State<SmashOrPassStatsPage> {
                                 Padding(
                                   padding: const EdgeInsets.only(left: 5),
                                   child: Text(
-                                    '$smashed: $smashCount $times',
+                                    '$smashed: ${combinedFoundList[index].smashCount} $times',
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize:
@@ -266,7 +294,7 @@ class _SmashOrPassStatsPageState extends State<SmashOrPassStatsPage> {
                                 Padding(
                                   padding: const EdgeInsets.only(left: 5),
                                   child: Text(
-                                    '$passed: $passCount $times',
+                                    '$passed: ${combinedFoundList[index].passCount} $times',
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize:
@@ -292,4 +320,18 @@ class _SmashOrPassStatsPageState extends State<SmashOrPassStatsPage> {
       },
     );
   }
+}
+
+class CombinedChampion {
+  String name;
+  int smashCount;
+  int passCount;
+  String iconUrl;
+
+  CombinedChampion({
+    this.name,
+    this.smashCount,
+    this.passCount,
+    this.iconUrl,
+  });
 }
