@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:champions/champions.dart' as champ;
 import 'package:scroll_snap_list/scroll_snap_list.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 import './detail_text/champion_detail_text.dart';
 import './detail_text/champion_detail_text_html.dart';
@@ -53,7 +54,7 @@ class ChampionTips extends StatelessWidget {
               ? Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 15),
+                      padding: const EdgeInsets.only(left: 30),
                       child: ChampionDetailText(
                         'Tips playing with ${champion.name}',
                         MediaQuery.of(context).size.width > 700 ? 40 : 24,
@@ -63,22 +64,21 @@ class ChampionTips extends StatelessWidget {
                     const SizedBox(
                       height: 5,
                     ),
-                    SizedBox(
-                      height: 150,
-                      width: MediaQuery.of(context).size.width - 40,
-                      child: ScrollSnapList(
-                        updateOnScroll: true,
-                        itemBuilder: _allytipsList,
-                        itemSize: MediaQuery.of(context).size.width - 40,
-                        dynamicItemSize: true,
-                        itemCount: dataSnapshot.data.length + 1,
-                      ),
+                    _tipsSlider(
+                      data: snapshot,
+                      dataIndex: 0,
+                      imageUrl: 'assets/images/bar_sketch_green.png',
+                      colorList: [
+                        Color.fromARGB(75, 11, 141, 11),
+                        Color.fromARGB(125, 0, 167, 0),
+                        Color.fromARGB(125, 0, 215, 0),
+                      ],
                     ),
                     const SizedBox(
                       height: 20,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 15),
+                      padding: const EdgeInsets.only(left: 30),
                       child: ChampionDetailText(
                         'Tips playing against ${champion.name}',
                         MediaQuery.of(context).size.width > 700 ? 40 : 24,
@@ -88,16 +88,16 @@ class ChampionTips extends StatelessWidget {
                     const SizedBox(
                       height: 5,
                     ),
-                    SizedBox(
-                      height: 150,
-                      width: MediaQuery.of(context).size.width - 40,
-                      child: ScrollSnapList(
-                        itemBuilder: _enemytipsList,
-                        itemSize: MediaQuery.of(context).size.width - 40,
-                        dynamicItemSize: true,
-                        itemCount: dataSnapshot.data.length + 1,
-                      ),
-                    )
+                    _tipsSlider(
+                      data: snapshot,
+                      dataIndex: 1,
+                      imageUrl: 'assets/images/bar_sketch_blue.png',
+                      colorList: [
+                        Color.fromARGB(75, 2, 74, 156),
+                        Color.fromARGB(125, 1, 91, 192),
+                        Color.fromARGB(125, 57, 150, 255),
+                      ],
+                    ),
                   ],
                 )
               : const SizedBox.shrink();
@@ -107,76 +107,88 @@ class ChampionTips extends StatelessWidget {
     );
   }
 
-  Widget _allytipsList(BuildContext context, int index) {
-    return dataSnapshot.data[0].length > index &&
-            dataSnapshot.data[0][index].isNotEmpty
-        ? Container(
-            height: 150,
-            width: MediaQuery.of(context).size.width - 40,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              gradient: const LinearGradient(
-                begin: Alignment.bottomRight,
-                end: Alignment.topLeft,
-                colors: [
-                  Color.fromARGB(255, 109, 85, 39),
-                  Color.fromARGB(255, 231, 195, 123),
-                ],
-              ),
-            ),
-            child: Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-              elevation: 5,
-              child: Stack(
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(15),
-                    child: ShaderMask(
-                      shaderCallback: (bound) {
-                        return const LinearGradient(
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
-                          colors: [
-                            Color.fromARGB(75, 11, 141, 11),
-                            Color.fromARGB(125, 0, 167, 0),
-                            Color.fromARGB(125, 0, 215, 0),
-                          ],
-                        ).createShader(bound);
-                      },
-                      blendMode: BlendMode.srcOver,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        width: MediaQuery.of(context).size.width - 40,
-                        height: 150,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(15),
-                          child: Image.asset(
-                            'assets/images/bar_sketch_green.png',
-                            fit: BoxFit.cover,
+  CarouselSlider _tipsSlider({
+    AsyncSnapshot<dynamic> data,
+    int dataIndex,
+    String imageUrl,
+    List<Color> colorList,
+  }) {
+    return CarouselSlider.builder(
+      itemCount: data.data.length + 1,
+      itemBuilder: (context, index, realIndex) {
+        return data.data[dataIndex].length > index &&
+                data.data[dataIndex][index].isNotEmpty
+            ? Container(
+                height: 150,
+                width: MediaQuery.of(context).size.width - 40,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  gradient: const LinearGradient(
+                    begin: Alignment.bottomRight,
+                    end: Alignment.topLeft,
+                    colors: [
+                      Color.fromARGB(255, 109, 85, 39),
+                      Color.fromARGB(255, 231, 195, 123),
+                    ],
+                  ),
+                ),
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  elevation: 5,
+                  child: Stack(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: ShaderMask(
+                          shaderCallback: (bound) {
+                            return LinearGradient(
+                              begin: Alignment.centerLeft,
+                              end: Alignment.centerRight,
+                              colors: colorList,
+                            ).createShader(bound);
+                          },
+                          blendMode: BlendMode.srcOver,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            width: MediaQuery.of(context).size.width - 40,
+                            height: 210,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(15),
+                              child: Image.asset(
+                                imageUrl,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ),
-                  Center(
-                    child: FittedBox(
-                      fit: BoxFit.fitWidth,
-                      child: ChampionDetailTextHtml(
-                        '${dataSnapshot.data[0][index]}'
-                            .replaceJsonStringSymbols(),
-                        MediaQuery.of(context).size.width > 700 ? 34 : 18,
+                      Center(
+                        child: FittedBox(
+                          fit: BoxFit.fitWidth,
+                          child: ChampionDetailTextHtml(
+                            '${data.data[dataIndex][index]}'
+                                .replaceJsonStringSymbols(),
+                            MediaQuery.of(context).size.width > 700 ? 34 : 18,
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
-                ],
-              ),
-            ),
-          )
-        : const SizedBox.shrink();
+                ),
+              )
+            : const SizedBox.shrink();
+      },
+      options: CarouselOptions(
+        pageSnapping: true,
+        enableInfiniteScroll: true,
+        enlargeCenterPage: true,
+        height: 150,
+      ),
+    );
   }
 
   Widget _enemytipsList(BuildContext context, int index) {
