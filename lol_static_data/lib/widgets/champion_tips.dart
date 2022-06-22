@@ -25,10 +25,6 @@ class ChampionTips extends StatelessWidget {
     Iterable<String> enemytips = await champion.enemyTips;
     List<String> enemyTipsList = enemytips.toList();
 
-    // enemyTipsList.forEach((element) {
-    //   print(element);
-    // });
-
     return enemyTipsList;
   }
 
@@ -36,6 +32,8 @@ class ChampionTips extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(champion.resource.label);
+
     return FutureBuilder(
       future: Future.wait([_allyTooltips(), _enemyTooltips()]),
       builder: (context, snapshot) {
@@ -91,11 +89,42 @@ class ChampionTips extends StatelessWidget {
                     _tipsSlider(
                       data: snapshot,
                       dataIndex: 1,
-                      imageUrl: 'assets/images/bar_sketch_blue.png',
+                      imageUrl: champion.resource.label == 'Energy'
+                          ? 'assets/images/bar_sketch_yellow.png'
+                          : champion.resource.label == 'Fury' ||
+                                  champion.resource.label == 'Rage' ||
+                                  champion.resource.label == 'Heat' ||
+                                  champion.resource.label == 'Crimson rush'
+                              ? 'assets/images/bar_sketch_red.png'
+                              : 'assets/images/bar_sketch_blue.png',
                       colorList: [
-                        Color.fromARGB(75, 2, 74, 156),
-                        Color.fromARGB(125, 1, 91, 192),
-                        Color.fromARGB(125, 57, 150, 255),
+                        if (champion.resource.label == 'Energy')
+                          Color.fromARGB(75, 131, 102, 0)
+                        else if (champion.resource.label == 'Fury' ||
+                            champion.resource.label == 'Rage' ||
+                            champion.resource.label == 'Heat' ||
+                            champion.resource.label == 'Crimson rush')
+                          Color.fromARGB(75, 111, 14, 16)
+                        else
+                          Color.fromARGB(75, 2, 74, 156),
+                        if (champion.resource.label == 'Energy')
+                          Color.fromARGB(125, 192, 153, 0)
+                        else if (champion.resource.label == 'Fury' ||
+                            champion.resource.label == 'Rage' ||
+                            champion.resource.label == 'Heat' ||
+                            champion.resource.label == 'Crimson rush')
+                          Color.fromARGB(75, 147, 21, 19)
+                        else
+                          Color.fromARGB(125, 1, 91, 192),
+                        if (champion.resource.label == 'Energy')
+                          Color.fromARGB(125, 217, 173, 2)
+                        else if (champion.resource.label == 'Fury' ||
+                            champion.resource.label == 'Rage' ||
+                            champion.resource.label == 'Heat' ||
+                            champion.resource.label == 'Crimson rush')
+                          Color.fromARGB(75, 179, 43, 30)
+                        else
+                          Color.fromARGB(125, 57, 150, 255),
                       ],
                     ),
                   ],
@@ -113,12 +142,12 @@ class ChampionTips extends StatelessWidget {
     String imageUrl,
     List<Color> colorList,
   }) {
-    return CarouselSlider.builder(
-      itemCount: data.data.length + 1,
-      itemBuilder: (context, index, realIndex) {
-        return data.data[dataIndex].length > index &&
-                data.data[dataIndex][index].isNotEmpty
-            ? Container(
+    return data.data[dataIndex].length >= 1 &&
+            data.data[dataIndex][0].isNotEmpty
+        ? CarouselSlider.builder(
+            itemCount: data.data[dataIndex].length,
+            itemBuilder: (context, index, realIndex) {
+              return Container(
                 height: 150,
                 width: MediaQuery.of(context).size.width - 40,
                 decoration: BoxDecoration(
@@ -179,81 +208,14 @@ class ChampionTips extends StatelessWidget {
                     ],
                   ),
                 ),
-              )
-            : const SizedBox.shrink();
-      },
-      options: CarouselOptions(
-        pageSnapping: true,
-        enableInfiniteScroll: true,
-        enlargeCenterPage: true,
-        height: 150,
-      ),
-    );
-  }
-
-  Widget _enemytipsList(BuildContext context, int index) {
-    return dataSnapshot.data[1].length > index &&
-            dataSnapshot.data[1][index].isNotEmpty
-        ? Container(
-            height: 150,
-            width: MediaQuery.of(context).size.width - 40,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              gradient: const LinearGradient(
-                begin: Alignment.bottomRight,
-                end: Alignment.topLeft,
-                colors: [
-                  Color.fromARGB(255, 109, 85, 39),
-                  Color.fromARGB(255, 231, 195, 123),
-                ],
-              ),
-            ),
-            child: Card(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)),
-              elevation: 5,
-              child: Stack(
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(15),
-                    child: ShaderMask(
-                      shaderCallback: (bound) {
-                        return const LinearGradient(
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
-                          colors: [
-                            Color.fromARGB(75, 2, 74, 156),
-                            Color.fromARGB(125, 1, 91, 192),
-                            Color.fromARGB(125, 57, 150, 255),
-                          ],
-                        ).createShader(bound);
-                      },
-                      blendMode: BlendMode.srcOver,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        width: MediaQuery.of(context).size.width - 40,
-                        height: 150,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(15),
-                          child: Image.asset(
-                            'assets/images/bar_sketch_blue.png',
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Center(
-                    child: ChampionDetailTextHtml(
-                      '${dataSnapshot.data[1][index]}'
-                          .replaceJsonStringSymbols(),
-                      MediaQuery.of(context).size.width > 700 ? 34 : 18,
-                    ),
-                  ),
-                ],
-              ),
+              );
+            },
+            options: CarouselOptions(
+              pageSnapping: true,
+              enableInfiniteScroll:
+                  data.data[dataIndex].length != 1 ? true : false,
+              enlargeCenterPage: true,
+              height: 150,
             ),
           )
         : const SizedBox.shrink();
