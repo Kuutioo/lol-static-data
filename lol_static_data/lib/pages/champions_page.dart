@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:champions/champions.dart' as champ;
 import 'package:new_gradient_app_bar/new_gradient_app_bar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:animated_widgets/animated_widgets.dart';
 
 import '../widgets/hamburger_bar.dart';
 import './champion_detail_page.dart';
@@ -296,37 +297,49 @@ class _ChampionsPageState extends State<ChampionsPage> {
                 ),
                 itemCount: _foundChamps.length,
                 itemBuilder: ((context, index) {
-                  return GridTile(
-                    child: IconButton(
-                      icon: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          border: Border.all(
-                            width: 3,
-                            color: Color.fromARGB(255, 171, 150, 76),
+                  return TranslationAnimatedWidget.tween(
+                    duration: Duration(milliseconds: 300),
+                    enabled: true,
+                    translationDisabled: Offset(200, 0),
+                    translationEnabled: Offset(0, 0),
+                    child: OpacityAnimatedWidget.tween(
+                      duration: Duration(milliseconds: 300),
+                      enabled: true,
+                      opacityEnabled: 1,
+                      opacityDisabled: 0,
+                      child: GridTile(
+                        child: IconButton(
+                          icon: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              border: Border.all(
+                                width: 3,
+                                color: Color.fromARGB(255, 171, 150, 76),
+                              ),
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image.network(
+                                _foundChamps[index].icon.url,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pushNamed(
+                              ChampionDetailPage.routeName,
+                              arguments: _foundChamps[index],
+                            );
+                          },
+                        ),
+                        footer: FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: ChampionDetailText(
+                            _foundChamps[index].name,
+                            MediaQuery.of(context).size.width > 700 ? 26 : 20,
+                            true,
                           ),
                         ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image.network(
-                            _foundChamps[index].icon.url,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                      onPressed: () {
-                        Navigator.of(context).pushNamed(
-                          ChampionDetailPage.routeName,
-                          arguments: _foundChamps[index],
-                        );
-                      },
-                    ),
-                    footer: FittedBox(
-                      fit: BoxFit.scaleDown,
-                      child: ChampionDetailText(
-                        _foundChamps[index].name,
-                        MediaQuery.of(context).size.width > 700 ? 26 : 20,
-                        true,
                       ),
                     ),
                   );

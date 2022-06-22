@@ -1,3 +1,4 @@
+import 'package:animated_widgets/animated_widgets.dart';
 import 'package:flutter/material.dart';
 
 import 'package:champions/champions.dart' as champ;
@@ -219,97 +220,116 @@ class _SmashOrPassStatsPageState extends State<SmashOrPassStatsPage> {
             child: ListView.builder(
               itemCount: combinedFoundList.length,
               itemBuilder: (context, index) {
-                return Container(
-                  key: UniqueKey(),
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                      left: 10,
-                      bottom: 10,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        GradientText(
-                          combinedFoundList[index].name,
-                          gradient: const LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [
-                              Color.fromARGB(255, 171, 150, 76),
-                              Color.fromARGB(255, 247, 217, 110),
-                            ],
-                          ),
-                          style: TextStyle(
-                              fontSize: MediaQuery.of(context).size.width > 700
-                                  ? 36
-                                  : 24,
-                              fontWeight: FontWeight.bold),
+                return TranslationAnimatedWidget.tween(
+                  duration: Duration(milliseconds: 300),
+                  enabled: true,
+                  translationDisabled: Offset(200, 0),
+                  translationEnabled: Offset(0, 0),
+                  child: OpacityAnimatedWidget.tween(
+                    duration: Duration(milliseconds: 300),
+                    enabled: true,
+                    opacityEnabled: 1,
+                    opacityDisabled: 0,
+                    child: Container(
+                      key: UniqueKey(),
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                          left: 10,
+                          bottom: 10,
                         ),
-                        Row(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: Container(
-                                width: MediaQuery.of(context).size.width > 700
-                                    ? 150
-                                    : 75,
-                                height: MediaQuery.of(context).size.width > 700
-                                    ? 150
-                                    : 75,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  border: Border.all(
-                                    width: 3,
-                                    color: Color.fromARGB(255, 171, 150, 76),
-                                  ),
-                                  image: DecorationImage(
-                                    image: NetworkImage(
-                                        combinedFoundList[index].iconUrl),
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
+                            GradientText(
+                              combinedFoundList[index].name,
+                              gradient: const LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                                  Color.fromARGB(255, 171, 150, 76),
+                                  Color.fromARGB(255, 247, 217, 110),
+                                ],
                               ),
+                              style: TextStyle(
+                                  fontSize:
+                                      MediaQuery.of(context).size.width > 700
+                                          ? 36
+                                          : 24,
+                                  fontWeight: FontWeight.bold),
                             ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            Row(
                               children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 5),
-                                  child: Text(
-                                    '$smashed: ${combinedFoundList[index].smashCount} $times',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize:
-                                          MediaQuery.of(context).size.width >
-                                                  700
-                                              ? 30
-                                              : 18,
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Container(
+                                    width:
+                                        MediaQuery.of(context).size.width > 700
+                                            ? 150
+                                            : 75,
+                                    height:
+                                        MediaQuery.of(context).size.width > 700
+                                            ? 150
+                                            : 75,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      border: Border.all(
+                                        width: 3,
+                                        color:
+                                            Color.fromARGB(255, 171, 150, 76),
+                                      ),
+                                      image: DecorationImage(
+                                        image: NetworkImage(
+                                            combinedFoundList[index].iconUrl),
+                                        fit: BoxFit.fill,
+                                      ),
                                     ),
                                   ),
                                 ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 5),
-                                  child: Text(
-                                    '$passed: ${combinedFoundList[index].passCount} $times',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize:
-                                          MediaQuery.of(context).size.width >
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 5),
+                                      child: Text(
+                                        '$smashed: ${combinedFoundList[index].smashCount} $times',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width >
                                                   700
                                               ? 30
                                               : 18,
+                                        ),
+                                      ),
                                     ),
-                                  ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 5),
+                                      child: Text(
+                                        '$passed: ${combinedFoundList[index].passCount} $times',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: MediaQuery.of(context)
+                                                      .size
+                                                      .width >
+                                                  700
+                                              ? 30
+                                              : 18,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
-                            ),
+                            )
                           ],
-                        )
-                      ],
+                        ),
+                      ),
                     ),
                   ),
                 );
