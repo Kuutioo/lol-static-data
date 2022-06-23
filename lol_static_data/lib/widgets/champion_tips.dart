@@ -32,8 +32,6 @@ class ChampionTips extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(champion.resource.label);
-
     return FutureBuilder(
       future: Future.wait([_allyTooltips(), _enemyTooltips()]),
       builder: (context, snapshot) {
